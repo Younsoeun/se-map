@@ -351,22 +351,12 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 
 .country-stats .stat-visited { color: var(--vs); font-weight: 600; }
 
-.country-layout {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 24px;
+.country-map-col {
+  padding: 20px;
   margin-top: 20px;
-  align-items: start;
-}
-
-@media (max-width: 900px) {
-  .country-layout { grid-template-columns: 1fr; }
-}
-
-.country-map-col { padding: 20px; position: sticky; top: 20px; }
-
-@media (max-width: 900px) {
-  .country-map-col { position: static; }
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #country-svg {
@@ -388,55 +378,64 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 }
 
 .city-ring { fill: none; stroke-width: 1.5; }
-.city-dot { cursor: pointer; }
 
-.search-input {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid var(--mb);
-  background: transparent;
-  font-family: var(--fb);
-  font-size: 0.95rem;
-  padding: 10px 4px;
-  color: var(--ink);
-  outline: none;
+/* Map city labels: legible over district lines via a soft halo. */
+.city-label {
+  font-family: var(--fu);
+  font-size: 13px;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--pn);
+  stroke-width: 3px;
+  stroke-linejoin: round;
 }
 
-.search-input:focus { border-bottom-color: var(--nv); }
-
-.filter-pills, .city-quicklinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 14px 0;
+.section-hint {
+  text-align: center;
+  font-family: var(--fu);
+  font-size: 0.85rem;
+  color: var(--if);
+  margin: 26px 0 14px;
 }
 
-.city-sections {
-  margin-top: 40px;
+/* City grid (on the country page) — cards link to per-city pages. */
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.city-card {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 3px;
+  padding: 16px 18px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
-.city-section h2 {
-  font-size: 1.4rem;
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
+.city-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sg);
+  border-color: var(--mbs);
 }
 
-.city-section .city-name-ko {
+.city-card-name { font-family: var(--fh); font-size: 1.15rem; }
+.city-card-en {
   font-family: var(--fu);
-  font-size: 0.9rem;
-  color: var(--is);
-  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--if);
 }
-
-.city-section .city-progress {
-  margin-left: auto;
+.city-card-meta {
   font-family: var(--fu);
   font-size: 0.78rem;
-  color: var(--if);
+  color: var(--is);
+  margin-top: 6px;
 }
 
 .attraction-grid {
@@ -444,6 +443,9 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 14px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .attraction-card {
@@ -599,34 +601,6 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 }
 
 .note-body::placeholder { color: var(--if); }
-
-.note-actions {
-  display: flex;
-  gap: 34px;
-  margin-top: 10px;
-  padding-top: 9px;
-  border-top: 1px solid var(--pb);
-}
-
-.note-actions svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: var(--if);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.attraction-card.is-hidden,
-.city-section.is-hidden {
-  display: none;
-}
-
-.attraction-card.is-hidden,
-.city-section.is-hidden {
-  display: none;
-}
 
 /* ===========================================================
    Culture page
@@ -915,16 +889,13 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   /* --- world / country maps: give the map more width --- */
   .world-map-wrap { padding: 12px; }
   .world-head, .culture-head { padding: 28px 0 20px; }
-  .country-map-col { padding: 12px; }
-  .country-layout { gap: 16px; margin-top: 14px; }
+  .country-map-col { padding: 12px; margin-top: 14px; }
 
-  /* --- attraction cards: comfortable single column --- */
+  /* --- city grid + attraction cards: comfortable single column --- */
+  .city-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
   .attraction-grid { grid-template-columns: 1fr; gap: 12px; }
   .attraction-card { padding: 14px 15px; }
   .attraction-card .attraction-name-en { white-space: normal; text-align: right; }
-
-  .city-sections { gap: 28px; }
-  .city-section h2 { font-size: 1.25rem; }
 
   /* --- culture page --- */
   .culture-section { padding: 18px 18px; }
@@ -935,7 +906,6 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   .route-stop-date { flex-direction: row; align-items: center; justify-content: space-between; }
   .route-city { gap: 10px; }
   .route-city-en { display: none; } /* keep Korean name + date readable on narrow screens */
-  .note-actions { gap: 24px; }
 }
 
 @media (max-width: 380px) {

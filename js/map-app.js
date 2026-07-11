@@ -1,39 +1,28 @@
-// World map + Portugal detail screen: rendering, search/filter, visited
-// tracking hooks, smooth-scroll navigation.
+// World map + country overview. The world screen lights up countries with
+// content; the country screen shows the country map (city markers) and a grid
+// of city cards. Clicking a city (marker or card) opens that city's own page
+// (city.html?country=…&city=…).
 
 (function () {
   const SVGNS = "http://www.w3.org/2000/svg";
 
   // Countries with authored content ready ("active" on the world map).
-  // Extend this when a new country is added (per the geo build pipeline).
   const ACTIVE_COUNTRIES = {
     Portugal: {
       key: "portugal",
       nameKo: "포르투갈",
-      // Pill label placed over the open Atlantic, with a leader line
-      // pointing at a coastal anchor point on the mainland.
-      labelLon: -21,
-      labelLat: 44.5,
-      anchorLon: -9.3,
-      anchorLat: 39.6,
+      labelLon: -21, labelLat: 44.5,
+      anchorLon: -9.3, anchorLat: 39.6,
     },
     France: {
       key: "france",
       nameKo: "프랑스",
-      // Label over the North Sea / UK area, clear of Portugal's callout.
-      labelLon: -1,
-      labelLat: 56,
-      anchorLon: 2.5,
-      anchorLat: 47.2,
+      labelLon: -1, labelLat: 56,
+      anchorLon: 2.5, anchorLat: 47.2,
     },
   };
 
-  const state = {
-    screen: "world",
-    countryKey: null,
-    searchText: "",
-    activeCategory: "all",
-  };
+  const state = { screen: "world", countryKey: null };
 
   function el(tag, attrs, children) {
     const node = document.createElement(tag);
@@ -50,10 +39,12 @@
 
   function svgEl(tag, attrs) {
     const node = document.createElementNS(SVGNS, tag);
-    if (attrs) {
-      for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
-    }
+    if (attrs) for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
     return node;
+  }
+
+  function cityUrl(countryKey, cityId) {
+    return `city.html?country=${encodeURIComponent(countryKey)}&city=${encodeURIComponent(cityId)}`;
   }
 
   // ---- World screen ----
@@ -63,8 +54,7 @@
     svg.innerHTML = "";
     svg.setAttribute("viewBox", window.SE_MAP_GEO.world.viewBox);
 
-    const countries = window.SE_MAP_GEO.world.countries;
-    countries.forEach((c) => {
+    window.SE_MAP_GEO.world.countries.forEach((c) => {
       const active = ACTIVE_COUNTRIES[c.name];
       const path = svgEl("path", {
         d: c.path,
@@ -80,17 +70,11 @@
       svg.appendChild(path);
     });
 
-    // Leader lines (drawn in SVG space so they scale with the map).
     Object.values(ACTIVE_COUNTRIES).forEach((active) => {
       const [ax, ay] = window.SEProject.world(active.anchorLon, active.anchorLat);
       const [lx, ly] = window.SEProject.world(active.labelLon, active.labelLat);
-      const line = svgEl("line", {
-        x1: ax, y1: ay, x2: lx, y2: ly,
-        class: "leader-line",
-      });
-      svg.appendChild(line);
-      const dot = svgEl("circle", { cx: ax, cy: ay, r: 3, fill: "var(--tc)" });
-      svg.appendChild(dot);
+      svg.appendChild(svgEl("line", { x1: ax, y1: ay, x2: lx, y2: ly, class: "leader-line" }));
+      svg.appendChild(svgEl("circle", { cx: ax, cy: ay, r: 3, fill: "var(--tc)" }));
     });
 
     renderWorldCallouts(svg);
@@ -99,7 +83,6 @@
   function renderWorldCallouts(svg) {
     const wrap = document.getElementById("world-map-wrap");
     wrap.querySelectorAll(".callout-pill").forEach((n) => n.remove());
-
     const vb = svg.viewBox.baseVal;
     Object.values(ACTIVE_COUNTRIES).forEach((active) => {
       const [lx, ly] = window.SEProject.world(active.labelLon, active.labelLat);
@@ -111,23 +94,24 @@
     });
   }
 
-  // ---- Country detail screen ----
+  // ---- Country screen ----
 
   function goToCountry(key) {
     state.screen = "country";
     state.countryKey = key;
-    state.searchText = "";
-    state.activeCategory = "all";
     document.getElementById("world-screen").hidden = true;
     document.getElementById("country-screen").hidden = false;
     renderCountry(key);
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }
 
   function goToWorld() {
     state.screen = "world";
+    state.countryKey = null;
     document.getElementById("country-screen").hidden = true;
     document.getElementById("world-screen").hidden = false;
+    // Drop any ?country= so a refresh returns to the world map.
+    if (location.search) history.replaceState(null, "", location.pathname);
   }
 
   function renderCountry(key) {
@@ -138,11 +122,8 @@
     document.getElementById("country-title").textContent = data.nameKo;
 
     renderCountryMap(geo, data);
-    renderFilterPills(data);
-    renderCityQuicklinks(data);
-    renderCitySections(data);
+    renderCityGrid(data);
     updateCountryStats(data);
-    applyFilters();
   }
 
   function renderCountryMap(geo, data) {
@@ -150,10 +131,7 @@
     svg.innerHTML = "";
     svg.setAttribute("viewBox", geo.viewBox);
 
-    svg.appendChild(
-      svgEl("path", { d: geo.outline, class: "country-outline", "fill-rule": "evenodd" })
-    );
-
+    svg.appendChild(svgEl("path", { d: geo.outline, class: "country-outline", "fill-rule": "evenodd" }));
     geo.districts.forEach((d) => {
       const path = svgEl("path", { d: d.path, class: "district", "fill-rule": "evenodd" });
       const title = svgEl("title", {});
@@ -162,26 +140,82 @@
       svg.appendChild(path);
     });
 
-    data.cities.forEach((city) => {
-      const attractionIds = data.attractions
-        .filter((a) => a.cityId === city.id)
-        .map((a) => a.id);
+    // Project city points and place labels without overlap.
+    const points = data.cities.map((city) => {
       const [x, y] = window.SEProject.country(data.key, city.lon, city.lat);
+      return { city, x, y };
+    });
+    const fs = viewBoxFontSize(geo.viewBox);
+    const placements = placeLabels(points, fs);
 
-      const ring = svgEl("circle", { cx: x, cy: y, r: 7, class: "city-ring", "data-city-marker": city.id });
-      const dot = svgEl("circle", { cx: x, cy: y, r: 3.5, class: "city-dot", "data-city-marker": city.id });
-      const label = svgEl("text", { x: x + 9, y: y + 3, class: "city-label" });
-      label.textContent = city.nameKo;
+    points.forEach((p, i) => {
+      const attractionIds = data.attractions.filter((a) => a.cityId === p.city.id).map((a) => a.id);
 
-      [ring, dot].forEach((n) =>
-        n.addEventListener("click", () => scrollToCity(city.id))
-      );
+      const ring = svgEl("circle", { cx: p.x, cy: p.y, r: 7, class: "city-ring", "data-city-marker": p.city.id });
+      const dot = svgEl("circle", { cx: p.x, cy: p.y, r: 3.5, class: "city-dot", "data-city-marker": p.city.id });
+
+      const pl = placements[i];
+      const label = svgEl("text", {
+        x: pl.tx, y: pl.ty, class: "city-label", "text-anchor": pl.anchor,
+      });
+      label.textContent = p.city.nameKo;
+
+      const go = () => { location.href = cityUrl(data.key, p.city.id); };
+      [ring, dot, label].forEach((n) => {
+        n.style.cursor = "pointer";
+        n.addEventListener("click", go);
+        const t = svgEl("title", {});
+        t.textContent = `${p.city.nameKo} · ${attractionIds.length}개 명소`;
+        n.appendChild(t);
+      });
 
       svg.appendChild(ring);
       svg.appendChild(dot);
       svg.appendChild(label);
+      styleCityMarker(p.city.id, attractionIds);
+    });
+  }
 
-      styleCityMarker(city.id, attractionIds);
+  // Font size (in SVG user units) for city labels, scaled to the map size.
+  function viewBoxFontSize(viewBox) {
+    const w = parseFloat(viewBox.split(" ")[2]) || 680;
+    return Math.round((w / 680) * 13);
+  }
+
+  function estimateWidth(text, fs) {
+    let w = 0;
+    for (const ch of text) {
+      if (/[가-힣]/.test(ch)) w += fs * 0.98;      // Hangul
+      else if (/[A-Za-z0-9]/.test(ch)) w += fs * 0.56;
+      else w += fs * 0.5;                                   // space / punctuation
+    }
+    return w;
+  }
+
+  function overlaps(a, b) {
+    return !(a.x2 < b.x1 || b.x2 < a.x1 || a.y2 < b.y1 || b.y2 < a.y1);
+  }
+
+  // Greedy label placement: for each city dot try right/left/below/above and
+  // pick the first position that doesn't collide with placed labels or dots.
+  function placeLabels(points, fs) {
+    const gap = 9;
+    const dotRects = points.map((p) => ({ x1: p.x - 8, y1: p.y - 8, x2: p.x + 8, y2: p.y + 8 }));
+    const placed = [];
+    return points.map((p) => {
+      const w = estimateWidth(p.city.nameKo, fs);
+      const cands = [
+        { anchor: "start", tx: p.x + gap, ty: p.y + fs * 0.35, box: { x1: p.x + gap, y1: p.y - fs * 0.7, x2: p.x + gap + w, y2: p.y + fs * 0.45 } },
+        { anchor: "end", tx: p.x - gap, ty: p.y + fs * 0.35, box: { x1: p.x - gap - w, y1: p.y - fs * 0.7, x2: p.x - gap, y2: p.y + fs * 0.45 } },
+        { anchor: "middle", tx: p.x, ty: p.y + gap + fs * 0.85, box: { x1: p.x - w / 2, y1: p.y + gap, x2: p.x + w / 2, y2: p.y + gap + fs } },
+        { anchor: "middle", tx: p.x, ty: p.y - gap, box: { x1: p.x - w / 2, y1: p.y - gap - fs, x2: p.x + w / 2, y2: p.y - gap } },
+      ];
+      const free = cands.find(
+        (c) => !placed.some((b) => overlaps(c.box, b)) && !dotRects.some((b) => overlaps(c.box, b))
+      );
+      const chosen = free || cands[0];
+      placed.push(chosen.box);
+      return chosen;
     });
   }
 
@@ -191,7 +225,6 @@
     const ring = svg.querySelector(`.city-ring[data-city-marker="${cityId}"]`);
     const dot = svg.querySelector(`.city-dot[data-city-marker="${cityId}"]`);
     if (!ring || !dot) return;
-
     if (stats.ratio >= 1 && stats.total > 0) {
       ring.style.stroke = "var(--vs)";
       dot.style.fill = "var(--vs)";
@@ -206,191 +239,25 @@
     }
   }
 
-  function scrollToCity(cityId) {
-    const target = document.getElementById(`city-${cityId}`);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function renderFilterPills(data) {
-    const wrap = document.getElementById("filter-pills");
-    wrap.innerHTML = "";
-    const all = el("button", { class: "pill active", text: "전체", "data-cat": "all" });
-    wrap.appendChild(all);
-    data.categories.forEach((cat) => {
-      const pill = el("button", {
-        class: "pill",
-        "data-cat": cat.id,
-      });
-      pill.innerHTML = `<span class="tag-dot" style="background:var(${cat.varName})"></span>${cat.nameKo}`;
-      wrap.appendChild(pill);
-    });
-    wrap.querySelectorAll(".pill").forEach((pill) => {
-      pill.addEventListener("click", () => {
-        state.activeCategory = pill.dataset.cat;
-        wrap.querySelectorAll(".pill").forEach((p) => p.classList.toggle("active", p === pill));
-        applyFilters();
-      });
-    });
-  }
-
-  function renderCityQuicklinks(data) {
-    const wrap = document.getElementById("city-quicklinks");
+  function renderCityGrid(data) {
+    const wrap = document.getElementById("city-grid");
     wrap.innerHTML = "";
     data.cities.forEach((city) => {
-      const pill = el("button", { class: "pill", text: city.nameKo });
-      pill.addEventListener("click", () => scrollToCity(city.id));
-      wrap.appendChild(pill);
+      const ids = data.attractions.filter((a) => a.cityId === city.id).map((a) => a.id);
+      const stats = window.SEVisited.getGroupStats(ids);
+      const card = el("a", { class: "city-card panel", href: cityUrl(data.key, city.id) });
+      card.innerHTML = `
+        <span class="city-card-name">${city.nameKo}</span>
+        <span class="city-card-en">${city.nameEn}</span>
+        <span class="city-card-meta">${ids.length}개 명소 · <span class="${stats.visitedCount ? "stat-visited" : ""}">방문 ${stats.visitedCount}/${ids.length}</span></span>
+      `;
+      wrap.appendChild(card);
     });
-  }
-
-  function renderCitySections(data) {
-    const wrap = document.getElementById("city-sections");
-    wrap.innerHTML = "";
-
-    data.cities.forEach((city) => {
-      const attractions = data.attractions.filter((a) => a.cityId === city.id);
-      if (attractions.length === 0) return;
-
-      const section = el("section", { class: "city-section", id: `city-${city.id}` });
-      const heading = el("h2", {}, [
-        el("span", { text: city.nameEn }),
-        el("span", { class: "city-name-ko", text: city.nameKo }),
-        el("span", { class: "city-progress", id: `city-progress-${city.id}` }),
-      ]);
-      section.appendChild(heading);
-
-      const grid = el("div", { class: "attraction-grid" });
-      attractions.forEach((a) => grid.appendChild(renderAttractionCard(a)));
-      section.appendChild(grid);
-      wrap.appendChild(section);
-
-      updateCityProgress(city.id, attractions.map((a) => a.id));
-    });
-  }
-
-  function renderAttractionCard(a) {
-    const details = el("details", {
-      class: "attraction-card panel",
-      "data-attraction-id": a.id,
-      "data-category": a.category,
-    });
-    const countryData = window.SE_MAP_DATA[state.countryKey];
-    const cat = countryData.categories.find((c) => c.id === a.category);
-
-    const summary = el("summary", {});
-    summary.innerHTML = `
-      <span class="tag-dot" style="background:var(${cat ? cat.varName : "--tc"})"></span>
-      <span class="attraction-name">${a.nameKo}</span>
-      <span class="attraction-name-en">${a.nameEn}</span>
-    `;
-    details.appendChild(summary);
-
-    const body = el("div", { class: "attraction-body" });
-    body.innerHTML = `
-      <p><strong>역사</strong>${a.history}</p>
-      <p><strong>소개</strong>${a.intro}</p>
-      <p><strong>방문 팁</strong>${a.tip}</p>
-    `;
-
-    const visitedRow = el("div", { class: "visited-row" });
-    const entry = window.SEVisited.get(a.id);
-
-    const label = el("label", {});
-    const checkbox = el("input", { type: "checkbox" });
-    checkbox.checked = entry.visited;
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode("방문함"));
-    visitedRow.appendChild(label);
-
-    // Visit note rendered as an X/Twitter-style post card.
-    const city = countryData.cities.find((c) => c.id === a.cityId);
-    const initial = (a.nameEn || "?").trim().charAt(0).toUpperCase();
-    const handle = "@" + (city ? city.nameEn : a.nameEn).toLowerCase().replace(/[^a-z0-9]/g, "");
-
-    const noteCard = el("div", { class: "note-card" });
-    noteCard.innerHTML = `
-      <div class="note-head">
-        <div class="note-avatar" style="background:var(${cat ? cat.varName : "--tc"})">${initial}</div>
-        <div class="note-id">
-          <span class="note-author">${a.nameKo}<span class="note-verified" title="방문함" hidden>✓</span></span>
-          <span class="note-handle">${handle}<span class="note-time"></span></span>
-        </div>
-      </div>
-    `;
-    const note = el("textarea", {
-      class: "note-body",
-      placeholder: "이곳에서의 방문 소감을 남겨보세요…",
-      rows: "2",
-    });
-    note.value = entry.note || "";
-    noteCard.appendChild(note);
-    noteCard.insertAdjacentHTML(
-      "beforeend",
-      `<div class="note-actions" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M1.75 12a10.25 10.25 0 1 1 4.9 8.73L2 22l1.3-4.6A10.2 10.2 0 0 1 1.75 12z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M4.5 3.5v9a3 3 0 0 0 3 3h9m0 0-3-3m3 3-3 3M19.5 20.5v-9a3 3 0 0 0-3-3h-9m0 0 3 3m-3-3 3-3"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 5C19 15.5 12 20 12 20z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M4 20V10M9.3 20V4M14.7 20v-8M20 20V7"/></svg>
-      </div>`
-    );
-
-    const verified = noteCard.querySelector(".note-verified");
-    const timeEl = noteCard.querySelector(".note-time");
-    function fmtDate(iso) {
-      if (!iso) return "";
-      const d = new Date(iso);
-      return ` · ${d.getMonth() + 1}월 ${d.getDate()}일`;
-    }
-    function syncMeta() {
-      verified.hidden = !checkbox.checked;
-      timeEl.textContent = fmtDate(window.SEVisited.get(a.id).updatedAt);
-    }
-    function autoGrow() {
-      note.style.height = "auto";
-      note.style.height = Math.max(note.scrollHeight, 44) + "px";
-    }
-    syncMeta();
-
-    visitedRow.appendChild(noteCard);
-
-    checkbox.addEventListener("change", () => {
-      window.SEVisited.setVisited(a.id, checkbox.checked);
-      details.dataset.visited = String(checkbox.checked);
-      syncMeta();
-    });
-
-    let noteTimer = null;
-    note.addEventListener("input", () => {
-      autoGrow();
-      clearTimeout(noteTimer);
-      noteTimer = setTimeout(() => {
-        window.SEVisited.setNote(a.id, note.value);
-        syncMeta();
-      }, 400);
-    });
-
-    // Size the textarea to its content once the card becomes visible.
-    details.addEventListener("toggle", () => {
-      if (details.open) autoGrow();
-    });
-
-    details.dataset.visited = String(entry.visited);
-    body.appendChild(visitedRow);
-    details.appendChild(body);
-    return details;
-  }
-
-  function updateCityProgress(cityId, attractionIds) {
-    const stats = window.SEVisited.getGroupStats(attractionIds);
-    const label = document.getElementById(`city-progress-${cityId}`);
-    if (label) label.textContent = `방문 ${stats.visitedCount}/${stats.total}`;
   }
 
   function updateCountryStats(data) {
-    const allIds = data.attractions.map((a) => a.id);
-    const stats = window.SEVisited.getGroupStats(allIds);
-    const el = document.getElementById("country-stats");
-    el.innerHTML = `
+    const stats = window.SEVisited.getGroupStats(data.attractions.map((a) => a.id));
+    document.getElementById("country-stats").innerHTML = `
       <span>${data.cities.length}개 도시</span>
       <span>${data.attractions.length}개 명소</span>
       <span>완성도 100%</span>
@@ -398,70 +265,10 @@
     `;
   }
 
-  // ---- Search + category filter ----
-
-  function applyFilters() {
-    const q = state.searchText.trim().toLowerCase();
-    const cat = state.activeCategory;
-    const data = window.SE_MAP_DATA[state.countryKey];
-    if (!data) return;
-
-    document.querySelectorAll(".attraction-card").forEach((card) => {
-      const id = card.dataset.attractionId;
-      const attraction = data.attractions.find((a) => a.id === id);
-      const matchesText =
-        !q ||
-        attraction.nameKo.toLowerCase().includes(q) ||
-        attraction.nameEn.toLowerCase().includes(q);
-      const matchesCat = cat === "all" || card.dataset.category === cat;
-      card.classList.toggle("is-hidden", !(matchesText && matchesCat));
-    });
-
-    document.querySelectorAll(".city-section").forEach((section) => {
-      const visibleCards = section.querySelectorAll(".attraction-card:not(.is-hidden)");
-      section.classList.toggle("is-hidden", visibleCards.length === 0);
-    });
-  }
-
-  // ---- Wiring ----
-
-  function refreshVisitedUI() {
-    if (state.screen !== "country" || !state.countryKey) return;
-    const data = window.SE_MAP_DATA[state.countryKey];
-
-    document.querySelectorAll(".attraction-card").forEach((card) => {
-      const id = card.dataset.attractionId;
-      const entry = window.SEVisited.get(id);
-      card.dataset.visited = String(entry.visited);
-      const checkbox = card.querySelector('input[type="checkbox"]');
-      const note = card.querySelector(".note-body");
-      if (checkbox && checkbox.checked !== entry.visited) checkbox.checked = entry.visited;
-      if (note && document.activeElement !== note && note.value !== entry.note) {
-        note.value = entry.note || "";
-      }
-      const verified = card.querySelector(".note-verified");
-      if (verified) verified.hidden = !entry.visited;
-      const timeEl = card.querySelector(".note-time");
-      if (timeEl) {
-        timeEl.textContent = entry.updatedAt
-          ? ` · ${new Date(entry.updatedAt).getMonth() + 1}월 ${new Date(entry.updatedAt).getDate()}일`
-          : "";
-      }
-    });
-
-    data.cities.forEach((city) => {
-      const ids = data.attractions.filter((a) => a.cityId === city.id).map((a) => a.id);
-      styleCityMarker(city.id, ids);
-      updateCityProgress(city.id, ids);
-    });
-
-    updateCountryStats(data);
-  }
+  // ---- Export / import ----
 
   function initExportImport() {
-    document.getElementById("export-btn").addEventListener("click", () => {
-      window.SEVisited.exportJSON();
-    });
+    document.getElementById("export-btn").addEventListener("click", () => window.SEVisited.exportJSON());
     const fileInput = document.getElementById("import-file");
     document.getElementById("import-btn").addEventListener("click", () => fileInput.click());
     fileInput.addEventListener("change", () => {
@@ -469,28 +276,24 @@
       if (!file) return;
       window.SEVisited.importJSONFile(file)
         .then(() => {
-          alert("방문 기록을 가져왔습니다.");
+          alert("기록을 가져왔습니다.");
+          if (state.screen === "country" && state.countryKey) renderCountry(state.countryKey);
         })
-        .catch((err) => {
-          alert("가져오기에 실패했습니다: " + err.message);
-        })
-        .finally(() => {
-          fileInput.value = "";
-        });
+        .catch((err) => alert("가져오기에 실패했습니다: " + err.message))
+        .finally(() => { fileInput.value = ""; });
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
     renderWorld();
-
     document.getElementById("back-btn").addEventListener("click", goToWorld);
-    document.getElementById("search-input").addEventListener("input", (e) => {
-      state.searchText = e.target.value;
-      applyFilters();
-    });
     document.getElementById("theme-toggle").addEventListener("click", () => window.SETheme.toggle());
-
     initExportImport();
-    window.SEVisited.onChange(refreshVisitedUI);
+
+    // Deep link: index.html?country=france opens that country directly
+    // (used by the "back to country" link on city pages).
+    const params = new URLSearchParams(location.search);
+    const country = params.get("country");
+    if (country && window.SE_MAP_DATA[country]) goToCountry(country);
   });
 })();

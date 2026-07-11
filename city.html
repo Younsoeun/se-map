@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SE Map — 유럽 여행 지도</title>
+<title>SE Map — 도시</title>
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -31,44 +31,25 @@
     </header>
 
     <main>
-      <section id="world-screen" class="screen">
-        <div class="world-head">
-          <p class="eyebrow">유럽 여행 지도</p>
-          <h1>발자국을 남길 다음 나라</h1>
-          <p class="sub">완성된 국가를 클릭하면 도시와 명소를 볼 수 있어요.</p>
-        </div>
-        <div class="world-map-wrap panel" id="world-map-wrap">
-          <svg id="world-svg" viewBox="0 0 960 500"></svg>
-        </div>
-      </section>
+      <div class="back-row">
+        <a class="pill" id="back-link" href="index.html">← 지도로</a>
+      </div>
+      <div class="country-head">
+        <p class="eyebrow" id="city-eyebrow"></p>
+        <h1 id="city-title"></h1>
+        <p class="country-stats" id="city-stats"></p>
+      </div>
 
-      <section id="country-screen" class="screen" hidden>
-        <div class="back-row">
-          <button class="pill" id="back-btn">← 세계지도로</button>
-        </div>
-        <div class="country-head">
-          <p class="eyebrow" id="country-eyebrow"></p>
-          <h1 id="country-title"></h1>
-          <p class="country-stats" id="country-stats"></p>
-        </div>
-
-        <div class="country-map-col panel">
-          <svg id="country-svg"></svg>
-        </div>
-
-        <p class="section-hint">도시를 선택하면 명소와 상세 내용을 볼 수 있어요.</p>
-        <div class="city-grid" id="city-grid"></div>
-      </section>
+      <div class="attraction-grid" id="attraction-grid"></div>
+      <p class="empty-state" id="city-empty" hidden></p>
     </main>
   </div>
 
-  <script src="js/geo-data.js"></script>
   <script src="js/data-portugal.js"></script>
   <script src="js/data-france.js"></script>
-  <script src="js/project.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/route.js"></script>
   <script src="js/visited.js"></script>
-  <script src="js/map-app.js"></script>
+  <script src="js/city-app.js"></script>
 </body>
 </html>

@@ -159,6 +159,15 @@ window.SE_MAP_DATA.france = {
       tip: "운하 보트 투어를 타면 프티트 프랑스와 유럽의회 지구까지 한 번에 둘러볼 수 있다. 해질녘 조명이 켜지면 더 예쁘다.",
     },
 
+    // ---- Colmar ----
+    {
+      id: "petite-venise", cityId: "colmar", category: "culture",
+      nameKo: "프티트 브니즈", nameEn: "Petite Venise",
+      history: "라우흐강을 따라 형성된 옛 포도 재배자·어부·뱃사공 마을로, 14~18세기 알자스 목조 골조(콜롱바주) 가옥이 강 양쪽에 늘어서 있다. 1960~70년대에 대대적으로 보존·복원됐다.",
+      intro: "'작은 베네치아'라는 이름처럼 운하 위로 색색의 전통 가옥이 비치는 콜마르에서 가장 사랑받는 동네로, 동화 속 마을 같은 풍경이다.",
+      tip: "운하 나룻배(바르크)를 타면 물 위에서 마을을 감상할 수 있고, 크리스마스 마켓 시즌(11월 말~12월)엔 특히 낭만적이다.",
+    },
+
     // ---- Reims ----
     {
       id: "reims-cathedral", cityId: "reims", category: "cathedral",
