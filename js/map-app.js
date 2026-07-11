@@ -17,6 +17,15 @@
       anchorLon: -9.3,
       anchorLat: 39.6,
     },
+    France: {
+      key: "france",
+      nameKo: "프랑스",
+      // Label over the North Sea / UK area, clear of Portugal's callout.
+      labelLon: -1,
+      labelLat: 56,
+      anchorLon: 2.5,
+      anchorLat: 47.2,
+    },
   };
 
   const state = {
@@ -265,7 +274,8 @@
       "data-attraction-id": a.id,
       "data-category": a.category,
     });
-    const cat = window.SE_MAP_DATA.portugal.categories.find((c) => c.id === a.category);
+    const countryData = window.SE_MAP_DATA[state.countryKey];
+    const cat = countryData.categories.find((c) => c.id === a.category);
 
     const summary = el("summary", {});
     summary.innerHTML = `
@@ -293,7 +303,7 @@
     visitedRow.appendChild(label);
 
     // Visit note rendered as an X/Twitter-style post card.
-    const city = window.SE_MAP_DATA.portugal.cities.find((c) => c.id === a.cityId);
+    const city = countryData.cities.find((c) => c.id === a.cityId);
     const initial = (a.nameEn || "?").trim().charAt(0).toUpperCase();
     const handle = "@" + (city ? city.nameEn : a.nameEn).toLowerCase().replace(/[^a-z0-9]/g, "");
 

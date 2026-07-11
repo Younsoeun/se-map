@@ -31,6 +31,14 @@ const COUNTRIES = [
     mainlandBBox: { minLon: -9.6, maxLon: -6.1, minLat: 36.8, maxLat: 42.2 },
     viewBox: { w: 600, h: 760, pad: 24 },
   },
+  {
+    admin: "France",
+    key: "france",
+    // Metropolitan France + Corsica; excludes the far-flung overseas
+    // territories (French Guiana, Réunion, etc.) which share the ADMIN name.
+    mainlandBBox: { minLon: -5.3, maxLon: 9.7, minLat: 41.2, maxLat: 51.2 },
+    viewBox: { w: 680, h: 700, pad: 24 },
+  },
 ];
 
 async function fetchCached(name, url) {
@@ -86,10 +94,20 @@ function worldProject(lon, lat) {
 }
 
 function buildWorld(admin0) {
+  // For countries we ship as "active" (filled) on the world map, clip their
+  // outline to the mainland bbox so far-flung overseas territories (e.g.
+  // French Guiana) don't appear as stray filled blobs.
+  const mainlandByAdmin = new Map(
+    COUNTRIES.map((c) => [c.admin, c.mainlandBBox])
+  );
+
   const countries = admin0.features
     .map((f) => {
       const name = f.properties.ADMIN || f.properties.NAME;
-      const d = geometryToPath(f.geometry, worldProject);
+      let geom = f.geometry;
+      const bbox = mainlandByAdmin.get(name);
+      if (bbox) geom = filterMainland(geom, bbox);
+      const d = geometryToPath(geom, worldProject);
       if (!d) return null;
       return { name, path: d };
     })
