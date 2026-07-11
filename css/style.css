@@ -1,0 +1,643 @@
+/* ===========================================================
+   SE_map design system
+   Warm-gray / navy / terracotta palette (from the original spec),
+   with a soft radial-gradient "blob" background and full-pill UI
+   shapes borrowed from mycalmsite.com. See notes/design-references.md.
+   =========================================================== */
+
+/* Light theme is the CSS default. Dark theme values (system-preference or
+   manual toggle) are applied by js/theme.js via setProperty on :root,
+   rather than duplicated here in @media/[data-theme] blocks — keeps the
+   stylesheet compact for environments with inline-<style> size limits. */
+:root {
+  --bg: #EDEAE1;
+  --pn: #F9F7F1;
+  --pb: #E3DDCB;
+  --mf: #FFFFFF;
+  --mb: #C7BFA9;
+  --mbs: #A79C7E;
+
+  --ink: #201D18;
+  --is: #5C574B;
+  --if: #8B8474;
+
+  --nv: #16233B;
+  --tc: #B65C36;
+  --vs: #5B7553;
+
+  --c1: #8A6D4B;
+  --c2: #A8863B;
+  --c3: #4C5D78;
+  --c4: #3E7A70;
+  --c5: #7C3F52;
+
+  --b1: rgba(182, 92, 54, 0.16);
+  --b2: rgba(22, 35, 59, 0.10);
+  --b3: rgba(168, 134, 59, 0.14);
+  --b4: rgba(91, 117, 83, 0.10);
+
+  --sg: 0 2px 12px rgba(22, 35, 59, 0.1);
+  --sc: 0 4px 16px rgba(32, 29, 24, 0.06);
+
+  --fh: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --fu: "Century Gothic", "Avenir Next", "Segoe UI", sans-serif;
+  --fb: "Seravek", "Segoe UI", "Malgun Gothic", sans-serif;
+
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--fb);
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ---- ambient gradient-blob background (mycalmsite technique, warm palette) ---- */
+
+.blob-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  will-change: transform;
+  animation: blob-drift 34s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 46vw; height: 46vw;
+  left: -12vw; top: -14vw;
+  background: radial-gradient(circle, var(--b1) 0%, transparent 72%);
+  animation-duration: 38s;
+}
+.blob-2 {
+  width: 40vw; height: 40vw;
+  right: -10vw; top: 6vw;
+  background: radial-gradient(circle, var(--b2) 0%, transparent 72%);
+  animation-duration: 44s;
+  animation-delay: -8s;
+}
+.blob-3 {
+  width: 38vw; height: 38vw;
+  left: 8vw; bottom: -16vw;
+  background: radial-gradient(circle, var(--b3) 0%, transparent 72%);
+  animation-duration: 40s;
+  animation-delay: -20s;
+}
+.blob-4 {
+  width: 30vw; height: 30vw;
+  right: 4vw; bottom: -10vw;
+  background: radial-gradient(circle, var(--b4) 0%, transparent 72%);
+  animation-duration: 50s;
+  animation-delay: -12s;
+}
+
+@keyframes blob-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(3%, 4%) scale(1.06); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- layout shell ---- */
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px clamp(16px, 4vw, 48px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fu);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.brand-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--tc);
+  display: inline-block;
+}
+
+.nav-links {
+  display: inline-flex;
+  gap: 6px;
+  background: var(--pn);
+  border: 1px solid var(--pb);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.nav-links a {
+  font-family: var(--fu);
+  font-size: 0.85rem;
+  color: var(--is);
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover { color: var(--ink); }
+
+.nav-links a.active {
+  background: var(--nv);
+  color: var(--pn);
+}
+
+.nav-utility {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+main {
+  padding: 0 clamp(16px, 4vw, 48px) 64px;
+}
+
+/* ---- pill primitives ---- */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--mb);
+  background: var(--pn);
+  color: var(--is);
+  font-family: var(--fu);
+  font-size: 0.8rem;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  border-color: var(--mbs);
+  color: var(--ink);
+}
+
+.pill.active {
+  background: var(--nv);
+  border-color: var(--nv);
+  color: var(--pn);
+}
+
+.pill.icon-btn {
+  padding: 7px 12px;
+}
+
+/* ---- headline / typography ---- */
+
+h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
+
+.eyebrow {
+  font-family: var(--fu);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--if);
+}
+
+/* ---- panel / card ---- */
+
+.panel {
+  background: var(--pn);
+  border: 1px solid var(--pb);
+  border-radius: 20px;
+  box-shadow: var(--sc);
+}
+
+/* ---- category tag dot (color set inline per-category via var(--cN)) ---- */
+
+.tag-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* ---- theme toggle ---- */
+
+.theme-toggle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--pb);
+  background: var(--pn);
+  color: var(--is);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ===========================================================
+   Map app: world screen + country detail screen
+   =========================================================== */
+
+.screen[hidden] { display: none; }
+
+.world-head, .culture-head {
+  text-align: center;
+  padding: 40px 0 28px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.world-head h1, .culture-head h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 10px 0;
+}
+
+.world-head .sub, .culture-head .sub {
+  color: var(--is);
+  font-family: var(--fu);
+  font-size: 0.9rem;
+}
+
+.world-map-wrap {
+  position: relative;
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#world-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.world-country {
+  fill: var(--mf);
+  stroke: var(--mb);
+  stroke-width: 0.5;
+  transition: fill 0.2s ease, opacity 0.2s ease;
+}
+
+.world-country.active {
+  fill: var(--nv);
+  cursor: pointer;
+}
+
+.world-country.active:hover { opacity: 0.88; }
+
+.leader-line {
+  stroke: var(--if);
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 2 3;
+}
+
+.callout-pill {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  font-size: 0.78rem;
+  padding: 6px 14px;
+}
+
+.back-row { margin-bottom: 14px; }
+
+.country-head { padding: 12px 0 8px; }
+
+.country-stats {
+  font-family: var(--fu);
+  font-size: 0.85rem;
+  color: var(--is);
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+
+.country-stats .stat-visited { color: var(--vs); font-weight: 600; }
+
+.country-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  margin-top: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .country-layout { grid-template-columns: 1fr; }
+}
+
+.country-map-col { padding: 20px; position: sticky; top: 20px; }
+
+@media (max-width: 900px) {
+  .country-map-col { position: static; }
+}
+
+#country-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.district {
+  fill: var(--mf);
+  stroke: var(--mb);
+  stroke-width: 1;
+}
+
+.country-outline {
+  fill: none;
+  stroke: var(--mbs);
+  stroke-width: 2;
+}
+
+.city-ring { fill: none; stroke-width: 1.5; }
+.city-dot { cursor: pointer; }
+
+.search-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--mb);
+  background: transparent;
+  font-family: var(--fb);
+  font-size: 0.95rem;
+  padding: 10px 4px;
+  color: var(--ink);
+  outline: none;
+}
+
+.search-input:focus { border-bottom-color: var(--nv); }
+
+.filter-pills, .city-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.city-sections {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.city-section h2 {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.city-section .city-name-ko {
+  font-family: var(--fu);
+  font-size: 0.9rem;
+  color: var(--is);
+  font-weight: 400;
+}
+
+.city-section .city-progress {
+  margin-left: auto;
+  font-family: var(--fu);
+  font-size: 0.78rem;
+  color: var(--if);
+}
+
+.attraction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.attraction-card {
+  border-radius: 16px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--tc);
+  transition: border-color 0.2s ease;
+}
+
+.attraction-card[data-visited="true"] { border-left-color: var(--vs); }
+
+.attraction-card summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--fu);
+}
+
+.attraction-card summary::-webkit-details-marker { display: none; }
+
+.attraction-card .attraction-name { font-weight: 600; }
+
+.attraction-card .attraction-name-en {
+  color: var(--if);
+  font-size: 0.78rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.attraction-body {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--is);
+}
+
+.attraction-body p { margin: 0 0 8px; }
+
+.attraction-body strong {
+  color: var(--ink);
+  font-family: var(--fu);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.visited-row {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--pb);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.visited-row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fu);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.visited-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--vs);
+}
+
+.visited-note {
+  width: 100%;
+  min-height: 52px;
+  resize: vertical;
+  border-radius: 10px;
+  border: 1px solid var(--pb);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--fb);
+  font-size: 0.85rem;
+  padding: 8px 10px;
+  box-sizing: border-box;
+}
+
+.attraction-card.is-hidden,
+.city-section.is-hidden {
+  display: none;
+}
+
+/* ===========================================================
+   Culture page
+   =========================================================== */
+
+.country-culture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto 56px;
+}
+
+.culture-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 20px 22px;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--fb);
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.culture-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sg);
+}
+
+.culture-card-flag { font-size: 1.6rem; }
+
+.culture-card-name {
+  font-family: var(--fh);
+  font-size: 1.2rem;
+}
+
+.culture-card-name-en {
+  font-family: var(--fu);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--if);
+  text-transform: uppercase;
+}
+
+.culture-card-tagline {
+  font-size: 0.82rem;
+  color: var(--is);
+  line-height: 1.4;
+}
+
+.culture-profile {
+  max-width: 860px;
+  margin: 0 auto 72px;
+  scroll-margin-top: 24px;
+}
+
+.culture-profile-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.culture-profile-flag { font-size: 2.6rem; line-height: 1; }
+
+.culture-profile-head h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.1rem);
+  margin: 4px 0;
+}
+
+.culture-profile-tagline {
+  font-family: var(--fu);
+  font-size: 0.88rem;
+  color: var(--is);
+}
+
+.culture-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.culture-section {
+  padding: 22px 26px;
+}
+
+.culture-section-title {
+  display: inline-block;
+  font-family: var(--fu);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pn);
+  background: var(--nv);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin: 0 0 14px;
+}
+
+.culture-section-body {
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--is);
+  margin: 0 0 10px;
+}
+
+.culture-section-body:last-child { margin-bottom: 0; }
