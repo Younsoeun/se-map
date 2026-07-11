@@ -887,3 +887,58 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 }
 
 .route-city .route-date { padding: 4px 7px; font-size: 0.8rem; }
+
+/* ===========================================================
+   Mobile / small screens
+   =========================================================== */
+
+@media (max-width: 640px) {
+  /* --- header: brand + utility on row 1, nav tabs full-width row 2 --- */
+  .top-nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .nav-links a { padding: 9px 0; flex: 1; text-align: center; }
+  /* export/import collapse to icon-only to save width */
+  .nav-utility .btn-label { display: none; }
+  .pill.icon-btn { padding: 9px 12px; }
+
+  main { padding: 0 14px 48px; }
+
+  /* --- world / country maps: give the map more width --- */
+  .world-map-wrap { padding: 12px; }
+  .world-head, .culture-head { padding: 28px 0 20px; }
+  .country-map-col { padding: 12px; }
+  .country-layout { gap: 16px; margin-top: 14px; }
+
+  /* --- attraction cards: comfortable single column --- */
+  .attraction-grid { grid-template-columns: 1fr; gap: 12px; }
+  .attraction-card { padding: 14px 15px; }
+  .attraction-card .attraction-name-en { white-space: normal; text-align: right; }
+
+  .city-sections { gap: 28px; }
+  .city-section h2 { font-size: 1.25rem; }
+
+  /* --- culture page --- */
+  .culture-section { padding: 18px 18px; }
+  .culture-profile-flag { font-size: 2.1rem; }
+
+  /* --- route page: stack the date control under the country title --- */
+  .route-stop-head { flex-direction: column; align-items: stretch; gap: 10px; }
+  .route-stop-date { flex-direction: row; align-items: center; justify-content: space-between; }
+  .route-city { gap: 10px; }
+  .route-city-en { display: none; } /* keep Korean name + date readable on narrow screens */
+  .note-actions { gap: 24px; }
+}
+
+@media (max-width: 380px) {
+  .world-head h1, .culture-head h1 { font-size: 1.6rem; }
+  .nav-links a { font-size: 0.8rem; }
+  .pill { padding: 8px 14px; }
+}
