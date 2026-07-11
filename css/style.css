@@ -461,12 +461,15 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   cursor: pointer;
   list-style: none;
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 8px;
   font-family: var(--fu);
 }
 
 .attraction-card summary::-webkit-details-marker { display: none; }
+
+.attraction-card .tag-dot { align-self: center; flex-shrink: 0; }
 
 .attraction-card .attraction-name { font-weight: 600; }
 
@@ -474,7 +477,6 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   color: var(--if);
   font-size: 0.78rem;
   margin-left: auto;
-  white-space: nowrap;
 }
 
 .attraction-body {
