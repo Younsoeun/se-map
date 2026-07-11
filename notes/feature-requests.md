@@ -42,3 +42,22 @@
 - [x] 검색("렐루" 입력 시 포르투 렐루 서점만 표시), 카테고리 필터 정상 동작 확인
 - [x] 라이트/다크 테마 전환 및 새로고침 후 유지 확인 (지도 페이지·문화 페이지 모두)
 - [x] 콘솔 에러 없음, `node --check`로 모든 생성 JS 파일 문법 검증 통과
+
+## 배포 (2026-07-11)
+
+- [x] **언제 어디서든 접속 가능하게 배포**: GitHub Pages (무료, 서버비 없음)
+  - 접속 주소: https://younsoeun.github.io/se-map/
+  - 저장소: https://github.com/Younsoeun/se-map (public)
+  - `data-cache/`(43MB 지도 원본)와 `.claude/`는 `.gitignore`로 제외
+- [x] 배포된 공개 URL에서 지도·문화 페이지 정상 렌더링 확인 (아티팩트와 달리 스타일 완전 적용)
+- [ ] (선택) 폰↔노트북 방문기록 자동 동기화 — 현재는 기기별 localStorage + JSON 내보내기/가져오기. 필요 시 무료 Firebase 연동 예정
+
+## 업데이트 방법 (참고)
+
+내용을 수정한 뒤 아래 명령으로 다시 배포하면 1~2분 내 사이트에 반영됨:
+```
+cd C:\Users\0218y\SE_map
+git add -A
+git commit -m "메모"
+git push
+```
