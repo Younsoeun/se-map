@@ -158,8 +158,8 @@ body {
   gap: 6px;
   background: var(--pn);
   border: 1px solid var(--pb);
-  border-radius: 999px;
-  padding: 4px;
+  border-radius: 15px;
+  padding: 5px;
 }
 
 .nav-links a {
@@ -167,8 +167,8 @@ body {
   font-size: 0.85rem;
   color: var(--is);
   text-decoration: none;
-  padding: 8px 18px;
-  border-radius: 999px;
+  padding: 9px 18px;
+  border-radius: 10px;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -191,17 +191,19 @@ main {
 
 /* ---- pill primitives ---- */
 
+/* Buttons/tags use a soft rounded-rectangle (not full pill) with generous
+   text↔border padding — per the reference in notes/design-references.md. */
 .pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border-radius: 999px;
+  border-radius: 13px;
   border: 1px solid var(--mb);
   background: var(--pn);
   color: var(--is);
   font-family: var(--fu);
   font-size: 0.8rem;
-  padding: 7px 16px;
+  padding: 9px 18px;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
@@ -219,7 +221,7 @@ main {
 }
 
 .pill.icon-btn {
-  padding: 7px 12px;
+  padding: 9px 15px;
 }
 
 /* ---- headline / typography ---- */
@@ -514,18 +516,110 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   accent-color: var(--vs);
 }
 
-.visited-note {
-  width: 100%;
-  min-height: 52px;
-  resize: vertical;
-  border-radius: 10px;
+/* Visit note as an X/Twitter-style post card (ref: 21st.dev x-gradient-card) */
+.note-card {
+  border-radius: 16px;
   border: 1px solid var(--pb);
-  background: var(--bg);
+  background: linear-gradient(140deg, var(--pn) 0%, var(--bg) 100%);
+  box-shadow: var(--sc);
+  padding: 12px 14px;
+}
+
+.note-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.note-avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--fu);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.note-id {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.note-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--fu);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.note-verified {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--nv);
+  color: var(--pn);
+  font-size: 0.62rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-verified[hidden] { display: none; }
+
+.note-handle {
+  font-size: 0.76rem;
+  color: var(--if);
+}
+
+.note-body {
+  width: 100%;
+  margin-top: 8px;
+  border: none;
+  background: transparent;
+  resize: none;
+  overflow: hidden;
   color: var(--ink);
   font-family: var(--fb);
-  font-size: 0.85rem;
-  padding: 8px 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 0;
+  outline: none;
   box-sizing: border-box;
+}
+
+.note-body::placeholder { color: var(--if); }
+
+.note-actions {
+  display: flex;
+  gap: 34px;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--pb);
+}
+
+.note-actions svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--if);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attraction-card.is-hidden,
+.city-section.is-hidden {
+  display: none;
 }
 
 .attraction-card.is-hidden,
@@ -641,3 +735,155 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 }
 
 .culture-section-body:last-child { margin-bottom: 0; }
+
+/* ===========================================================
+   Route page (trip planner)
+   =========================================================== */
+
+.route-list {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.route-section-label {
+  font-family: var(--fu);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nv);
+  margin: 20px 0 2px;
+}
+
+.route-section-label.muted { color: var(--if); }
+.route-section-label:first-child { margin-top: 0; }
+
+.route-stop {
+  padding: 16px 18px;
+  border-left: 3px solid transparent;
+}
+
+.route-stop.is-fixed { border-left-color: var(--nv); }
+
+.route-stop-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.route-stop-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.route-flag { font-size: 1.5rem; line-height: 1.1; }
+
+.route-stop-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.route-stop-name {
+  font-family: var(--fh);
+  font-size: 1.15rem;
+}
+
+.route-badge {
+  font-family: var(--fu);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  border-radius: 8px;
+  padding: 3px 10px;
+}
+
+.route-badge.fixed { background: var(--nv); color: var(--pn); }
+.route-badge.optional {
+  background: transparent;
+  border: 1px solid var(--mb);
+  color: var(--if);
+}
+
+.route-stop-meta {
+  display: block;
+  font-family: var(--fu);
+  font-size: 0.78rem;
+  color: var(--is);
+  margin-top: 3px;
+}
+
+.route-stop-date {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.route-date-label {
+  font-family: var(--fu);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--if);
+}
+
+.route-date {
+  border: 1px solid var(--mb);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--fb);
+  font-size: 0.85rem;
+  padding: 6px 8px;
+}
+
+.route-date:focus { outline: none; border-color: var(--nv); }
+
+.route-cities {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--pb);
+  display: flex;
+  flex-direction: column;
+}
+
+.route-city {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+}
+
+.route-city + .route-city { border-top: 1px solid var(--pb); }
+
+.route-city-label {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-width: 0;
+}
+
+.route-pin { font-size: 0.8rem; }
+
+.route-city-name {
+  font-family: var(--fu);
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.route-city.is-fixed .route-city-name { font-weight: 600; }
+
+.route-city-en {
+  font-size: 0.74rem;
+  color: var(--if);
+  white-space: nowrap;
+}
+
+.route-city .route-date { padding: 4px 7px; font-size: 0.8rem; }

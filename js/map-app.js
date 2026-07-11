@@ -292,22 +292,76 @@
     label.appendChild(document.createTextNode("방문함"));
     visitedRow.appendChild(label);
 
+    // Visit note rendered as an X/Twitter-style post card.
+    const city = window.SE_MAP_DATA.portugal.cities.find((c) => c.id === a.cityId);
+    const initial = (a.nameEn || "?").trim().charAt(0).toUpperCase();
+    const handle = "@" + (city ? city.nameEn : a.nameEn).toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    const noteCard = el("div", { class: "note-card" });
+    noteCard.innerHTML = `
+      <div class="note-head">
+        <div class="note-avatar" style="background:var(${cat ? cat.varName : "--tc"})">${initial}</div>
+        <div class="note-id">
+          <span class="note-author">${a.nameKo}<span class="note-verified" title="방문함" hidden>✓</span></span>
+          <span class="note-handle">${handle}<span class="note-time"></span></span>
+        </div>
+      </div>
+    `;
     const note = el("textarea", {
-      class: "visited-note",
-      placeholder: "방문 소감을 짧게 남겨보세요",
+      class: "note-body",
+      placeholder: "이곳에서의 방문 소감을 남겨보세요…",
+      rows: "2",
     });
     note.value = entry.note || "";
-    visitedRow.appendChild(note);
+    noteCard.appendChild(note);
+    noteCard.insertAdjacentHTML(
+      "beforeend",
+      `<div class="note-actions" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M1.75 12a10.25 10.25 0 1 1 4.9 8.73L2 22l1.3-4.6A10.2 10.2 0 0 1 1.75 12z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M4.5 3.5v9a3 3 0 0 0 3 3h9m0 0-3-3m3 3-3 3M19.5 20.5v-9a3 3 0 0 0-3-3h-9m0 0 3 3m-3-3 3-3"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 5C19 15.5 12 20 12 20z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M4 20V10M9.3 20V4M14.7 20v-8M20 20V7"/></svg>
+      </div>`
+    );
+
+    const verified = noteCard.querySelector(".note-verified");
+    const timeEl = noteCard.querySelector(".note-time");
+    function fmtDate(iso) {
+      if (!iso) return "";
+      const d = new Date(iso);
+      return ` · ${d.getMonth() + 1}월 ${d.getDate()}일`;
+    }
+    function syncMeta() {
+      verified.hidden = !checkbox.checked;
+      timeEl.textContent = fmtDate(window.SEVisited.get(a.id).updatedAt);
+    }
+    function autoGrow() {
+      note.style.height = "auto";
+      note.style.height = Math.max(note.scrollHeight, 44) + "px";
+    }
+    syncMeta();
+
+    visitedRow.appendChild(noteCard);
 
     checkbox.addEventListener("change", () => {
       window.SEVisited.setVisited(a.id, checkbox.checked);
       details.dataset.visited = String(checkbox.checked);
+      syncMeta();
     });
 
     let noteTimer = null;
     note.addEventListener("input", () => {
+      autoGrow();
       clearTimeout(noteTimer);
-      noteTimer = setTimeout(() => window.SEVisited.setNote(a.id, note.value), 400);
+      noteTimer = setTimeout(() => {
+        window.SEVisited.setNote(a.id, note.value);
+        syncMeta();
+      }, 400);
+    });
+
+    // Size the textarea to its content once the card becomes visible.
+    details.addEventListener("toggle", () => {
+      if (details.open) autoGrow();
     });
 
     details.dataset.visited = String(entry.visited);
@@ -370,10 +424,18 @@
       const entry = window.SEVisited.get(id);
       card.dataset.visited = String(entry.visited);
       const checkbox = card.querySelector('input[type="checkbox"]');
-      const note = card.querySelector(".visited-note");
+      const note = card.querySelector(".note-body");
       if (checkbox && checkbox.checked !== entry.visited) checkbox.checked = entry.visited;
       if (note && document.activeElement !== note && note.value !== entry.note) {
         note.value = entry.note || "";
+      }
+      const verified = card.querySelector(".note-verified");
+      if (verified) verified.hidden = !entry.visited;
+      const timeEl = card.querySelector(".note-time");
+      if (timeEl) {
+        timeEl.textContent = entry.updatedAt
+          ? ` · ${new Date(entry.updatedAt).getMonth() + 1}월 ${new Date(entry.updatedAt).getDate()}일`
+          : "";
       }
     });
 

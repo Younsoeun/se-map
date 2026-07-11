@@ -61,6 +61,9 @@
         app: "SE_map",
         exportedAt: new Date().toISOString(),
         visited: state,
+        // Route dates live in a separate store (route.js). Include them so a
+        // single backup file covers both visit records and trip dates.
+        route: window.SERoute ? window.SERoute.dump() : {},
       };
       const blob = new Blob([JSON.stringify(payload, null, 2)], {
         type: "application/json",
@@ -85,6 +88,10 @@
         }
         state = { ...state, ...incoming };
         persist();
+        // Restore route dates too, if the backup includes them.
+        if (parsed.route && window.SERoute) {
+          window.SERoute.mergeFrom(parsed.route);
+        }
       });
     },
   };

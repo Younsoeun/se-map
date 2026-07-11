@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SE Map — 루트</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="blob-field">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <div class="app">
+    <header class="top-nav">
+      <a class="brand" href="index.html"><span class="brand-dot"></span>SE Map</a>
+      <nav class="nav-links">
+        <a href="index.html">지도</a>
+        <a href="route.html" class="active">루트</a>
+        <a href="culture.html">문화</a>
+      </nav>
+      <div class="nav-utility">
+        <button class="pill icon-btn" id="export-btn" title="기록 내보내기">⇩ 내보내기</button>
+        <button class="pill icon-btn" id="import-btn" title="기록 가져오기">⇧ 가져오기</button>
+        <input type="file" id="import-file" accept="application/json" hidden />
+        <button class="theme-toggle" id="theme-toggle" title="테마 전환">◐</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="culture-head">
+        <p class="eyebrow">루트 노트</p>
+        <h1>거주 기간 여행 루트</h1>
+        <p class="sub">방문일을 입력하면 그 항목이 위로 고정되고 날짜순으로 정렬돼요. 비워두면 추천 순서 그대로예요.</p>
+      </section>
+
+      <div class="route-list" id="route-list"></div>
+    </main>
+  </div>
+
+  <script src="js/route-data.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/route.js"></script>
+  <script src="js/visited.js"></script>
+  <script src="js/route-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+// Recommended travel route for an Aug-late → Jan/Feb Europe residency, based
+// in Portugal. Array order = recommended order (cold-in-winter countries early
+// while warm, warm-winter-sun countries last). Each stop groups a country/
+// region and its key cities. Used by route.html (route-app.js).
+
+window.SE_MAP_ROUTE = {
+  stops: [
+    {
+      id: "fr", nameKo: "프랑스", nameEn: "France", flag: "🇫🇷",
+      season: "8월 말~9월",
+      hint: "겨울엔 춥고 습해서 초가을에 먼저",
+      cities: [
+        { id: "fr-paris", nameKo: "파리", nameEn: "Paris" },
+        { id: "fr-lyon", nameKo: "리옹", nameEn: "Lyon" },
+        { id: "fr-provence", nameKo: "프로방스", nameEn: "Provence" },
+        { id: "fr-alsace", nameKo: "알자스(스트라스부르)", nameEn: "Alsace" },
+      ],
+    },
+    {
+      id: "es-n", nameKo: "스페인 북부", nameEn: "Northern Spain", flag: "🇪🇸",
+      season: "9월",
+      hint: "여름 온화·겨울 흐림, 포르투갈↔프랑스 길목",
+      cities: [
+        { id: "es-n-sansebastian", nameKo: "산세바스티안", nameEn: "San Sebastián" },
+        { id: "es-n-bilbao", nameKo: "빌바오", nameEn: "Bilbao" },
+        { id: "es-n-santiago", nameKo: "산티아고", nameEn: "Santiago de Compostela" },
+      ],
+    },
+    {
+      id: "gr", nameKo: "그리스", nameEn: "Greece", flag: "🇬🇷",
+      season: "10월 초",
+      hint: "섬은 10월이 마지막 따뜻한 창",
+      cities: [
+        { id: "gr-athens", nameKo: "아테네", nameEn: "Athens" },
+        { id: "gr-santorini", nameKo: "산토리니", nameEn: "Santorini" },
+        { id: "gr-crete", nameKo: "크레타", nameEn: "Crete" },
+      ],
+    },
+    {
+      id: "it", nameKo: "이탈리아", nameEn: "Italy", flag: "🇮🇹",
+      season: "10월",
+      hint: "9~10월 황금기, 수확철·한산",
+      cities: [
+        { id: "it-rome", nameKo: "로마", nameEn: "Rome" },
+        { id: "it-florence", nameKo: "피렌체", nameEn: "Florence" },
+        { id: "it-venice", nameKo: "베네치아", nameEn: "Venice" },
+        { id: "it-naples", nameKo: "나폴리", nameEn: "Naples" },
+      ],
+    },
+    {
+      id: "ma", nameKo: "모로코", nameEn: "Morocco", flag: "🇲🇦",
+      season: "11월",
+      hint: "9~11월이 이상적, 11월 한산",
+      cities: [
+        { id: "ma-marrakech", nameKo: "마라케시", nameEn: "Marrakech" },
+        { id: "ma-fez", nameKo: "페스", nameEn: "Fez" },
+        { id: "ma-chefchaouen", nameKo: "셰프샤우엔", nameEn: "Chefchaouen" },
+        { id: "ma-sahara", nameKo: "사하라(메르주가)", nameEn: "Sahara" },
+        { id: "ma-essaouira", nameKo: "에사우이라", nameEn: "Essaouira" },
+      ],
+    },
+    {
+      id: "es-s", nameKo: "스페인 남부", nameEn: "Southern Spain", flag: "🇪🇸",
+      season: "12~1월",
+      hint: "겨울에도 15~20°C로 온화",
+      cities: [
+        { id: "es-s-seville", nameKo: "세비야", nameEn: "Seville" },
+        { id: "es-s-granada", nameKo: "그라나다", nameEn: "Granada" },
+        { id: "es-s-cordoba", nameKo: "코르도바", nameEn: "Córdoba" },
+        { id: "es-s-malaga", nameKo: "말라가", nameEn: "Málaga" },
+      ],
+    },
+    {
+      id: "ic", nameKo: "카나리아 제도", nameEn: "Canary Islands", flag: "🇮🇨",
+      season: "12~1월",
+      hint: "22°C, 유럽 최고의 겨울 태양",
+      cities: [
+        { id: "ic-tenerife", nameKo: "테네리페", nameEn: "Tenerife" },
+        { id: "ic-grancanaria", nameKo: "그란카나리아", nameEn: "Gran Canaria" },
+      ],
+    },
+    {
+      id: "mt", nameKo: "몰타", nameEn: "Malta", flag: "🇲🇹",
+      season: "1월",
+      hint: "17°C, 연 300일 맑음",
+      cities: [
+        { id: "mt-valletta", nameKo: "발레타", nameEn: "Valletta" },
+      ],
+    },
+    {
+      id: "pt-w", nameKo: "포르투갈 겨울", nameEn: "Portugal (winter)", flag: "🇵🇹",
+      season: "1~2월",
+      hint: "홈 베이스 겨울 태양으로 마무리",
+      cities: [
+        { id: "pt-w-algarve", nameKo: "알가르브(라구스·파루)", nameEn: "Algarve" },
+        { id: "pt-w-madeira", nameKo: "마데이라(푼샬)", nameEn: "Madeira" },
+      ],
+    },
+
+    // ---- 최대화용 선택 stop (원치 않으면 지워도 됨) ----
+    {
+      id: "eu-c", nameKo: "중부 유럽", nameEn: "Central Europe", flag: "🇪🇺",
+      season: "9월", optional: true,
+      hint: "네덜란드·독일·스위스 등 겨울에 추운 곳, 묶어서 초가을에",
+      cities: [
+        { id: "eu-c-amsterdam", nameKo: "암스테르담", nameEn: "Amsterdam" },
+        { id: "eu-c-berlin", nameKo: "베를린", nameEn: "Berlin" },
+        { id: "eu-c-swiss", nameKo: "스위스(취리히·루체른)", nameEn: "Switzerland" },
+      ],
+    },
+    {
+      id: "hr", nameKo: "크로아티아", nameEn: "Croatia", flag: "🇭🇷",
+      season: "10월", optional: true,
+      hint: "10월 온화, 아드리아 해안",
+      cities: [
+        { id: "hr-dubrovnik", nameKo: "두브로브니크", nameEn: "Dubrovnik" },
+        { id: "hr-split", nameKo: "스플리트", nameEn: "Split" },
+      ],
+    },
+  ],
+};
