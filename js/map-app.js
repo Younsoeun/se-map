@@ -74,6 +74,36 @@
       labelLon: 2, labelLat: 44,
       anchorLon: 8.2, anchorLat: 46.8,
     },
+    Norway: {
+      key: "norway",
+      nameKo: "노르웨이",
+      labelLon: -2, labelLat: 64,
+      anchorLon: 8.5, anchorLat: 61,
+    },
+    Sweden: {
+      key: "sweden",
+      nameKo: "스웨덴",
+      labelLon: 22, labelLat: 66,
+      anchorLon: 15, anchorLat: 62,
+    },
+    Finland: {
+      key: "finland",
+      nameKo: "핀란드",
+      labelLon: 33, labelLat: 65,
+      anchorLon: 26, anchorLat: 64,
+    },
+    Denmark: {
+      key: "denmark",
+      nameKo: "덴마크",
+      labelLon: 4, labelLat: 51,
+      anchorLon: 9.5, anchorLat: 56,
+    },
+    Iceland: {
+      key: "iceland",
+      nameKo: "아이슬란드",
+      labelLon: -32, labelLat: 63,
+      anchorLon: -19, anchorLat: 64.8,
+    },
     // Canary Islands: no matching world-map polygon (they're clipped out of
     // Spain), so this entry only produces a callout pill to reach the page.
     Canary: {

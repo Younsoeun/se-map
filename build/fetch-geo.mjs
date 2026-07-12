@@ -104,6 +104,39 @@ const COUNTRIES = [
     mainlandBBox: { minLon: 5.9, maxLon: 10.6, minLat: 45.7, maxLat: 47.9 },
     viewBox: { w: 780, h: 480, pad: 24 },
   },
+  // ---- Northern Europe (Nordics) ----
+  {
+    admin: "Norway",
+    key: "norway",
+    // Mainland Norway incl. Lofoten/Finnmark; excludes Svalbard & Jan Mayen.
+    mainlandBBox: { minLon: 4.0, maxLon: 31.5, minLat: 57.8, maxLat: 71.3 },
+    viewBox: { w: 620, h: 760, pad: 24 },
+  },
+  {
+    admin: "Sweden",
+    key: "sweden",
+    mainlandBBox: { minLon: 10.9, maxLon: 24.2, minLat: 55.2, maxLat: 69.1 },
+    viewBox: { w: 500, h: 780, pad: 24 },
+  },
+  {
+    admin: "Denmark",
+    key: "denmark",
+    // Jutland + Zealand + Funen; drops Bornholm (far east) for a clean shape.
+    mainlandBBox: { minLon: 8.0, maxLon: 12.8, minLat: 54.5, maxLat: 57.8 },
+    viewBox: { w: 640, h: 560, pad: 24 },
+  },
+  {
+    admin: "Finland",
+    key: "finland",
+    mainlandBBox: { minLon: 19.3, maxLon: 31.6, minLat: 59.7, maxLat: 70.1 },
+    viewBox: { w: 520, h: 760, pad: 24 },
+  },
+  {
+    admin: "Iceland",
+    key: "iceland",
+    mainlandBBox: { minLon: -24.6, maxLon: -13.4, minLat: 63.3, maxLat: 66.6 },
+    viewBox: { w: 760, h: 500, pad: 24 },
+  },
   {
     // Canary Islands: a sub-region carved out of Spain's ADMIN geometry.
     // noWorldClip keeps this bbox from hijacking Spain's peninsula clip on the

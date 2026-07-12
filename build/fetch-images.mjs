@@ -260,6 +260,63 @@ const WIKI = {
   "jet-deau-geneva": "Jet d'Eau",
   "chillon-castle": "Château de Chillon",
   "lake-lugano": "Lake Lugano",
+  // Norway
+  "vigeland-park": "Vigeland Park",
+  "oslo-opera-house": "Norwegian National Opera and Ballet",
+  "munch-museum": "Munch Museum",
+  "bryggen": "Bryggen",
+  "floyen-bergen": "Fløyen",
+  "flam-railway": "Flåm Line",
+  "geirangerfjord": "Geirangerfjord",
+  "trollstigen": "Trollstigen",
+  "alesund-town": "Ålesund",
+  "preikestolen": "Preikestolen",
+  "nidaros-cathedral": "Nidaros Cathedral",
+  "lofoten-islands": "Lofoten",
+  "tromso-aurora": "Tromsø",
+  "north-cape": "North Cape (Norway)",
+  // Sweden
+  "gamla-stan": "Gamla stan",
+  "vasa-museum": "Vasa Museum",
+  "stockholm-city-hall": "Stockholm City Hall",
+  "skansen": "Skansen",
+  "drottningholm": "Drottningholm Palace",
+  "haga-gothenburg": "Haga, Gothenburg",
+  "turning-torso": "Turning Torso",
+  "uppsala-cathedral": "Uppsala Cathedral",
+  "visby-town": "Visby",
+  "dalarna-siljan": "Lake Siljan",
+  "icehotel-kiruna": "Icehotel",
+  "abisko-aurora": "Abisko National Park",
+  // Denmark
+  "nyhavn": "Nyhavn",
+  "tivoli-gardens": "Tivoli Gardens",
+  "little-mermaid": "The Little Mermaid (statue)",
+  "kronborg-castle": "Kronborg",
+  "roskilde-viking": "Roskilde Cathedral",
+  "andersen-odense": "Odense",
+  "aros-aarhus": "ARoS Aarhus Kunstmuseum",
+  "grenen-skagen": "Grenen",
+  "legoland-billund": "Legoland Billund",
+  // Finland
+  "helsinki-cathedral": "Helsinki Cathedral",
+  "temppeliaukio": "Temppeliaukio Church",
+  "suomenlinna": "Suomenlinna",
+  "porvoo-oldtown": "Porvoo",
+  "turku-castle": "Turku Castle",
+  "tampere-moomin": "Tampere",
+  "olavinlinna": "Olavinlinna",
+  "santa-claus-village": "Santa Claus Village",
+  "saariselka-aurora": "Saariselkä",
+  // Iceland
+  "hallgrimskirkja": "Hallgrímskirkja",
+  "blue-lagoon-iceland": "Blue Lagoon (geothermal spa)",
+  "thingvellir-park": "Þingvellir",
+  "geysir-strokkur": "Strokkur",
+  "gullfoss-falls": "Gullfoss",
+  "reynisfjara": "Reynisfjara",
+  "jokulsarlon-lagoon": "Jökulsárlón",
+  "myvatn-akureyri": "Mývatn",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -343,6 +400,11 @@ async function main() {
   Object.assign(data, loadData("js/data-netherlands.js"));
   Object.assign(data, loadData("js/data-germany.js"));
   Object.assign(data, loadData("js/data-switzerland.js"));
+  Object.assign(data, loadData("js/data-norway.js"));
+  Object.assign(data, loadData("js/data-sweden.js"));
+  Object.assign(data, loadData("js/data-denmark.js"));
+  Object.assign(data, loadData("js/data-finland.js"));
+  Object.assign(data, loadData("js/data-iceland.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {
