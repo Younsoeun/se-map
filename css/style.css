@@ -839,11 +839,17 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   margin-top: 3px;
 }
 
-.route-stop-date {
+/* Stop head: 방문 시작일 / 방문 종료일 side by side. */
+.route-stop-dates {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.route-date-field {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  flex-shrink: 0;
 }
 
 .route-date-label {
@@ -861,9 +867,18 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   font-family: var(--fb);
   font-size: 0.85rem;
   padding: 6px 8px;
+  min-width: 0;
 }
 
 .route-date:focus { outline: none; border-color: var(--nv); }
+
+/* City row: two compact date inputs with a ~ between them. */
+.route-city-dates {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
 
 .route-cities {
   margin-top: 12px;
@@ -949,10 +964,13 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   .culture-section { padding: 18px 18px; }
   .culture-profile-flag { font-size: 2.1rem; }
 
-  /* --- route page: stack the date control under the country title --- */
+  /* --- route page: stack the date controls under the country title --- */
   .route-stop-head { flex-direction: column; align-items: stretch; gap: 10px; }
-  .route-stop-date { flex-direction: row; align-items: center; justify-content: space-between; }
-  .route-city { gap: 10px; }
+  .route-stop-dates { gap: 8px; }
+  .route-stop-dates .route-date-field { flex: 1; min-width: 0; }
+  .route-city { flex-direction: column; align-items: stretch; gap: 8px; }
+  .route-city-dates { justify-content: flex-start; }
+  .route-city-dates .route-date { flex: 1; }
   .route-city-en { display: none; } /* keep Korean name + date readable on narrow screens */
 }
 

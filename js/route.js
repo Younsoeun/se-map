@@ -23,16 +23,28 @@
     bus.dispatchEvent(new CustomEvent("change"));
   }
 
+  // Values are { start, end } (YYYY-MM-DD). Legacy values were a plain start
+  // string; normalize those on read so old saved data still works.
+  function normalize(v) {
+    if (!v) return { start: "", end: "" };
+    if (typeof v === "string") return { start: v, end: "" };
+    return { start: v.start || "", end: v.end || "" };
+  }
+
   const SERoute = {
-    // Returns "" when no date is set for this id.
-    getDate(id) {
-      return state[id] || "";
+    getRange(id) {
+      return normalize(state[id]);
     },
 
-    // Pass "" to clear the date.
-    setDate(id, dateStr) {
-      if (dateStr) state[id] = dateStr;
-      else delete state[id];
+    // Convenience: the start date (used for sorting). "" when unset.
+    getDate(id) {
+      return normalize(state[id]).start;
+    },
+
+    // Pass empty strings to clear.
+    setRange(id, start, end) {
+      if (!start && !end) delete state[id];
+      else state[id] = { start: start || "", end: end || "" };
       persist();
     },
 

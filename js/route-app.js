@@ -41,17 +41,22 @@
     return { dated: dated.map((x) => x.item), undated: undated.map((x) => x.item) };
   }
 
-  function dateInput(id, onChange) {
-    const input = el("input", { type: "date", class: "route-date" });
-    const current = window.SERoute.getDate(id);
-    if (current) input.value = current;
-    input.addEventListener("change", () => {
-      window.SERoute.setDate(id, input.value);
+  // Two date inputs (start, end) bound to one route item.
+  function dateInputs(id, onChange) {
+    const r = window.SERoute.getRange(id);
+    const start = el("input", { type: "date", class: "route-date" });
+    const end = el("input", { type: "date", class: "route-date" });
+    start.value = r.start || "";
+    end.value = r.end || "";
+    function commit() {
+      window.SERoute.setRange(id, start.value, end.value);
       onChange();
+    }
+    [start, end].forEach((inp) => {
+      inp.addEventListener("change", commit);
+      inp.addEventListener("click", (e) => e.stopPropagation());
     });
-    // Clicking the input shouldn't bubble to any parent toggles.
-    input.addEventListener("click", (e) => e.stopPropagation());
-    return input;
+    return { start, end };
   }
 
   function renderCity(city, rerender) {
@@ -64,7 +69,13 @@
     left.appendChild(el("span", { class: "route-city-en", text: city.nameEn }));
     row.appendChild(left);
 
-    row.appendChild(dateInput(city.id, rerender));
+    const { start, end } = dateInputs(city.id, rerender);
+    const dwrap = el("div", { class: "route-city-dates" }, [
+      start,
+      el("span", { class: "route-date-sep", text: "~" }),
+      end,
+    ]);
+    row.appendChild(dwrap);
     return row;
   }
 
@@ -90,9 +101,17 @@
     title.appendChild(titleText);
     head.appendChild(title);
 
-    const dateWrap = el("label", { class: "route-stop-date" });
-    dateWrap.appendChild(el("span", { class: "route-date-label", text: "방문 시작일" }));
-    dateWrap.appendChild(dateInput(stop.id, rerender));
+    const { start, end } = dateInputs(stop.id, rerender);
+    const dateWrap = el("div", { class: "route-stop-dates" }, [
+      el("label", { class: "route-date-field" }, [
+        el("span", { class: "route-date-label", text: "방문 시작일" }),
+        start,
+      ]),
+      el("label", { class: "route-date-field" }, [
+        el("span", { class: "route-date-label", text: "방문 종료일" }),
+        end,
+      ]),
+    ]);
     head.appendChild(dateWrap);
 
     card.appendChild(head);
