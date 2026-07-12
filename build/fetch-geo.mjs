@@ -78,6 +78,16 @@ const COUNTRIES = [
     mainlandBBox: { minLon: 14.1, maxLon: 14.62, minLat: 35.78, maxLat: 36.10 },
     viewBox: { w: 680, h: 560, pad: 24 },
   },
+  {
+    // Canary Islands: a sub-region carved out of Spain's ADMIN geometry.
+    // noWorldClip keeps this bbox from hijacking Spain's peninsula clip on the
+    // world map; the Canaries are reached via their own callout pill.
+    admin: "Spain",
+    key: "canary",
+    noWorldClip: true,
+    mainlandBBox: { minLon: -18.3, maxLon: -13.3, minLat: 27.5, maxLat: 29.5 },
+    viewBox: { w: 780, h: 380, pad: 24 },
+  },
 ];
 
 async function fetchCached(name, url) {
@@ -136,8 +146,10 @@ function buildWorld(admin0) {
   // For countries we ship as "active" (filled) on the world map, clip their
   // outline to the mainland bbox so far-flung overseas territories (e.g.
   // French Guiana) don't appear as stray filled blobs.
+  // Sub-region entries (noWorldClip) reuse another entry's ADMIN name and must
+  // NOT drive the world-map clip, or they'd override the primary entry's bbox.
   const mainlandByAdmin = new Map(
-    COUNTRIES.map((c) => [c.admin, c.mainlandBBox])
+    COUNTRIES.filter((c) => !c.noWorldClip).map((c) => [c.admin, c.mainlandBBox])
   );
 
   const countries = admin0.features

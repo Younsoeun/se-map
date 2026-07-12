@@ -41,7 +41,7 @@
     Morocco: {
       key: "morocco",
       nameKo: "모로코",
-      labelLon: -18, labelLat: 27,
+      labelLon: -24, labelLat: 33,
       anchorLon: -7, anchorLat: 31.8,
     },
     Malta: {
@@ -49,6 +49,14 @@
       nameKo: "몰타",
       labelLon: 20, labelLat: 30.5,
       anchorLon: 14.4, anchorLat: 35.9,
+    },
+    // Canary Islands: no matching world-map polygon (they're clipped out of
+    // Spain), so this entry only produces a callout pill to reach the page.
+    Canary: {
+      key: "canary",
+      nameKo: "카나리아 제도",
+      labelLon: -34, labelLat: 22,
+      anchorLon: -15.6, anchorLat: 28.2,
     },
   };
 

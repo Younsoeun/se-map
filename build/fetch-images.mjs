@@ -181,6 +181,18 @@ const WIKI = {
   "ggantija-temples": "Ġgantija",
   "gozo-citadel": "Cittadella (Gozo)",
   "blue-lagoon-comino": "Comino",
+  // Canary Islands
+  "teide-national-park": "Teide National Park",
+  "la-laguna-oldtown": "San Cristóbal de La Laguna",
+  "los-gigantes-cliffs": "Los Gigantes",
+  "maspalomas-dunes": "Maspalomas",
+  "roque-nublo": "Roque Nublo",
+  "vegueta-las-palmas": "Las Palmas",
+  "timanfaya-national-park": "Timanfaya National Park",
+  "jameos-del-agua": "Jameos del Agua",
+  "corralejo-dunes": "Corralejo",
+  "roque-de-los-muchachos": "Roque de los Muchachos",
+  "garajonay-national-park": "Garajonay National Park",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -195,6 +207,8 @@ const MANUAL_IMAGES = {
     "https://commons.wikimedia.org/wiki/Special:FilePath/Vista_Centro_Hist%C3%B3rico_de_Lagos_%28cropped%29.jpg?width=640",
   "rotunda-thessaloniki":
     "https://commons.wikimedia.org/wiki/Special:FilePath/Thessaloniki_Saint_George_Rotunda_from_the_Arch_of_Galerius.jpg?width=640",
+  "corralejo-dunes":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Azul%2C_Dunas_de_Corralejo%2C_Fuerteventura%2C_Espa%C3%B1a%2C_2015.JPG?width=640",
 };
 
 function loadData(rel) {
@@ -257,6 +271,7 @@ async function main() {
   Object.assign(data, loadData("js/data-italy.js"));
   Object.assign(data, loadData("js/data-morocco.js"));
   Object.assign(data, loadData("js/data-malta.js"));
+  Object.assign(data, loadData("js/data-canary.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

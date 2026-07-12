@@ -83,11 +83,12 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "ic", nameKo: "카나리아 제도", nameEn: "Canary Islands", flag: "🇮🇨",
+      countryKey: "canary",
       season: "12~1월",
       hint: "22°C, 유럽 최고의 겨울 태양",
       cities: [
-        { id: "ic-tenerife", nameKo: "테네리페", nameEn: "Tenerife" },
-        { id: "ic-grancanaria", nameKo: "그란카나리아", nameEn: "Gran Canaria" },
+        { id: "ic-tenerife", nameKo: "테네리페", nameEn: "Tenerife", cityId: "tenerife" },
+        { id: "ic-grancanaria", nameKo: "그란카나리아", nameEn: "Gran Canaria", cityId: "gran-canaria" },
       ],
     },
     {
