@@ -171,6 +171,43 @@ const COUNTRIES = [
     viewBox: { w: 760, h: 460, pad: 24 },
   },
   {
+    admin: "Slovakia",
+    key: "slovakia",
+    mainlandBBox: { minLon: 16.8, maxLon: 22.6, minLat: 47.7, maxLat: 49.7 },
+    viewBox: { w: 780, h: 400, pad: 24 },
+  },
+  {
+    admin: "Romania",
+    key: "romania",
+    mainlandBBox: { minLon: 20.2, maxLon: 29.8, minLat: 43.5, maxLat: 48.3 },
+    viewBox: { w: 720, h: 460, pad: 24 },
+  },
+  {
+    admin: "Bulgaria",
+    key: "bulgaria",
+    mainlandBBox: { minLon: 22.3, maxLon: 28.7, minLat: 41.2, maxLat: 44.3 },
+    viewBox: { w: 760, h: 420, pad: 24 },
+  },
+  {
+    admin: "Estonia",
+    key: "estonia",
+    mainlandBBox: { minLon: 21.6, maxLon: 28.3, minLat: 57.4, maxLat: 59.8 },
+    viewBox: { w: 760, h: 380, pad: 24 },
+  },
+  {
+    admin: "Latvia",
+    key: "latvia",
+    noDistricts: true, // admin-1 is ~120 municipalities — too fine to draw
+    mainlandBBox: { minLon: 20.9, maxLon: 28.3, minLat: 55.6, maxLat: 58.1 },
+    viewBox: { w: 760, h: 360, pad: 24 },
+  },
+  {
+    admin: "Lithuania",
+    key: "lithuania",
+    mainlandBBox: { minLon: 20.9, maxLon: 26.9, minLat: 53.8, maxLat: 56.5 },
+    viewBox: { w: 740, h: 420, pad: 24 },
+  },
+  {
     // Canary Islands: a sub-region carved out of Spain's ADMIN geometry.
     // noWorldClip keeps this bbox from hijacking Spain's peninsula clip on the
     // world map; the Canaries are reached via their own callout pill.

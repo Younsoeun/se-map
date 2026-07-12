@@ -134,6 +134,42 @@
       labelLon: 9, labelLat: 42,
       anchorLon: 14.8, anchorLat: 46.1,
     },
+    Slovakia: {
+      key: "slovakia",
+      nameKo: "슬로바키아",
+      labelLon: 22, labelLat: 50.5,
+      anchorLon: 19.5, anchorLat: 48.7,
+    },
+    Romania: {
+      key: "romania",
+      nameKo: "루마니아",
+      labelLon: 31, labelLat: 47,
+      anchorLon: 25, anchorLat: 45.9,
+    },
+    Bulgaria: {
+      key: "bulgaria",
+      nameKo: "불가리아",
+      labelLon: 32, labelLat: 42,
+      anchorLon: 25.3, anchorLat: 42.7,
+    },
+    Estonia: {
+      key: "estonia",
+      nameKo: "에스토니아",
+      labelLon: 33, labelLat: 59.5,
+      anchorLon: 25.5, anchorLat: 58.7,
+    },
+    Latvia: {
+      key: "latvia",
+      nameKo: "라트비아",
+      labelLon: 33, labelLat: 57,
+      anchorLon: 24.6, anchorLat: 56.9,
+    },
+    Lithuania: {
+      key: "lithuania",
+      nameKo: "리투아니아",
+      labelLon: 31, labelLat: 54.5,
+      anchorLon: 23.9, anchorLat: 55.2,
+    },
     // Canary Islands: no matching world-map polygon (they're clipped out of
     // Spain), so this entry only produces a callout pill to reach the page.
     Canary: {

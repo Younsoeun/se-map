@@ -362,6 +362,48 @@ const WIKI = {
   "lake-bohinj": "Lake Bohinj",
   "postojna-predjama": "Postojna Cave",
   "piran-town": "Piran",
+  // Slovakia
+  "bratislava-castle": "Bratislava Castle",
+  "spis-castle": "Spiš Castle",
+  "high-tatras-park": "High Tatras",
+  "bojnice-castle": "Bojnice Castle",
+  "banska-stiavnica-town": "Banská Štiavnica",
+  "kosice-cathedral": "St. Elisabeth Cathedral, Košice",
+  "vlkolinec-village": "Vlkolínec",
+  // Romania
+  "palace-parliament": "Palace of the Parliament",
+  "brasov-oldtown": "Brașov",
+  "bran-castle": "Bran Castle",
+  "peles-castle": "Peleș Castle",
+  "sibiu-oldtown": "Sibiu",
+  "sighisoara-citadel": "Sighișoara",
+  "voronet-monastery": "Voroneț Monastery",
+  "transfagarasan-road": "Transfăgărășan",
+  // Bulgaria
+  "alexander-nevsky": "Alexander Nevsky Cathedral, Sofia",
+  "plovdiv-oldtown": "Plovdiv",
+  "rila-monastery": "Rila Monastery",
+  "tsarevets": "Tsarevets (fortress)",
+  "nessebar-oldtown": "Nesebar",
+  "koprivshtitsa-town": "Koprivshtitsa",
+  // Estonia
+  "tallinn-oldtown": "Tallinn",
+  "kadriorg-tallinn": "Kadriorg Palace",
+  "tartu-town": "Tartu",
+  "kuressaare-castle": "Kuressaare Castle",
+  "lahemaa-park": "Lahemaa National Park",
+  // Latvia
+  "riga-oldtown": "Riga",
+  "riga-art-nouveau": "Art Nouveau architecture in Riga",
+  "jurmala-beach": "Jūrmala",
+  "turaida-sigulda": "Turaida Castle",
+  "rundale-palace": "Rundāle Palace",
+  // Lithuania
+  "vilnius-oldtown": "Vilnius Old Town",
+  "trakai-castle": "Trakai Island Castle",
+  "kaunas-oldtown": "Kaunas",
+  "hill-of-crosses": "Hill of Crosses",
+  "curonian-spit": "Curonian Spit",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -378,6 +420,12 @@ const MANUAL_IMAGES = {
     "https://commons.wikimedia.org/wiki/Special:FilePath/Thessaloniki_Saint_George_Rotunda_from_the_Arch_of_Galerius.jpg?width=640",
   "corralejo-dunes":
     "https://commons.wikimedia.org/wiki/Special:FilePath/Azul%2C_Dunas_de_Corralejo%2C_Fuerteventura%2C_Espa%C3%B1a%2C_2015.JPG?width=640",
+  "spis-castle":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Spissky_hrad_west.jpg?width=640",
+  "kosice-cathedral":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Cathedral_of_St._Elizabeth_in_Ko%C5%A1ice.jpg?width=640",
+  "transfagarasan-road":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Transfagarasan_road_with_Bilea_Lake.jpg?width=640",
 };
 
 function loadData(rel) {
@@ -455,6 +503,12 @@ async function main() {
   Object.assign(data, loadData("js/data-hungary.js"));
   Object.assign(data, loadData("js/data-poland.js"));
   Object.assign(data, loadData("js/data-slovenia.js"));
+  Object.assign(data, loadData("js/data-slovakia.js"));
+  Object.assign(data, loadData("js/data-romania.js"));
+  Object.assign(data, loadData("js/data-bulgaria.js"));
+  Object.assign(data, loadData("js/data-estonia.js"));
+  Object.assign(data, loadData("js/data-latvia.js"));
+  Object.assign(data, loadData("js/data-lithuania.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {
