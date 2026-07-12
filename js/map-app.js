@@ -104,6 +104,36 @@
       labelLon: -32, labelLat: 63,
       anchorLon: -19, anchorLat: 64.8,
     },
+    Czechia: {
+      key: "czechia",
+      nameKo: "체코",
+      labelLon: 10, labelLat: 53,
+      anchorLon: 15.5, anchorLat: 49.8,
+    },
+    Austria: {
+      key: "austria",
+      nameKo: "오스트리아",
+      labelLon: 12, labelLat: 44.5,
+      anchorLon: 14.5, anchorLat: 47.5,
+    },
+    Hungary: {
+      key: "hungary",
+      nameKo: "헝가리",
+      labelLon: 25, labelLat: 46,
+      anchorLon: 19.4, anchorLat: 47.2,
+    },
+    Poland: {
+      key: "poland",
+      nameKo: "폴란드",
+      labelLon: 27, labelLat: 54,
+      anchorLon: 19.5, anchorLat: 52,
+    },
+    Slovenia: {
+      key: "slovenia",
+      nameKo: "슬로베니아",
+      labelLon: 9, labelLat: 42,
+      anchorLon: 14.8, anchorLat: 46.1,
+    },
     // Canary Islands: no matching world-map polygon (they're clipped out of
     // Spain), so this entry only produces a callout pill to reach the page.
     Canary: {

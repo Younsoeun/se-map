@@ -317,6 +317,51 @@ const WIKI = {
   "reynisfjara": "Reynisfjara",
   "jokulsarlon-lagoon": "Jökulsárlón",
   "myvatn-akureyri": "Mývatn",
+  // Czechia
+  "charles-bridge": "Charles Bridge",
+  "prague-castle": "Prague Castle",
+  "old-town-square-prague": "Prague astronomical clock",
+  "jewish-quarter-prague": "Josefov",
+  "wenceslas-square": "Wenceslas Square",
+  "cesky-krumlov-town": "Český Krumlov",
+  "sedlec-ossuary": "Sedlec Ossuary",
+  "karlovy-vary-spa": "Karlovy Vary",
+  "villa-tugendhat": "Villa Tugendhat",
+  "pilsner-urquell": "Pilsner Urquell",
+  "holy-trinity-olomouc": "Holy Trinity Column, Olomouc",
+  "telc-town": "Telč",
+  // Austria
+  "schonbrunn": "Schönbrunn Palace",
+  "vienna-hofburg-ring": "Hofburg",
+  "belvedere-klimt": "Belvedere, Vienna",
+  "hohensalzburg": "Hohensalzburg Fortress",
+  "hallstatt-village": "Hallstatt",
+  "innsbruck-golden-roof": "Golden Roof",
+  "graz-oldtown": "Graz",
+  "wachau-melk": "Melk Abbey",
+  // Hungary
+  "hungarian-parliament": "Hungarian Parliament Building",
+  "buda-castle": "Fisherman's Bastion",
+  "szechenyi-baths": "Széchenyi thermal bath",
+  "eger-castle": "Eger Castle",
+  "pecs-oldtown": "Pécs",
+  "szentendre-town": "Szentendre",
+  "balaton-tihany": "Tihany",
+  // Poland
+  "krakow-rynek": "Main Square, Kraków",
+  "wawel-castle": "Wawel Castle",
+  "warsaw-oldtown": "Warsaw Old Town",
+  "wroclaw-rynek": "Wrocław",
+  "gdansk-oldtown": "Gdańsk",
+  "wieliczka-mine": "Wieliczka Salt Mine",
+  "zakopane-tatra": "Zakopane",
+  "auschwitz": "Auschwitz concentration camp",
+  // Slovenia
+  "ljubljana-oldtown": "Ljubljana",
+  "lake-bled": "Lake Bled",
+  "lake-bohinj": "Lake Bohinj",
+  "postojna-predjama": "Postojna Cave",
+  "piran-town": "Piran",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -405,6 +450,11 @@ async function main() {
   Object.assign(data, loadData("js/data-denmark.js"));
   Object.assign(data, loadData("js/data-finland.js"));
   Object.assign(data, loadData("js/data-iceland.js"));
+  Object.assign(data, loadData("js/data-czechia.js"));
+  Object.assign(data, loadData("js/data-austria.js"));
+  Object.assign(data, loadData("js/data-hungary.js"));
+  Object.assign(data, loadData("js/data-poland.js"));
+  Object.assign(data, loadData("js/data-slovenia.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

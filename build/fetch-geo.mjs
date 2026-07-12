@@ -137,6 +137,39 @@ const COUNTRIES = [
     mainlandBBox: { minLon: -24.6, maxLon: -13.4, minLat: 63.3, maxLat: 66.6 },
     viewBox: { w: 760, h: 500, pad: 24 },
   },
+  // ---- Central / Eastern Europe ----
+  {
+    admin: "Czechia",
+    key: "czechia",
+    admin1Name: "Czech Republic", // admin-1 dataset uses the older name
+    mainlandBBox: { minLon: 12.0, maxLon: 18.9, minLat: 48.5, maxLat: 51.1 },
+    viewBox: { w: 720, h: 460, pad: 24 },
+  },
+  {
+    admin: "Austria",
+    key: "austria",
+    mainlandBBox: { minLon: 9.5, maxLon: 17.2, minLat: 46.3, maxLat: 49.1 },
+    viewBox: { w: 760, h: 400, pad: 24 },
+  },
+  {
+    admin: "Hungary",
+    key: "hungary",
+    mainlandBBox: { minLon: 16.1, maxLon: 22.9, minLat: 45.7, maxLat: 48.6 },
+    viewBox: { w: 720, h: 440, pad: 24 },
+  },
+  {
+    admin: "Poland",
+    key: "poland",
+    mainlandBBox: { minLon: 14.1, maxLon: 24.2, minLat: 49.0, maxLat: 54.9 },
+    viewBox: { w: 680, h: 560, pad: 24 },
+  },
+  {
+    admin: "Slovenia",
+    key: "slovenia",
+    noDistricts: true, // admin-1 is ~200 municipalities — too fine to draw
+    mainlandBBox: { minLon: 13.3, maxLon: 16.6, minLat: 45.4, maxLat: 46.9 },
+    viewBox: { w: 760, h: 460, pad: 24 },
+  },
   {
     // Canary Islands: a sub-region carved out of Spain's ADMIN geometry.
     // noWorldClip keeps this bbox from hijacking Spain's peninsula clip on the
@@ -327,11 +360,17 @@ async function buildCountry(country, admin0_50m, admin1_10m) {
   if (!outlineFeature) throw new Error(`No admin-0 feature for ${country.admin}`);
   const mainlandGeom = filterMainland(outlineFeature.geometry, country.mainlandBBox);
 
-  const districtFeatures = admin1_10m.features.filter(
-    (f) =>
-      f.properties.admin === country.admin &&
-      featureOverlapsBBox(f.geometry, country.mainlandBBox)
-  );
+  // Some countries name their admin-1 features differently (e.g. "Czech
+  // Republic" vs ADMIN "Czechia"); allow an override. noDistricts skips the
+  // internal boundaries entirely (e.g. when they are too fine-grained).
+  const admin1Name = country.admin1Name || country.admin;
+  const districtFeatures = country.noDistricts
+    ? []
+    : admin1_10m.features.filter(
+        (f) =>
+          f.properties.admin === admin1Name &&
+          featureOverlapsBBox(f.geometry, country.mainlandBBox)
+      );
 
   const allProjectionRings = [
     ...allRings(mainlandGeom),
