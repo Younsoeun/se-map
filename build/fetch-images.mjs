@@ -63,6 +63,34 @@ const WIKI = {
   "vieux-nice": "Nice",
   "cite-carcassonne": "Cité de Carcassonne",
   "place-bourse": "Place de la Bourse",
+  // Spain
+  "palacio-real-madrid": "Royal Palace of Madrid",
+  "plaza-mayor-madrid": "Plaza Mayor, Madrid",
+  "parque-del-retiro": "Buen Retiro Park",
+  "la-rambla": "La Rambla, Barcelona",
+  "catedral-sevilla": "Seville Cathedral",
+  "real-alcazar-sevilla": "Alcázar of Seville",
+  "plaza-espana-sevilla": "Plaza de España, Seville",
+  "alhambra": "Alhambra",
+  "albaicin": "Albaicín",
+  "mezquita-cordoba": "Mosque–Cathedral of Córdoba",
+  "patios-cordoba": "Córdoba, Spain",
+  "catedral-toledo": "Toledo Cathedral",
+  "casco-historico-toledo": "Toledo, Spain",
+  "acueducto-segovia": "Aqueduct of Segovia",
+  "alcazar-segovia": "Alcázar of Segovia",
+  "ciudad-artes-ciencias": "City of Arts and Sciences",
+  "lonja-seda-valencia": "Llotja de la Seda",
+  "guggenheim-bilbao": "Guggenheim Museum Bilbao",
+  "playa-concha": "San Sebastián",
+  "catedral-santiago": "Santiago de Compostela Cathedral",
+  "puente-nuevo-ronda": "Puente Nuevo",
+  "plaza-mayor-salamanca": "Plaza Mayor, Salamanca",
+  "casas-colgadas-cuenca": "Casas Colgadas",
+  "alcazaba-malaga": "Alcazaba of Málaga",
+  "basilica-pilar-zaragoza": "Basilica of Our Lady of the Pillar",
+  "teatro-romano-merida": "Roman Theatre (Mérida)",
+  "murallas-avila": "Walls of Ávila",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -132,6 +160,7 @@ async function main() {
   const data = {};
   Object.assign(data, loadData("js/data-portugal.js"));
   Object.assign(data, loadData("js/data-france.js"));
+  Object.assign(data, loadData("js/data-spain.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

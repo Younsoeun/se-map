@@ -20,6 +20,12 @@
       labelLon: -1, labelLat: 56,
       anchorLon: 2.5, anchorLat: 47.2,
     },
+    Spain: {
+      key: "spain",
+      nameKo: "스페인",
+      labelLon: -3, labelLat: 32.5,
+      anchorLon: -3.7, anchorLat: 40.4,
+    },
   };
 
   const state = { screen: "world", countryKey: null };

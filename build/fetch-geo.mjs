@@ -39,6 +39,15 @@ const COUNTRIES = [
     mainlandBBox: { minLon: -5.3, maxLon: 9.7, minLat: 41.2, maxLat: 51.2 },
     viewBox: { w: 680, h: 700, pad: 24 },
   },
+  {
+    admin: "Spain",
+    key: "spain",
+    // Iberian peninsula only; drops the Canary Islands (far southwest) and the
+    // North-African enclaves (Ceuta/Melilla) which share the ADMIN name.
+    // Balearic Islands sit just east of the coast — excluded for a clean shape.
+    mainlandBBox: { minLon: -9.6, maxLon: 3.4, minLat: 35.9, maxLat: 43.9 },
+    viewBox: { w: 720, h: 620, pad: 24 },
+  },
 ];
 
 async function fetchCached(name, url) {
