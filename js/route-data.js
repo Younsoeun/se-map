@@ -2,28 +2,35 @@
 // in Portugal. Array order = recommended order (cold-in-winter countries early
 // while warm, warm-winter-sun countries last). Each stop groups a country/
 // region and its key cities. Used by route.html (route-app.js).
+//
+// A stop with a `countryKey` links to that country's overview
+// (index.html?country=…); a city with a `cityId` links to its detail page
+// (city.html?country=<stop.countryKey>&city=<cityId>). These fields are only
+// present where a built detail page already exists.
 
 window.SE_MAP_ROUTE = {
   stops: [
     {
       id: "fr", nameKo: "프랑스", nameEn: "France", flag: "🇫🇷",
+      countryKey: "france",
       season: "8월 말~9월",
       hint: "겨울엔 춥고 습해서 초가을에 먼저",
       cities: [
-        { id: "fr-paris", nameKo: "파리", nameEn: "Paris" },
-        { id: "fr-lyon", nameKo: "리옹", nameEn: "Lyon" },
+        { id: "fr-paris", nameKo: "파리", nameEn: "Paris", cityId: "paris" },
+        { id: "fr-lyon", nameKo: "리옹", nameEn: "Lyon", cityId: "lyon" },
         { id: "fr-provence", nameKo: "프로방스", nameEn: "Provence" },
-        { id: "fr-alsace", nameKo: "알자스(스트라스부르)", nameEn: "Alsace" },
+        { id: "fr-alsace", nameKo: "알자스(스트라스부르)", nameEn: "Alsace", cityId: "strasbourg" },
       ],
     },
     {
       id: "es-n", nameKo: "스페인 북부", nameEn: "Northern Spain", flag: "🇪🇸",
+      countryKey: "spain",
       season: "9월",
       hint: "여름 온화·겨울 흐림, 포르투갈↔프랑스 길목",
       cities: [
-        { id: "es-n-sansebastian", nameKo: "산세바스티안", nameEn: "San Sebastián" },
-        { id: "es-n-bilbao", nameKo: "빌바오", nameEn: "Bilbao" },
-        { id: "es-n-santiago", nameKo: "산티아고", nameEn: "Santiago de Compostela" },
+        { id: "es-n-sansebastian", nameKo: "산세바스티안", nameEn: "San Sebastián", cityId: "san-sebastian" },
+        { id: "es-n-bilbao", nameKo: "빌바오", nameEn: "Bilbao", cityId: "bilbao" },
+        { id: "es-n-santiago", nameKo: "산티아고", nameEn: "Santiago de Compostela", cityId: "santiago" },
       ],
     },
     {
@@ -61,13 +68,14 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "es-s", nameKo: "스페인 남부", nameEn: "Southern Spain", flag: "🇪🇸",
+      countryKey: "spain",
       season: "12~1월",
       hint: "겨울에도 15~20°C로 온화",
       cities: [
-        { id: "es-s-seville", nameKo: "세비야", nameEn: "Seville" },
-        { id: "es-s-granada", nameKo: "그라나다", nameEn: "Granada" },
-        { id: "es-s-cordoba", nameKo: "코르도바", nameEn: "Córdoba" },
-        { id: "es-s-malaga", nameKo: "말라가", nameEn: "Málaga" },
+        { id: "es-s-seville", nameKo: "세비야", nameEn: "Seville", cityId: "sevilla" },
+        { id: "es-s-granada", nameKo: "그라나다", nameEn: "Granada", cityId: "granada" },
+        { id: "es-s-cordoba", nameKo: "코르도바", nameEn: "Córdoba", cityId: "cordoba" },
+        { id: "es-s-malaga", nameKo: "말라가", nameEn: "Málaga", cityId: "malaga" },
       ],
     },
     {
@@ -89,10 +97,11 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "pt-w", nameKo: "포르투갈 겨울", nameEn: "Portugal (winter)", flag: "🇵🇹",
+      countryKey: "portugal",
       season: "1~2월",
       hint: "홈 베이스 겨울 태양으로 마무리",
       cities: [
-        { id: "pt-w-algarve", nameKo: "알가르브(라구스·파루)", nameEn: "Algarve" },
+        { id: "pt-w-algarve", nameKo: "알가르브(라구스·파루)", nameEn: "Algarve", cityId: "algarve" },
         { id: "pt-w-madeira", nameKo: "마데이라(푼샬)", nameEn: "Madeira" },
       ],
     },

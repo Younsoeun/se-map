@@ -923,6 +923,30 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 
 .route-city .route-date { padding: 4px 7px; font-size: 0.8rem; }
 
+/* Linked stop/city names → their detail page. Subtle affordance: a trailing
+   arrow that slides on hover, plus an underline. */
+a.route-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+a.route-link::after {
+  content: "↗";
+  font-size: 0.72em;
+  margin-left: 3px;
+  color: var(--tc);
+  opacity: 0.65;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+  display: inline-block;
+}
+a.route-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+a.route-link:hover::after { opacity: 1; transform: translate(1px, -1px); }
+a.route-link:focus-visible {
+  outline: 2px solid var(--tc);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
 /* ===========================================================
    Mobile / small screens
    =========================================================== */

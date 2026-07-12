@@ -59,13 +59,23 @@
     return { start, end };
   }
 
-  function renderCity(city, rerender) {
+  function renderCity(city, rerender, countryKey) {
     const dated = !!window.SERoute.getDate(city.id);
     const row = el("div", { class: "route-city" + (dated ? " is-fixed" : "") });
 
     const left = el("div", { class: "route-city-label" });
     if (dated) left.appendChild(el("span", { class: "route-pin", text: "📌" }));
-    left.appendChild(el("span", { class: "route-city-name", text: city.nameKo }));
+    // Link to the city's detail page when one exists.
+    const nameNode =
+      countryKey && city.cityId
+        ? el("a", {
+            class: "route-city-name route-link",
+            href: `city.html?country=${encodeURIComponent(countryKey)}&city=${encodeURIComponent(city.cityId)}`,
+            title: `${city.nameKo} 상세 페이지로`,
+            text: city.nameKo,
+          })
+        : el("span", { class: "route-city-name", text: city.nameKo });
+    left.appendChild(nameNode);
     left.appendChild(el("span", { class: "route-city-en", text: city.nameEn }));
     row.appendChild(left);
 
@@ -91,7 +101,17 @@
     title.appendChild(el("span", { class: "route-flag", text: stop.flag }));
     const titleText = el("div", {});
     const nameRow = el("div", { class: "route-stop-name-row" });
-    nameRow.appendChild(el("span", { class: "route-stop-name", text: stop.nameKo }));
+    // Link the country name to its overview map when a detail page exists.
+    nameRow.appendChild(
+      stop.countryKey
+        ? el("a", {
+            class: "route-stop-name route-link",
+            href: `index.html?country=${encodeURIComponent(stop.countryKey)}`,
+            title: `${stop.nameKo} 지도 보기`,
+            text: stop.nameKo,
+          })
+        : el("span", { class: "route-stop-name", text: stop.nameKo })
+    );
     if (dated) nameRow.appendChild(el("span", { class: "route-badge fixed", text: "확정" }));
     if (stop.optional) nameRow.appendChild(el("span", { class: "route-badge optional", text: "선택" }));
     titleText.appendChild(nameRow);
@@ -123,7 +143,7 @@
     );
     const cityWrap = el("div", { class: "route-cities" });
     [...datedCities, ...undatedCities].forEach((c) =>
-      cityWrap.appendChild(renderCity(c, rerender))
+      cityWrap.appendChild(renderCity(c, rerender, stop.countryKey))
     );
     card.appendChild(cityWrap);
 
