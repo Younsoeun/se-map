@@ -32,6 +32,12 @@
       labelLon: 33, labelLat: 43,
       anchorLon: 23.7, anchorLat: 38.5,
     },
+    Italy: {
+      key: "italy",
+      nameKo: "이탈리아",
+      labelLon: 6, labelLat: 40,
+      anchorLon: 12.5, anchorLat: 42.5,
+    },
   };
 
   const state = { screen: "world", countryKey: null };

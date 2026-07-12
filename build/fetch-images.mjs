@@ -115,6 +115,37 @@ const WIKI = {
   "rhodes-old-town": "Medieval City of Rhodes",
   "corfu-old-town": "Corfu (city)",
   "navagio-zakynthos": "Navagio Beach",
+  // Italy
+  "colosseo": "Colosseum",
+  "foro-romano": "Roman Forum",
+  "pantheon-rome": "Pantheon, Rome",
+  "trevi-fountain": "Trevi Fountain",
+  "vatican-museums": "Vatican Museums",
+  "st-peters-basilica": "St. Peter's Basilica",
+  "piazza-navona": "Piazza Navona",
+  "florence-duomo": "Florence Cathedral",
+  "uffizi": "Uffizi",
+  "ponte-vecchio": "Ponte Vecchio",
+  "accademia-david": "David (Michelangelo)",
+  "san-marco-basilica": "St Mark's Basilica",
+  "doges-palace": "Doge's Palace",
+  "rialto-bridge": "Rialto Bridge",
+  "grand-canal": "Grand Canal (Venice)",
+  "naples-centro-storico": "Naples",
+  "naples-archaeological-museum": "National Archaeological Museum, Naples",
+  "pompeii-ruins": "Pompeii",
+  "amalfi-coast": "Amalfi Coast",
+  "capri-blue-grotto": "Blue Grotto (Capri)",
+  "milan-duomo": "Milan Cathedral",
+  "last-supper": "The Last Supper (Leonardo)",
+  "pisa-leaning-tower": "Leaning Tower of Pisa",
+  "piazza-del-campo": "Piazza del Campo",
+  "cinque-terre-villages": "Cinque Terre",
+  "verona-arena": "Verona Arena",
+  "bologna-piazza-maggiore": "Piazza Maggiore",
+  "mole-antonelliana": "Mole Antonelliana",
+  "basilica-san-francesco": "Basilica of San Francesco d'Assisi",
+  "sassi-matera": "Sassi di Matera",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -188,6 +219,7 @@ async function main() {
   Object.assign(data, loadData("js/data-france.js"));
   Object.assign(data, loadData("js/data-spain.js"));
   Object.assign(data, loadData("js/data-greece.js"));
+  Object.assign(data, loadData("js/data-italy.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

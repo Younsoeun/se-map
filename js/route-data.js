@@ -46,13 +46,14 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "it", nameKo: "이탈리아", nameEn: "Italy", flag: "🇮🇹",
+      countryKey: "italy",
       season: "10월",
       hint: "9~10월 황금기, 수확철·한산",
       cities: [
-        { id: "it-rome", nameKo: "로마", nameEn: "Rome" },
-        { id: "it-florence", nameKo: "피렌체", nameEn: "Florence" },
-        { id: "it-venice", nameKo: "베네치아", nameEn: "Venice" },
-        { id: "it-naples", nameKo: "나폴리", nameEn: "Naples" },
+        { id: "it-rome", nameKo: "로마", nameEn: "Rome", cityId: "rome" },
+        { id: "it-florence", nameKo: "피렌체", nameEn: "Florence", cityId: "florence" },
+        { id: "it-venice", nameKo: "베네치아", nameEn: "Venice", cityId: "venice" },
+        { id: "it-naples", nameKo: "나폴리", nameEn: "Naples", cityId: "naples" },
       ],
     },
     {

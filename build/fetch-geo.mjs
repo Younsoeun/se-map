@@ -56,6 +56,14 @@ const COUNTRIES = [
     mainlandBBox: { minLon: 19.2, maxLon: 28.4, minLat: 34.6, maxLat: 41.8 },
     viewBox: { w: 700, h: 640, pad: 24 },
   },
+  {
+    admin: "Italy",
+    key: "italy",
+    // Mainland + Sicily + Sardinia (all core); the tiny far islands (Pantelleria,
+    // Lampedusa) fall outside this bbox and are dropped.
+    mainlandBBox: { minLon: 6.5, maxLon: 18.6, minLat: 36.5, maxLat: 47.1 },
+    viewBox: { w: 560, h: 720, pad: 24 },
+  },
 ];
 
 async function fetchCached(name, url) {
