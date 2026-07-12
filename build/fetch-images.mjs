@@ -146,6 +146,28 @@ const WIKI = {
   "mole-antonelliana": "Mole Antonelliana",
   "basilica-san-francesco": "Basilica of San Francesco d'Assisi",
   "sassi-matera": "Sassi di Matera",
+  // Morocco
+  "jemaa-el-fnaa": "Jemaa el-Fnaa",
+  "koutoubia-mosque": "Kutubiyya Mosque",
+  "bahia-palace": "Bahia Palace",
+  "saadian-tombs": "Saadian Tombs",
+  "majorelle-garden": "Jardin Majorelle",
+  "fes-el-bali": "Fes el Bali",
+  "al-qarawiyyin": "University of al-Qarawiyyin",
+  "bou-inania-madrasa": "Bou Inania Madrasa",
+  "chouara-tannery": "Chouara Tannery",
+  "chefchaouen-medina": "Chefchaouen",
+  "erg-chebbi": "Erg Chebbi",
+  "todra-gorge": "Todgha Gorge",
+  "ait-benhaddou-ksar": "Aït Benhaddou",
+  "taourirt-kasbah": "Taourirt Kasbah",
+  "essaouira-medina": "Essaouira",
+  "bab-mansour-meknes": "Bab Mansour",
+  "volubilis-ruins": "Volubilis",
+  "hassan-tower-rabat": "Hassan Tower",
+  "kasbah-udayas": "Kasbah of the Udayas",
+  "hassan-ii-mosque": "Hassan II Mosque",
+  "tangier-medina": "Tangier",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -220,6 +242,7 @@ async function main() {
   Object.assign(data, loadData("js/data-spain.js"));
   Object.assign(data, loadData("js/data-greece.js"));
   Object.assign(data, loadData("js/data-italy.js"));
+  Object.assign(data, loadData("js/data-morocco.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

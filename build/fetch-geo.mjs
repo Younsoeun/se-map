@@ -64,6 +64,13 @@ const COUNTRIES = [
     mainlandBBox: { minLon: 6.5, maxLon: 18.6, minLat: 36.5, maxLat: 47.1 },
     viewBox: { w: 560, h: 720, pad: 24 },
   },
+  {
+    admin: "Morocco",
+    key: "morocco",
+    // Morocco proper (Western Sahara is a separate ADMIN in the source data).
+    mainlandBBox: { minLon: -13.5, maxLon: -0.9, minLat: 27.5, maxLat: 36.1 },
+    viewBox: { w: 700, h: 640, pad: 24 },
+  },
 ];
 
 async function fetchCached(name, url) {

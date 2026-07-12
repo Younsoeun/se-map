@@ -38,6 +38,12 @@
       labelLon: 6, labelLat: 40,
       anchorLon: 12.5, anchorLat: 42.5,
     },
+    Morocco: {
+      key: "morocco",
+      nameKo: "모로코",
+      labelLon: -18, labelLat: 27,
+      anchorLon: -7, anchorLat: 31.8,
+    },
   };
 
   const state = { screen: "world", countryKey: null };

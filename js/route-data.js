@@ -58,14 +58,15 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "ma", nameKo: "모로코", nameEn: "Morocco", flag: "🇲🇦",
+      countryKey: "morocco",
       season: "11월",
       hint: "9~11월이 이상적, 11월 한산",
       cities: [
-        { id: "ma-marrakech", nameKo: "마라케시", nameEn: "Marrakech" },
-        { id: "ma-fez", nameKo: "페스", nameEn: "Fez" },
-        { id: "ma-chefchaouen", nameKo: "셰프샤우엔", nameEn: "Chefchaouen" },
-        { id: "ma-sahara", nameKo: "사하라(메르주가)", nameEn: "Sahara" },
-        { id: "ma-essaouira", nameKo: "에사우이라", nameEn: "Essaouira" },
+        { id: "ma-marrakech", nameKo: "마라케시", nameEn: "Marrakech", cityId: "marrakech" },
+        { id: "ma-fez", nameKo: "페스", nameEn: "Fez", cityId: "fez" },
+        { id: "ma-chefchaouen", nameKo: "셰프샤우엔", nameEn: "Chefchaouen", cityId: "chefchaouen" },
+        { id: "ma-sahara", nameKo: "사하라(메르주가)", nameEn: "Sahara", cityId: "merzouga" },
+        { id: "ma-essaouira", nameKo: "에사우이라", nameEn: "Essaouira", cityId: "essaouira" },
       ],
     },
     {
