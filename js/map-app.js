@@ -205,12 +205,68 @@
     return `city.html?country=${encodeURIComponent(countryKey)}&city=${encodeURIComponent(cityId)}`;
   }
 
-  // ---- World screen ----
+  // ---- World screen (zoomable / pannable map) ----
+
+  const WORLD_W = 960, WORLD_H = 500;
+  let WORLD_ASPECT = WORLD_W / WORLD_H;    // set from the default (fitted) view
+  let worldView = null;                    // current viewBox window {x,y,w,h}
+  let worldEntries = [];                   // [{active, pill, ax, ay, lx, ly, dot}]
+  let layoutQueued = false;
+  let mapDragMoved = false;
+
+  function projectedBounds() {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    Object.values(ACTIVE_COUNTRIES).forEach((a) => {
+      [[a.anchorLon, a.anchorLat], [a.labelLon, a.labelLat]].forEach(([lon, lat]) => {
+        const [x, y] = window.SEProject.world(lon, lat);
+        minX = Math.min(minX, x); maxX = Math.max(maxX, x);
+        minY = Math.min(minY, y); maxY = Math.max(maxY, y);
+      });
+    });
+    return { minX, minY, maxX, maxY };
+  }
+
+  // Default view fits all active countries (anchors + labels) with padding.
+  function defaultWorldView() {
+    const b = projectedBounds();
+    const padX = (b.maxX - b.minX) * 0.07 + 8;
+    const padY = (b.maxY - b.minY) * 0.16 + 12;
+    return { x: b.minX - padX, y: b.minY - padY, w: (b.maxX - b.minX) + padX * 2, h: (b.maxY - b.minY) + padY * 2 };
+  }
+
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+  // Keep the aspect fixed (so the map box never changes shape), clamp zoom, and
+  // keep the window overlapping the world.
+  function clampWorldView(v) {
+    const minW = 80, maxW = WORLD_W;
+    const w = clamp(v.w, minW, maxW);
+    const h = w / WORLD_ASPECT;
+    const mX = 30, mY = 30;
+    const x = clamp(v.x, -mX, WORLD_W + mX - w);
+    const yMin = -mY, yMax = WORLD_H + mY - h;
+    const y = yMax < yMin ? (WORLD_H - h) / 2 : clamp(v.y, yMin, yMax);
+    return { x, y, w, h };
+  }
+
+  function setWorldView(v) {
+    worldView = clampWorldView(v);
+    const svg = document.getElementById("world-svg");
+    svg.setAttribute("viewBox", `${worldView.x} ${worldView.y} ${worldView.w} ${worldView.h}`);
+    queueWorldLayout();
+  }
+
+  function queueWorldLayout() {
+    if (layoutQueued) return;
+    layoutQueued = true;
+    requestAnimationFrame(() => { layoutQueued = false; layoutWorld(); });
+  }
 
   function renderWorld() {
     const svg = document.getElementById("world-svg");
+    const wrap = document.getElementById("world-map-wrap");
     svg.innerHTML = "";
-    svg.setAttribute("viewBox", window.SE_MAP_GEO.world.viewBox);
+    wrap.querySelectorAll(".callout-pill").forEach((n) => n.remove());
 
     window.SE_MAP_GEO.world.countries.forEach((c) => {
       const active = ACTIVE_COUNTRIES[c.name];
@@ -218,9 +274,10 @@
         d: c.path,
         class: "world-country" + (active ? " active" : ""),
         "fill-rule": "evenodd",
+        "vector-effect": "non-scaling-stroke",
       });
       if (active) {
-        path.addEventListener("click", () => goToCountry(active.key));
+        path.addEventListener("click", () => { if (!mapDragMoved) goToCountry(active.key); });
         const title = svgEl("title", {});
         title.textContent = active.nameKo;
         path.appendChild(title);
@@ -228,83 +285,184 @@
       svg.appendChild(path);
     });
 
-    // Anchor dots mark each active country; leader lines to the labels are
-    // drawn after the callout pills are laid out and de-collided.
-    Object.values(ACTIVE_COUNTRIES).forEach((active) => {
-      const [ax, ay] = window.SEProject.world(active.anchorLon, active.anchorLat);
-      svg.appendChild(svgEl("circle", { cx: ax, cy: ay, r: 3, fill: "var(--tc)" }));
-    });
-
-    renderWorldCallouts(svg);
-  }
-
-  function renderWorldCallouts(svg) {
-    const wrap = document.getElementById("world-map-wrap");
-    wrap.querySelectorAll(".callout-pill").forEach((n) => n.remove());
-    svg.querySelectorAll(".leader-line").forEach((n) => n.remove());
-    const vb = svg.viewBox.baseVal;
-    const entries = [];
-    Object.values(ACTIVE_COUNTRIES).forEach((active) => {
+    worldEntries = Object.values(ACTIVE_COUNTRIES).map((active) => {
       const [ax, ay] = window.SEProject.world(active.anchorLon, active.anchorLat);
       const [lx, ly] = window.SEProject.world(active.labelLon, active.labelLat);
+      const dot = svgEl("circle", { cx: ax, cy: ay, r: 3, fill: "var(--tc)" });
+      svg.appendChild(dot);
       const pill = el("button", { class: "pill callout-pill", text: active.nameKo });
-      pill.style.left = `${(lx / vb.width) * 100}%`;
-      pill.style.top = `${(ly / vb.height) * 100}%`;
-      pill.addEventListener("click", () => goToCountry(active.key));
+      pill.addEventListener("click", (e) => {
+        if (mapDragMoved) { e.preventDefault(); return; }
+        goToCountry(active.key);
+      });
       wrap.appendChild(pill);
-      entries.push({ pill, ax, ay });
+      return { active, pill, ax, ay, lx, ly, dot };
     });
-    decollideCallouts(svg, wrap, vb, entries);
+
+    // Establish the fixed aspect from the default fit, then apply the view.
+    const def = defaultWorldView();
+    WORLD_ASPECT = def.w / def.h;
+    setWorldView(worldView || def);
   }
 
-  // Nudge overlapping callout pills downward so labels never collide, then draw
-  // a leader line from each country's anchor dot to its final pill position.
-  function decollideCallouts(svg, wrap, vb, entries) {
-    requestAnimationFrame(() => {
-      const wrapRect = wrap.getBoundingClientRect();
-      if (!wrapRect.width || !wrapRect.height) return;
-      const pad = 3;
-      const items = entries
-        .map((e) => {
-          const r = e.pill.getBoundingClientRect();
-          return {
-            e,
-            top: r.top - wrapRect.top,
-            left: r.left - wrapRect.left,
-            w: r.width,
-            h: r.height,
-          };
-        })
-        .sort((a, b) => a.top - b.top);
+  // Position the label pills over the map for the current view, nudge any that
+  // overlap, hide off-screen ones, and draw leader lines to their anchor dots.
+  function layoutWorld() {
+    if (!worldView) return;
+    const svg = document.getElementById("world-svg");
+    const wrap = document.getElementById("world-map-wrap");
+    const wrapRect = wrap.getBoundingClientRect();
+    const svgRect = svg.getBoundingClientRect();
+    if (!svgRect.width || !svgRect.height) return;
 
-      const placed = [];
-      for (const it of items) {
-        let guard = 0;
-        let overlap = true;
-        while (overlap && guard++ < 200) {
-          overlap = false;
-          for (const q of placed) {
-            const ox = it.left < q.left + q.w + pad && it.left + it.w + pad > q.left;
-            const oy = it.top < q.top + q.h + pad && it.top + it.h + pad > q.top;
-            if (ox && oy) {
-              it.top = q.top + q.h + pad;
-              overlap = true;
-            }
-          }
+    // Rescale anchor dots so they stay a constant on-screen size while zooming.
+    const dotR = worldView.w / 320;
+    worldEntries.forEach((e) => e.dot.setAttribute("r", dotR));
+    svg.querySelectorAll(".leader-line").forEach((n) => n.remove());
+
+    const offX = svgRect.left - wrapRect.left;
+    const offY = svgRect.top - wrapRect.top;
+    const pad = 3;
+
+    const items = [];
+    worldEntries.forEach((e) => {
+      const fx = (e.lx - worldView.x) / worldView.w;
+      const fy = (e.ly - worldView.y) / worldView.h;
+      // Hide labels whose anchor sits well outside the current window.
+      const afx = (e.ax - worldView.x) / worldView.w;
+      const afy = (e.ay - worldView.y) / worldView.h;
+      const off = afx < -0.05 || afx > 1.05 || afy < -0.05 || afy > 1.05;
+      e.pill.style.display = off ? "none" : "";
+      if (off) return;
+      const cx = offX + fx * svgRect.width;   // pill bottom-center x (in wrap px)
+      const by = offY + fy * svgRect.height;  // pill bottom-center y
+      e.pill.style.left = cx + "px";
+      e.pill.style.top = by + "px";
+      const r = e.pill.getBoundingClientRect();
+      items.push({ e, cx, by, w: r.width, h: r.height, top: by - r.height, left: cx - r.width / 2 });
+    });
+
+    items.sort((a, b) => a.top - b.top);
+    const placed = [];
+    for (const it of items) {
+      let guard = 0, overlap = true;
+      while (overlap && guard++ < 200) {
+        overlap = false;
+        for (const q of placed) {
+          const ox = it.left < q.left + q.w + pad && it.left + it.w + pad > q.left;
+          const oy = it.top < q.top + q.h + pad && it.top + it.h + pad > q.top;
+          if (ox && oy) { it.top = q.top + q.h + pad; overlap = true; }
         }
-        // Pills use translate(-50%,-100%): the style anchor is the bottom-center.
-        it.e.pill.style.top = `${((it.top + it.h) / wrapRect.height) * 100}%`;
-        placed.push(it);
       }
+      it.e.pill.style.top = (it.top + it.h) + "px"; // style anchor = bottom-center
+      placed.push(it);
+    }
 
-      const sx = vb.width / wrapRect.width;
-      const sy = vb.height / wrapRect.height;
-      for (const it of placed) {
-        const bx = (it.left + it.w / 2) * sx;
-        const by = (it.top + it.h) * sy;
-        svg.appendChild(svgEl("line", { x1: it.e.ax, y1: it.e.ay, x2: bx, y2: by, class: "leader-line" }));
+    // Leader lines, in viewBox coords, from anchor dot to final pill.
+    for (const it of placed) {
+      const bxSvg = it.cx - offX, bySvg = (it.top + it.h) - offY;
+      const x2 = worldView.x + (bxSvg / svgRect.width) * worldView.w;
+      const y2 = worldView.y + (bySvg / svgRect.height) * worldView.h;
+      svg.appendChild(svgEl("line", {
+        x1: it.e.ax, y1: it.e.ay, x2, y2,
+        class: "leader-line", "vector-effect": "non-scaling-stroke",
+      }));
+    }
+  }
+
+  // ---- Zoom / pan interactions ----
+
+  function zoomAt(factor, clientX, clientY) {
+    const svg = document.getElementById("world-svg");
+    const r = svg.getBoundingClientRect();
+    const fx = (clientX - r.left) / r.width;
+    const fy = (clientY - r.top) / r.height;
+    const pointX = worldView.x + fx * worldView.w;
+    const pointY = worldView.y + fy * worldView.h;
+    const newW = clamp(worldView.w / factor, 80, WORLD_W);
+    const newH = newW / WORLD_ASPECT;
+    setWorldView({ x: pointX - fx * newW, y: pointY - fy * newH, w: newW, h: newH });
+  }
+
+  function initWorldZoom() {
+    const svg = document.getElementById("world-svg");
+    const center = () => {
+      const r = svg.getBoundingClientRect();
+      return [r.left + r.width / 2, r.top + r.height / 2];
+    };
+    const on = (id, fn) => { const b = document.getElementById(id); if (b) b.addEventListener("click", fn); };
+    on("zoom-in", () => zoomAt(1.4, ...center()));
+    on("zoom-out", () => zoomAt(1 / 1.4, ...center()));
+    on("zoom-reset", () => { mapDragMoved = false; setWorldView(defaultWorldView()); });
+
+    svg.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      zoomAt(e.deltaY < 0 ? 1.18 : 1 / 1.18, e.clientX, e.clientY);
+    }, { passive: false });
+
+    const pointers = new Map();
+    let panStart = null, pinchStart = null;
+    const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+
+    svg.addEventListener("pointerdown", (e) => {
+      svg.setPointerCapture(e.pointerId);
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      mapDragMoved = false;
+      if (pointers.size === 1) {
+        panStart = { x: e.clientX, y: e.clientY, view: { ...worldView } };
+        pinchStart = null;
+      } else if (pointers.size === 2) {
+        const p = [...pointers.values()];
+        const m = mid(p[0], p[1]);
+        pinchStart = { dist: dist(p[0], p[1]), mx: m.x, my: m.y, view: { ...worldView } };
+        panStart = null;
       }
     });
+
+    svg.addEventListener("pointermove", (e) => {
+      if (!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      const r = svg.getBoundingClientRect();
+      if (pinchStart && pointers.size >= 2) {
+        const p = [...pointers.values()];
+        const d = dist(p[0], p[1]);
+        const factor = d / (pinchStart.dist || 1);
+        const fx = (pinchStart.mx - r.left) / r.width;
+        const fy = (pinchStart.my - r.top) / r.height;
+        const pointX = pinchStart.view.x + fx * pinchStart.view.w;
+        const pointY = pinchStart.view.y + fy * pinchStart.view.h;
+        const newW = clamp(pinchStart.view.w / factor, 80, WORLD_W);
+        const newH = newW / WORLD_ASPECT;
+        setWorldView({ x: pointX - fx * newW, y: pointY - fy * newH, w: newW, h: newH });
+        mapDragMoved = true;
+      } else if (panStart) {
+        const dx = e.clientX - panStart.x, dy = e.clientY - panStart.y;
+        if (Math.abs(dx) + Math.abs(dy) > 3) mapDragMoved = true;
+        setWorldView({
+          x: panStart.view.x - (dx / r.width) * panStart.view.w,
+          y: panStart.view.y - (dy / r.height) * panStart.view.h,
+          w: panStart.view.w, h: panStart.view.h,
+        });
+      }
+    });
+
+    const endPointer = (e) => {
+      pointers.delete(e.pointerId);
+      try { svg.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+      if (pointers.size < 2) pinchStart = null;
+      if (pointers.size === 1) {
+        const p = [...pointers.values()][0];
+        panStart = { x: p.x, y: p.y, view: { ...worldView } };
+      } else if (pointers.size === 0) {
+        panStart = null;
+      }
+    };
+    svg.addEventListener("pointerup", endPointer);
+    svg.addEventListener("pointercancel", endPointer);
+
+    // Keep labels aligned when the container is resized.
+    window.addEventListener("resize", queueWorldLayout);
   }
 
   // ---- Country screen ----
@@ -511,6 +669,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     renderWorld();
+    initWorldZoom();
     document.getElementById("back-btn").addEventListener("click", goToWorld);
     document.getElementById("theme-toggle").addEventListener("click", () => window.SETheme.toggle());
     initExportImport();

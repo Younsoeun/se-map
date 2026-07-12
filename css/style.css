@@ -299,13 +299,44 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   padding: 24px;
   max-width: 1100px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 #world-svg {
   width: 100%;
   height: auto;
   display: block;
+  touch-action: none;      /* custom pinch/pan via pointer events */
+  cursor: grab;
 }
+#world-svg:active { cursor: grabbing; }
+
+.map-zoom-controls {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 3;
+}
+.map-zoom-controls button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--mb);
+  background: var(--mf);
+  color: var(--ink);
+  border-radius: 9px;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.map-zoom-controls button:hover { border-color: var(--tc); color: var(--tc); }
+.map-zoom-controls button:focus-visible { outline: 2px solid var(--tc); outline-offset: 2px; }
 
 .world-country {
   fill: var(--mf);
@@ -331,8 +362,10 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 .callout-pill {
   position: absolute;
   transform: translate(-50%, -100%);
-  font-size: 0.78rem;
-  padding: 6px 14px;
+  font-size: 0.68rem;
+  padding: 4px 9px;
+  white-space: nowrap;
+  z-index: 2;
 }
 
 .back-row { margin-bottom: 14px; }
@@ -974,6 +1007,9 @@ a.route-link:focus-visible {
   .world-map-wrap { padding: 12px; }
   .world-head, .culture-head { padding: 28px 0 20px; }
   .country-map-col { padding: 12px; margin-top: 14px; }
+  .callout-pill { font-size: 0.6rem; padding: 3px 7px; }
+  .map-zoom-controls { right: 10px; bottom: 10px; }
+  .map-zoom-controls button { width: 38px; height: 38px; }
 
   /* --- city grid: two landscape cards per row on phones --- */
   .city-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
