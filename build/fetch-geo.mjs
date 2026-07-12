@@ -86,6 +86,25 @@ const COUNTRIES = [
     viewBox: { w: 680, h: 640, pad: 24 },
   },
   {
+    admin: "Netherlands",
+    key: "netherlands",
+    // European Netherlands only (drops the Caribbean municipalities).
+    mainlandBBox: { minLon: 3.2, maxLon: 7.3, minLat: 50.7, maxLat: 53.6 },
+    viewBox: { w: 560, h: 620, pad: 24 },
+  },
+  {
+    admin: "Germany",
+    key: "germany",
+    mainlandBBox: { minLon: 5.8, maxLon: 15.1, minLat: 47.2, maxLat: 55.1 },
+    viewBox: { w: 620, h: 700, pad: 24 },
+  },
+  {
+    admin: "Switzerland",
+    key: "switzerland",
+    mainlandBBox: { minLon: 5.9, maxLon: 10.6, minLat: 45.7, maxLat: 47.9 },
+    viewBox: { w: 780, h: 480, pad: 24 },
+  },
+  {
     // Canary Islands: a sub-region carved out of Spain's ADMIN geometry.
     // noWorldClip keeps this bbox from hijacking Spain's peninsula clip on the
     // world map; the Canaries are reached via their own callout pill.

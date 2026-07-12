@@ -65,12 +65,14 @@
 
     const left = el("div", { class: "route-city-label" });
     if (dated) left.appendChild(el("span", { class: "route-pin", text: "📌" }));
-    // Link to the city's detail page when one exists.
+    // Link to the city's detail page when one exists. A city may override the
+    // stop's country (e.g. the multi-country "Central Europe" stop).
+    const ck = city.countryKey || countryKey;
     const nameNode =
-      countryKey && city.cityId
+      ck && city.cityId
         ? el("a", {
             class: "route-city-name route-link",
-            href: `city.html?country=${encodeURIComponent(countryKey)}&city=${encodeURIComponent(city.cityId)}`,
+            href: `city.html?country=${encodeURIComponent(ck)}&city=${encodeURIComponent(city.cityId)}`,
             title: `${city.nameKo} 상세 페이지로`,
             text: city.nameKo,
           })

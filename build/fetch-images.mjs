@@ -210,6 +210,56 @@ const WIKI = {
   "zagreb-gornji-grad": "St. Mark's Church, Zagreb",
   "rovinj-old-town": "Rovinj",
   "pula-arena": "Pula Arena",
+  // Netherlands
+  "amsterdam-canal-ring": "Canals of Amsterdam",
+  "rijksmuseum": "Rijksmuseum",
+  "van-gogh-museum": "Van Gogh Museum",
+  "anne-frank-house": "Anne Frank House",
+  "cube-houses": "Cube house",
+  "erasmus-bridge": "Erasmus Bridge",
+  "mauritshuis": "Mauritshuis",
+  "binnenhof": "Binnenhof",
+  "dom-tower-utrecht": "Dom Tower of Utrecht",
+  "delft-old-town": "Delft",
+  "kinderdijk-windmills": "Kinderdijk",
+  "giethoorn-village": "Giethoorn",
+  "zaanse-schans-windmills": "Zaanse Schans",
+  // Germany
+  "brandenburg-gate": "Brandenburg Gate",
+  "reichstag": "Reichstag building",
+  "east-side-gallery": "East Side Gallery",
+  "museum-island": "Museum Island",
+  "gendarmenmarkt": "Gendarmenmarkt",
+  "sanssouci-palace": "Sanssouci",
+  "marienplatz": "Marienplatz",
+  "nymphenburg-palace": "Nymphenburg Palace",
+  "english-garden": "English Garden (Munich)",
+  "neuschwanstein-castle": "Neuschwanstein Castle",
+  "cologne-cathedral": "Cologne Cathedral",
+  "elbphilharmonie": "Elbphilharmonie",
+  "frauenkirche-dresden": "Dresden Frauenkirche",
+  "zwinger-dresden": "Zwinger",
+  "heidelberg-castle": "Heidelberg Castle",
+  "rothenburg-old-town": "Rothenburg ob der Tauber",
+  "middle-rhine": "Rhine Gorge",
+  "nuremberg-old-town": "Nuremberg Castle",
+  "konigssee": "Königssee",
+  "romerberg-frankfurt": "Römerberg",
+  // Switzerland
+  "zurich-old-town": "Zürich",
+  "grossmunster": "Grossmünster",
+  "chapel-bridge": "Kapellbrücke",
+  "mount-pilatus": "Pilatus (mountain)",
+  "lion-monument": "Lion Monument",
+  "jungfraujoch": "Jungfraujoch",
+  "harder-kulm": "Harder Kulm",
+  "lauterbrunnen-valley": "Lauterbrunnen",
+  "matterhorn": "Matterhorn",
+  "gornergrat": "Gornergrat",
+  "bern-old-town": "Old City of Bern",
+  "jet-deau-geneva": "Jet d'Eau",
+  "chillon-castle": "Château de Chillon",
+  "lake-lugano": "Lake Lugano",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -290,6 +340,9 @@ async function main() {
   Object.assign(data, loadData("js/data-malta.js"));
   Object.assign(data, loadData("js/data-canary.js"));
   Object.assign(data, loadData("js/data-croatia.js"));
+  Object.assign(data, loadData("js/data-netherlands.js"));
+  Object.assign(data, loadData("js/data-germany.js"));
+  Object.assign(data, loadData("js/data-switzerland.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

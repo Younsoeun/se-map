@@ -117,9 +117,9 @@ window.SE_MAP_ROUTE = {
       season: "9월", optional: true,
       hint: "네덜란드·독일·스위스 등 겨울에 추운 곳, 묶어서 초가을에",
       cities: [
-        { id: "eu-c-amsterdam", nameKo: "암스테르담", nameEn: "Amsterdam" },
-        { id: "eu-c-berlin", nameKo: "베를린", nameEn: "Berlin" },
-        { id: "eu-c-swiss", nameKo: "스위스(취리히·루체른)", nameEn: "Switzerland" },
+        { id: "eu-c-amsterdam", nameKo: "암스테르담", nameEn: "Amsterdam", countryKey: "netherlands", cityId: "amsterdam" },
+        { id: "eu-c-berlin", nameKo: "베를린", nameEn: "Berlin", countryKey: "germany", cityId: "berlin" },
+        { id: "eu-c-swiss", nameKo: "스위스(루체른)", nameEn: "Switzerland", countryKey: "switzerland", cityId: "lucerne" },
       ],
     },
     {

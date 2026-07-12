@@ -56,6 +56,24 @@
       labelLon: 24, labelLat: 48,
       anchorLon: 16.5, anchorLat: 45.1,
     },
+    Netherlands: {
+      key: "netherlands",
+      nameKo: "네덜란드",
+      labelLon: -6, labelLat: 57,
+      anchorLon: 5.3, anchorLat: 52.2,
+    },
+    Germany: {
+      key: "germany",
+      nameKo: "독일",
+      labelLon: 17, labelLat: 55,
+      anchorLon: 10.4, anchorLat: 51.2,
+    },
+    Switzerland: {
+      key: "switzerland",
+      nameKo: "스위스",
+      labelLon: 2, labelLat: 44,
+      anchorLon: 8.2, anchorLat: 46.8,
+    },
     // Canary Islands: no matching world-map polygon (they're clipped out of
     // Spain), so this entry only produces a callout pill to reach the page.
     Canary: {
