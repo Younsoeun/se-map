@@ -79,6 +79,13 @@ const COUNTRIES = [
     viewBox: { w: 680, h: 560, pad: 24 },
   },
   {
+    admin: "Croatia",
+    key: "croatia",
+    // Whole country incl. the Dalmatian coast + islands + Istria.
+    mainlandBBox: { minLon: 13.3, maxLon: 19.5, minLat: 42.3, maxLat: 46.6 },
+    viewBox: { w: 680, h: 640, pad: 24 },
+  },
+  {
     // Canary Islands: a sub-region carved out of Spain's ADMIN geometry.
     // noWorldClip keeps this bbox from hijacking Spain's peninsula clip on the
     // world map; the Canaries are reached via their own callout pill.

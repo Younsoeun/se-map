@@ -124,11 +124,12 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "hr", nameKo: "크로아티아", nameEn: "Croatia", flag: "🇭🇷",
+      countryKey: "croatia",
       season: "10월", optional: true,
       hint: "10월 온화, 아드리아 해안",
       cities: [
-        { id: "hr-dubrovnik", nameKo: "두브로브니크", nameEn: "Dubrovnik" },
-        { id: "hr-split", nameKo: "스플리트", nameEn: "Split" },
+        { id: "hr-dubrovnik", nameKo: "두브로브니크", nameEn: "Dubrovnik", cityId: "dubrovnik" },
+        { id: "hr-split", nameKo: "스플리트", nameEn: "Split", cityId: "split" },
       ],
     },
   ],

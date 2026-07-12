@@ -50,6 +50,12 @@
       labelLon: 20, labelLat: 30.5,
       anchorLon: 14.4, anchorLat: 35.9,
     },
+    Croatia: {
+      key: "croatia",
+      nameKo: "크로아티아",
+      labelLon: 24, labelLat: 48,
+      anchorLon: 16.5, anchorLat: 45.1,
+    },
     // Canary Islands: no matching world-map polygon (they're clipped out of
     // Spain), so this entry only produces a callout pill to reach the page.
     Canary: {
@@ -108,10 +114,10 @@
       svg.appendChild(path);
     });
 
+    // Anchor dots mark each active country; leader lines to the labels are
+    // drawn after the callout pills are laid out and de-collided.
     Object.values(ACTIVE_COUNTRIES).forEach((active) => {
       const [ax, ay] = window.SEProject.world(active.anchorLon, active.anchorLat);
-      const [lx, ly] = window.SEProject.world(active.labelLon, active.labelLat);
-      svg.appendChild(svgEl("line", { x1: ax, y1: ay, x2: lx, y2: ly, class: "leader-line" }));
       svg.appendChild(svgEl("circle", { cx: ax, cy: ay, r: 3, fill: "var(--tc)" }));
     });
 
@@ -121,14 +127,69 @@
   function renderWorldCallouts(svg) {
     const wrap = document.getElementById("world-map-wrap");
     wrap.querySelectorAll(".callout-pill").forEach((n) => n.remove());
+    svg.querySelectorAll(".leader-line").forEach((n) => n.remove());
     const vb = svg.viewBox.baseVal;
+    const entries = [];
     Object.values(ACTIVE_COUNTRIES).forEach((active) => {
+      const [ax, ay] = window.SEProject.world(active.anchorLon, active.anchorLat);
       const [lx, ly] = window.SEProject.world(active.labelLon, active.labelLat);
       const pill = el("button", { class: "pill callout-pill", text: active.nameKo });
       pill.style.left = `${(lx / vb.width) * 100}%`;
       pill.style.top = `${(ly / vb.height) * 100}%`;
       pill.addEventListener("click", () => goToCountry(active.key));
       wrap.appendChild(pill);
+      entries.push({ pill, ax, ay });
+    });
+    decollideCallouts(svg, wrap, vb, entries);
+  }
+
+  // Nudge overlapping callout pills downward so labels never collide, then draw
+  // a leader line from each country's anchor dot to its final pill position.
+  function decollideCallouts(svg, wrap, vb, entries) {
+    requestAnimationFrame(() => {
+      const wrapRect = wrap.getBoundingClientRect();
+      if (!wrapRect.width || !wrapRect.height) return;
+      const pad = 3;
+      const items = entries
+        .map((e) => {
+          const r = e.pill.getBoundingClientRect();
+          return {
+            e,
+            top: r.top - wrapRect.top,
+            left: r.left - wrapRect.left,
+            w: r.width,
+            h: r.height,
+          };
+        })
+        .sort((a, b) => a.top - b.top);
+
+      const placed = [];
+      for (const it of items) {
+        let guard = 0;
+        let overlap = true;
+        while (overlap && guard++ < 200) {
+          overlap = false;
+          for (const q of placed) {
+            const ox = it.left < q.left + q.w + pad && it.left + it.w + pad > q.left;
+            const oy = it.top < q.top + q.h + pad && it.top + it.h + pad > q.top;
+            if (ox && oy) {
+              it.top = q.top + q.h + pad;
+              overlap = true;
+            }
+          }
+        }
+        // Pills use translate(-50%,-100%): the style anchor is the bottom-center.
+        it.e.pill.style.top = `${((it.top + it.h) / wrapRect.height) * 100}%`;
+        placed.push(it);
+      }
+
+      const sx = vb.width / wrapRect.width;
+      const sy = vb.height / wrapRect.height;
+      for (const it of placed) {
+        const bx = (it.left + it.w / 2) * sx;
+        const by = (it.top + it.h) * sy;
+        svg.appendChild(svgEl("line", { x1: it.e.ax, y1: it.e.ay, x2: bx, y2: by, class: "leader-line" }));
+      }
     });
   }
 
@@ -148,6 +209,9 @@
     state.countryKey = null;
     document.getElementById("country-screen").hidden = true;
     document.getElementById("world-screen").hidden = false;
+    // Re-render so callout de-collision runs with the map actually visible
+    // (a deep-linked load renders the world while it's still hidden).
+    renderWorld();
     // Drop any ?country= so a refresh returns to the world map.
     if (location.search) history.replaceState(null, "", location.pathname);
   }

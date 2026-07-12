@@ -193,6 +193,23 @@ const WIKI = {
   "corralejo-dunes": "Corralejo",
   "roque-de-los-muchachos": "Roque de los Muchachos",
   "garajonay-national-park": "Garajonay National Park",
+  // Croatia
+  "dubrovnik-walls": "Walls of Dubrovnik",
+  "dubrovnik-stradun": "Old City of Dubrovnik",
+  "mount-srd-dubrovnik": "Srđ",
+  "diocletian-palace": "Diocletian's Palace",
+  "marjan-split": "Marjan, Split",
+  "plitvice-lakes": "Plitvice Lakes National Park",
+  "krka-waterfalls": "Krka National Park",
+  "sea-organ-zadar": "Sea organ",
+  "st-donatus-zadar": "Church of St. Donatus",
+  "st-james-sibenik": "Cathedral of St. James, Šibenik",
+  "trogir-old-town": "Trogir",
+  "hvar-town-fortress": "Hvar",
+  "korcula-old-town": "Korčula (town)",
+  "zagreb-gornji-grad": "St. Mark's Church, Zagreb",
+  "rovinj-old-town": "Rovinj",
+  "pula-arena": "Pula Arena",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -272,6 +289,7 @@ async function main() {
   Object.assign(data, loadData("js/data-morocco.js"));
   Object.assign(data, loadData("js/data-malta.js"));
   Object.assign(data, loadData("js/data-canary.js"));
+  Object.assign(data, loadData("js/data-croatia.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {
