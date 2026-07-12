@@ -207,6 +207,34 @@ const COUNTRIES = [
     mainlandBBox: { minLon: 20.9, maxLon: 26.9, minLat: 53.8, maxLat: 56.5 },
     viewBox: { w: 740, h: 420, pad: 24 },
   },
+  // ---- Western Europe (British Isles + Benelux) ----
+  {
+    admin: "Ireland",
+    key: "ireland",
+    // Republic of Ireland (Northern Ireland is part of the UK ADMIN).
+    mainlandBBox: { minLon: -10.7, maxLon: -5.9, minLat: 51.4, maxLat: 55.5 },
+    viewBox: { w: 600, h: 640, pad: 24 },
+  },
+  {
+    admin: "United Kingdom",
+    key: "uk",
+    noDistricts: true, // admin-1 is ~230 historic counties — too fine to draw
+    // Great Britain + Northern Ireland; excludes far-north Shetland.
+    mainlandBBox: { minLon: -8.3, maxLon: 1.9, minLat: 49.8, maxLat: 59.2 },
+    viewBox: { w: 560, h: 720, pad: 24 },
+  },
+  {
+    admin: "Belgium",
+    key: "belgium",
+    mainlandBBox: { minLon: 2.5, maxLon: 6.5, minLat: 49.4, maxLat: 51.6 },
+    viewBox: { w: 720, h: 440, pad: 24 },
+  },
+  {
+    admin: "Luxembourg",
+    key: "luxembourg",
+    mainlandBBox: { minLon: 5.6, maxLon: 6.6, minLat: 49.4, maxLat: 50.2 },
+    viewBox: { w: 520, h: 640, pad: 24 },
+  },
   {
     // Canary Islands: a sub-region carved out of Spain's ADMIN geometry.
     // noWorldClip keeps this bbox from hijacking Spain's peninsula clip on the

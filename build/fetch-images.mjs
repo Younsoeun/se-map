@@ -404,6 +404,44 @@ const WIKI = {
   "kaunas-oldtown": "Kaunas",
   "hill-of-crosses": "Hill of Crosses",
   "curonian-spit": "Curonian Spit",
+  // Ireland
+  "trinity-book-of-kells": "Book of Kells",
+  "guinness-temple-bar": "Guinness Storehouse",
+  "newgrange-tomb": "Newgrange",
+  "galway-connemara": "Galway",
+  "cliffs-of-moher": "Cliffs of Moher",
+  "dingle-peninsula": "Dingle Peninsula",
+  "ring-of-kerry": "Ring of Kerry",
+  "blarney-castle": "Blarney Castle",
+  "rock-of-cashel": "Rock of Cashel",
+  // United Kingdom
+  "westminster-bigben": "Big Ben",
+  "tower-of-london": "Tower of London",
+  "british-museum": "British Museum",
+  "buckingham-palace": "Buckingham Palace",
+  "windsor-castle": "Windsor Castle",
+  "stonehenge-circle": "Stonehenge",
+  "roman-baths-bath": "Roman Baths (Bath)",
+  "oxford-university": "Radcliffe Camera",
+  "cotswolds-villages": "Cotswolds",
+  "york-minster": "York Minster",
+  "lake-district-park": "Lake District",
+  "edinburgh-castle": "Edinburgh Castle",
+  "isle-of-skye": "Old Man of Storr",
+  "snowdonia-park": "Snowdonia",
+  "giants-causeway-basalt": "Giant's Causeway",
+  // Belgium
+  "grand-place": "Grand-Place",
+  "atomium": "Atomium",
+  "bruges-centre": "Bruges",
+  "ghent-oldtown": "Ghent",
+  "antwerp-cathedral": "Cathedral of Our Lady (Antwerp)",
+  "dinant-citadel": "Dinant",
+  // Luxembourg
+  "luxembourg-old-quarters": "Luxembourg City",
+  "bock-casemates": "Bock (Luxembourg)",
+  "vianden-castle": "Vianden Castle",
+  "mullerthal-trail": "Mullerthal",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -509,6 +547,10 @@ async function main() {
   Object.assign(data, loadData("js/data-estonia.js"));
   Object.assign(data, loadData("js/data-latvia.js"));
   Object.assign(data, loadData("js/data-lithuania.js"));
+  Object.assign(data, loadData("js/data-ireland.js"));
+  Object.assign(data, loadData("js/data-uk.js"));
+  Object.assign(data, loadData("js/data-belgium.js"));
+  Object.assign(data, loadData("js/data-luxembourg.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

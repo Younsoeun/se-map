@@ -170,6 +170,30 @@
       labelLon: 31, labelLat: 54.5,
       anchorLon: 23.9, anchorLat: 55.2,
     },
+    Ireland: {
+      key: "ireland",
+      nameKo: "아일랜드",
+      labelLon: -14, labelLat: 52,
+      anchorLon: -8, anchorLat: 53.4,
+    },
+    "United Kingdom": {
+      key: "uk",
+      nameKo: "영국",
+      labelLon: -11, labelLat: 57,
+      anchorLon: -2, anchorLat: 53.5,
+    },
+    Belgium: {
+      key: "belgium",
+      nameKo: "벨기에",
+      labelLon: 0, labelLat: 49,
+      anchorLon: 4.6, anchorLat: 50.7,
+    },
+    Luxembourg: {
+      key: "luxembourg",
+      nameKo: "룩셈부르크",
+      labelLon: 9, labelLat: 48,
+      anchorLon: 6.1, anchorLat: 49.7,
+    },
     // Canary Islands: no matching world-map polygon (they're clipped out of
     // Spain), so this entry only produces a callout pill to reach the page.
     Canary: {
