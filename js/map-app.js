@@ -44,6 +44,12 @@
       labelLon: -18, labelLat: 27,
       anchorLon: -7, anchorLat: 31.8,
     },
+    Malta: {
+      key: "malta",
+      nameKo: "몰타",
+      labelLon: 20, labelLat: 30.5,
+      anchorLon: 14.4, anchorLat: 35.9,
+    },
   };
 
   const state = { screen: "world", countryKey: null };

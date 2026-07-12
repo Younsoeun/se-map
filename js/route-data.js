@@ -92,10 +92,11 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "mt", nameKo: "몰타", nameEn: "Malta", flag: "🇲🇹",
+      countryKey: "malta",
       season: "1월",
       hint: "17°C, 연 300일 맑음",
       cities: [
-        { id: "mt-valletta", nameKo: "발레타", nameEn: "Valletta" },
+        { id: "mt-valletta", nameKo: "발레타", nameEn: "Valletta", cityId: "valletta" },
       ],
     },
     {

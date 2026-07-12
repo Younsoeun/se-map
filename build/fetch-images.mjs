@@ -168,6 +168,19 @@ const WIKI = {
   "kasbah-udayas": "Kasbah of the Udayas",
   "hassan-ii-mosque": "Hassan II Mosque",
   "tangier-medina": "Tangier",
+  // Malta
+  "st-johns-co-cathedral": "St John's Co-Cathedral",
+  "grandmasters-palace": "Grandmaster's Palace, Valletta",
+  "upper-barrakka-gardens": "Upper Barrakka Gardens",
+  "fort-st-elmo": "Fort Saint Elmo",
+  "mdina-old-city": "Mdina",
+  "birgu-vittoriosa": "Birgu",
+  "marsaxlokk-harbour": "Marsaxlokk",
+  "blue-grotto-malta": "Blue Grotto (Malta)",
+  "hagar-qim-temples": "Ħaġar Qim",
+  "ggantija-temples": "Ġgantija",
+  "gozo-citadel": "Cittadella (Gozo)",
+  "blue-lagoon-comino": "Comino",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -243,6 +256,7 @@ async function main() {
   Object.assign(data, loadData("js/data-greece.js"));
   Object.assign(data, loadData("js/data-italy.js"));
   Object.assign(data, loadData("js/data-morocco.js"));
+  Object.assign(data, loadData("js/data-malta.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {

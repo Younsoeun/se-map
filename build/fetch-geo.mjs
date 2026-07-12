@@ -71,6 +71,13 @@ const COUNTRIES = [
     mainlandBBox: { minLon: -13.5, maxLon: -0.9, minLat: 27.5, maxLat: 36.1 },
     viewBox: { w: 700, h: 640, pad: 24 },
   },
+  {
+    admin: "Malta",
+    key: "malta",
+    // Whole archipelago: Malta + Gozo + Comino.
+    mainlandBBox: { minLon: 14.1, maxLon: 14.62, minLat: 35.78, maxLat: 36.10 },
+    viewBox: { w: 680, h: 560, pad: 24 },
+  },
 ];
 
 async function fetchCached(name, url) {
