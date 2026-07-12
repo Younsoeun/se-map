@@ -16,16 +16,19 @@
     return node;
   }
 
-  function fmtDate(iso) {
+  function fmtKo(iso) {
     if (!iso) return "";
     const d = new Date(iso);
-    return ` · ${d.getMonth() + 1}월 ${d.getDate()}일`;
+    return `${d.getMonth() + 1}월 ${d.getDate()}일`;
   }
 
   function renderAttractionCard(a, country, onVisitChange) {
     const cat = country.categories.find((c) => c.id === a.category);
     const city = country.cities.find((c) => c.id === a.cityId);
     const varRef = cat ? cat.varName : "--tc";
+    const img = (window.SE_MAP_IMAGES || {})[a.id] || "";
+    const entry = window.SEVisited.get(a.id);
+    const handle = "@" + (city ? city.nameEn : a.nameEn).toLowerCase().replace(/[^a-z0-9]/g, "");
 
     const details = el("details", {
       class: "attraction-card panel",
@@ -33,11 +36,17 @@
       "data-category": a.category,
     });
 
+    // Collapsed state: a landmark cover photo with a category tag.
     const summary = el("summary", {});
     summary.innerHTML = `
-      <span class="tag-dot" style="background:var(${varRef})"></span>
-      <span class="attraction-name">${a.nameKo}</span>
-      <span class="attraction-name-en">${a.nameEn}</span>
+      <div class="ac-cover"${img ? ` style="background-image:url('${img}')"` : ""}>
+        ${img ? "" : '<div class="ac-cover-fallback"></div>'}
+        <span class="ac-cat" style="background:var(${varRef})">${cat ? cat.nameKo : ""}</span>
+      </div>
+      <div class="ac-titlebar">
+        <span class="attraction-name">${a.nameKo}</span>
+        <span class="attraction-name-en">${a.nameEn}</span>
+      </div>
     `;
     details.appendChild(summary);
 
@@ -48,29 +57,22 @@
       <p><strong>방문 팁</strong>${a.tip}</p>
     `;
 
-    const entry = window.SEVisited.get(a.id);
-    const visitedRow = el("div", { class: "visited-row" });
-
-    const label = el("label", {});
-    const checkbox = el("input", { type: "checkbox" });
-    checkbox.checked = entry.visited;
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode("방문함"));
-    visitedRow.appendChild(label);
-
-    // X/Twitter-style note card (header + editable body only — no footer icons).
-    const initial = (a.nameEn || "?").trim().charAt(0).toUpperCase();
-    const handle = "@" + (city ? city.nameEn : a.nameEn).toLowerCase().replace(/[^a-z0-9]/g, "");
+    // Note card: checkbox where the avatar used to be, then name + a line that
+    // shows @handle normally, or the visit date range once dates are set.
     const noteCard = el("div", { class: "note-card" });
     noteCard.innerHTML = `
       <div class="note-head">
-        <div class="note-avatar" style="background:var(${varRef})">${initial}</div>
+        <label class="note-check" title="방문함"><input type="checkbox" /></label>
         <div class="note-id">
-          <span class="note-author">${a.nameKo}<span class="note-verified" title="방문함" hidden>✓</span></span>
-          <span class="note-handle">${handle}<span class="note-time"></span></span>
+          <span class="note-author">${a.nameKo}</span>
+          <span class="note-handle"></span>
         </div>
       </div>
     `;
+    const checkbox = noteCard.querySelector('input[type="checkbox"]');
+    checkbox.checked = entry.visited;
+    const handleEl = noteCard.querySelector(".note-handle");
+
     const note = el("textarea", {
       class: "note-body",
       placeholder: "이곳에서의 방문 소감을 남겨보세요…",
@@ -79,23 +81,39 @@
     note.value = entry.note || "";
     noteCard.appendChild(note);
 
-    const verified = noteCard.querySelector(".note-verified");
-    const timeEl = noteCard.querySelector(".note-time");
-    function syncMeta() {
-      verified.hidden = !checkbox.checked;
-      timeEl.textContent = fmtDate(window.SEVisited.get(a.id).updatedAt);
+    const dates = el("div", { class: "note-dates" });
+    dates.innerHTML = `
+      <label class="note-date-field"><span>방문 시작</span><input type="date" class="d-start" /></label>
+      <span class="note-date-sep">~</span>
+      <label class="note-date-field"><span>방문 종료</span><input type="date" class="d-end" /></label>
+    `;
+    const dStart = dates.querySelector(".d-start");
+    const dEnd = dates.querySelector(".d-end");
+    dStart.value = entry.visitStart || "";
+    dEnd.value = entry.visitEnd || "";
+    noteCard.appendChild(dates);
+
+    function updateHandle() {
+      const e = window.SEVisited.get(a.id);
+      if (e.visitStart || e.visitEnd) {
+        const s = fmtKo(e.visitStart);
+        const en = fmtKo(e.visitEnd);
+        handleEl.textContent = s && en ? `${s} ~ ${en}` : s ? `${s} ~` : `~ ${en}`;
+        handleEl.classList.add("is-date");
+      } else {
+        handleEl.textContent = handle;
+        handleEl.classList.remove("is-date");
+      }
     }
     function autoGrow() {
       note.style.height = "auto";
       note.style.height = Math.max(note.scrollHeight, 44) + "px";
     }
-    syncMeta();
-    visitedRow.appendChild(noteCard);
+    updateHandle();
 
     checkbox.addEventListener("change", () => {
       window.SEVisited.setVisited(a.id, checkbox.checked);
       details.dataset.visited = String(checkbox.checked);
-      syncMeta();
       if (onVisitChange) onVisitChange();
     });
 
@@ -103,16 +121,20 @@
     note.addEventListener("input", () => {
       autoGrow();
       clearTimeout(noteTimer);
-      noteTimer = setTimeout(() => {
-        window.SEVisited.setNote(a.id, note.value);
-        syncMeta();
-      }, 400);
+      noteTimer = setTimeout(() => window.SEVisited.setNote(a.id, note.value), 400);
     });
+
+    function onDateChange() {
+      window.SEVisited.setDates(a.id, dStart.value, dEnd.value);
+      updateHandle();
+    }
+    dStart.addEventListener("change", onDateChange);
+    dEnd.addEventListener("change", onDateChange);
 
     details.addEventListener("toggle", () => { if (details.open) autoGrow(); });
 
     details.dataset.visited = String(entry.visited);
-    body.appendChild(visitedRow);
+    body.appendChild(noteCard);
     details.appendChild(body);
     return details;
   }

@@ -242,7 +242,7 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 .panel {
   background: var(--pn);
   border: 1px solid var(--pb);
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: var(--sc);
 }
 
@@ -398,43 +398,62 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   margin: 26px 0 14px;
 }
 
-/* City grid (on the country page) — cards link to per-city pages. */
+/* City grid (country page) — photo "destination" cards linking to city pages. */
 .city-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
-  max-width: 900px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+  max-width: 940px;
   margin: 0 auto;
 }
 
 .city-card {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 16px 18px;
+  align-items: flex-end;
+  min-height: 208px;
+  border-radius: 10px;
+  overflow: hidden;
   text-decoration: none;
-  color: var(--ink);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  color: #fff;
+  background-color: var(--mb);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.city-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 18, 20, 0.82) 0%, rgba(15, 18, 20, 0.25) 45%, rgba(15, 18, 20, 0) 72%);
 }
 
 .city-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--sg);
-  border-color: var(--mbs);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
 }
 
-.city-card-name { font-family: var(--fh); font-size: 1.15rem; }
+.city-card-body {
+  position: relative;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.city-card-name { font-family: var(--fh); font-size: 1.3rem; color: #fff; }
 .city-card-en {
   font-family: var(--fu);
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--if);
+  color: rgba(255, 255, 255, 0.75);
 }
 .city-card-meta {
   font-family: var(--fu);
   font-size: 0.78rem;
-  color: var(--is);
+  color: rgba(255, 255, 255, 0.9);
   margin-top: 6px;
 }
 
@@ -448,39 +467,61 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   margin-right: auto;
 }
 
+/* Attraction card: landmark cover photo + title, expands to details + note. */
 .attraction-card {
-  border-radius: 16px;
-  padding: 16px 18px;
-  border-left: 3px solid var(--tc);
+  padding: 0;
+  overflow: hidden;
   transition: border-color 0.2s ease;
 }
 
-.attraction-card[data-visited="true"] { border-left-color: var(--vs); }
+.attraction-card[data-visited="true"] { border-color: var(--vs); }
 
-.attraction-card summary {
-  cursor: pointer;
-  list-style: none;
+.attraction-card summary { cursor: pointer; list-style: none; }
+.attraction-card summary::-webkit-details-marker { display: none; }
+
+.ac-cover {
+  position: relative;
+  height: 168px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--mb);
+}
+
+.ac-cover-fallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--pn), var(--bg));
+}
+
+.ac-cat {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-family: var(--fu);
+  font-size: 0.68rem;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 7px;
+}
+
+.ac-titlebar {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
   gap: 2px 8px;
-  font-family: var(--fu);
+  padding: 12px 16px;
 }
 
-.attraction-card summary::-webkit-details-marker { display: none; }
+.attraction-name { font-family: var(--fu); font-weight: 600; }
 
-.attraction-card .tag-dot { align-self: center; flex-shrink: 0; }
-
-.attraction-card .attraction-name { font-weight: 600; }
-
-.attraction-card .attraction-name-en {
+.attraction-name-en {
   color: var(--if);
   font-size: 0.78rem;
   margin-left: auto;
 }
 
 .attraction-body {
-  margin-top: 12px;
+  padding: 0 16px 16px;
   font-size: 0.88rem;
   line-height: 1.55;
   color: var(--is);
@@ -497,57 +538,41 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   margin-bottom: 2px;
 }
 
-.visited-row {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px dashed var(--pb);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.visited-row label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--fu);
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.visited-row input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--vs);
-}
-
-/* Visit note as an X/Twitter-style post card (ref: 21st.dev x-gradient-card) */
+/* Visit note card — checkbox where a profile avatar would be, then name +
+   a line that shows @handle or the visit date range. */
 .note-card {
-  border-radius: 16px;
+  margin-top: 14px;
+  border-radius: 10px;
   border: 1px solid var(--pb);
   background: linear-gradient(140deg, var(--pn) 0%, var(--bg) 100%);
-  box-shadow: var(--sc);
   padding: 12px 14px;
 }
 
 .note-head {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
 }
 
-.note-avatar {
-  width: 34px;
-  height: 34px;
+.note-check {
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
-  border-radius: 50%;
+  border-radius: 8px;
+  border: 1px solid var(--mb);
+  background: var(--bg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-family: var(--fu);
-  font-weight: 600;
-  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.note-check input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: var(--vs);
+  cursor: pointer;
 }
 
 .note-id {
@@ -558,33 +583,14 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 }
 
 .note-author {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
   font-family: var(--fu);
   font-weight: 600;
   font-size: 0.85rem;
   color: var(--ink);
 }
 
-.note-verified {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--nv);
-  color: var(--pn);
-  font-size: 0.62rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.note-verified[hidden] { display: none; }
-
-.note-handle {
-  font-size: 0.76rem;
-  color: var(--if);
-}
+.note-handle { font-size: 0.76rem; color: var(--if); }
+.note-handle.is-date { color: var(--vs); font-weight: 600; font-family: var(--fu); }
 
 .note-body {
   width: 100%;
@@ -603,6 +609,42 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 }
 
 .note-body::placeholder { color: var(--if); }
+
+.note-dates {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.note-date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.note-date-field span {
+  font-family: var(--fu);
+  font-size: 0.66rem;
+  color: var(--if);
+}
+
+.note-date-field input {
+  border: 1px solid var(--mb);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--fb);
+  font-size: 0.8rem;
+  padding: 5px 7px;
+  min-width: 0;
+}
+
+.note-date-field input:focus { outline: none; border-color: var(--nv); }
+
+.note-date-sep { color: var(--if); padding-bottom: 7px; }
 
 /* ===========================================================
    Culture page
@@ -739,10 +781,10 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
 
 .route-stop {
   padding: 16px 18px;
-  border-left: 3px solid transparent;
+  transition: border-color 0.2s ease;
 }
 
-.route-stop.is-fixed { border-left-color: var(--nv); }
+.route-stop.is-fixed { border-color: var(--nv); }
 
 .route-stop-head {
   display: flex;
@@ -894,10 +936,10 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   .country-map-col { padding: 12px; margin-top: 14px; }
 
   /* --- city grid + attraction cards: comfortable single column --- */
-  .city-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .city-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
   .attraction-grid { grid-template-columns: 1fr; gap: 12px; }
-  .attraction-card { padding: 14px 15px; }
   .attraction-card .attraction-name-en { white-space: normal; text-align: right; }
+  .ac-cover { height: 190px; }
 
   /* --- culture page --- */
   .culture-section { padding: 18px 18px; }

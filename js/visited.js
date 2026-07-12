@@ -23,13 +23,15 @@
     bus.dispatchEvent(new CustomEvent("change"));
   }
 
+  const DEFAULT = { visited: false, note: "", visitStart: "", visitEnd: "" };
+
   const SEVisited = {
     get(attractionId) {
-      return state[attractionId] || { visited: false, note: "" };
+      return { ...DEFAULT, ...(state[attractionId] || {}) };
     },
 
     setVisited(attractionId, visited) {
-      const entry = state[attractionId] || { visited: false, note: "" };
+      const entry = state[attractionId] || { ...DEFAULT };
       entry.visited = !!visited;
       entry.updatedAt = new Date().toISOString();
       state[attractionId] = entry;
@@ -37,8 +39,18 @@
     },
 
     setNote(attractionId, note) {
-      const entry = state[attractionId] || { visited: false, note: "" };
+      const entry = state[attractionId] || { ...DEFAULT };
       entry.note = note;
+      entry.updatedAt = new Date().toISOString();
+      state[attractionId] = entry;
+      persist();
+    },
+
+    // start/end are "YYYY-MM-DD" strings ("" clears).
+    setDates(attractionId, start, end) {
+      const entry = state[attractionId] || { ...DEFAULT };
+      entry.visitStart = start || "";
+      entry.visitEnd = end || "";
       entry.updatedAt = new Date().toISOString();
       state[attractionId] = entry;
       persist();

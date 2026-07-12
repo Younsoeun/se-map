@@ -242,14 +242,23 @@
   function renderCityGrid(data) {
     const wrap = document.getElementById("city-grid");
     wrap.innerHTML = "";
+    const IMAGES = window.SE_MAP_IMAGES || {};
     data.cities.forEach((city) => {
-      const ids = data.attractions.filter((a) => a.cityId === city.id).map((a) => a.id);
+      const cityAttractions = data.attractions.filter((a) => a.cityId === city.id);
+      const ids = cityAttractions.map((a) => a.id);
       const stats = window.SEVisited.getGroupStats(ids);
-      const card = el("a", { class: "city-card panel", href: cityUrl(data.key, city.id) });
+      // Cover = the first of this city's attractions that has a photo.
+      const cover = (cityAttractions.find((a) => IMAGES[a.id]) || {});
+      const img = IMAGES[cover.id] || "";
+
+      const card = el("a", { class: "city-card", href: cityUrl(data.key, city.id) });
+      if (img) card.style.backgroundImage = `url('${img}')`;
       card.innerHTML = `
-        <span class="city-card-name">${city.nameKo}</span>
-        <span class="city-card-en">${city.nameEn}</span>
-        <span class="city-card-meta">${ids.length}개 명소 · <span class="${stats.visitedCount ? "stat-visited" : ""}">방문 ${stats.visitedCount}/${ids.length}</span></span>
+        <div class="city-card-body">
+          <span class="city-card-name">${city.nameKo}</span>
+          <span class="city-card-en">${city.nameEn}</span>
+          <span class="city-card-meta">${ids.length}개 명소 · 방문 ${stats.visitedCount}/${ids.length}</span>
+        </div>
       `;
       wrap.appendChild(card);
     });
