@@ -26,6 +26,12 @@
       labelLon: -3, labelLat: 32.5,
       anchorLon: -3.7, anchorLat: 40.4,
     },
+    Greece: {
+      key: "greece",
+      nameKo: "그리스",
+      labelLon: 33, labelLat: 43,
+      anchorLon: 23.7, anchorLat: 38.5,
+    },
   };
 
   const state = { screen: "world", countryKey: null };

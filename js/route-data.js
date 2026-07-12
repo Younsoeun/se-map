@@ -35,12 +35,13 @@ window.SE_MAP_ROUTE = {
     },
     {
       id: "gr", nameKo: "그리스", nameEn: "Greece", flag: "🇬🇷",
+      countryKey: "greece",
       season: "10월 초",
       hint: "섬은 10월이 마지막 따뜻한 창",
       cities: [
-        { id: "gr-athens", nameKo: "아테네", nameEn: "Athens" },
-        { id: "gr-santorini", nameKo: "산토리니", nameEn: "Santorini" },
-        { id: "gr-crete", nameKo: "크레타", nameEn: "Crete" },
+        { id: "gr-athens", nameKo: "아테네", nameEn: "Athens", cityId: "athens" },
+        { id: "gr-santorini", nameKo: "산토리니", nameEn: "Santorini", cityId: "santorini" },
+        { id: "gr-crete", nameKo: "크레타", nameEn: "Crete", cityId: "heraklion" },
       ],
     },
     {

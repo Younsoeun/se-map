@@ -48,6 +48,14 @@ const COUNTRIES = [
     mainlandBBox: { minLon: -9.6, maxLon: 3.4, minLat: 35.9, maxLat: 43.9 },
     viewBox: { w: 720, h: 620, pad: 24 },
   },
+  {
+    admin: "Greece",
+    key: "greece",
+    // Wide bbox on purpose: keep the Aegean/Ionian islands (Santorini, Crete,
+    // Rhodes, Corfu, Mykonos, Zakynthos) since they are core destinations.
+    mainlandBBox: { minLon: 19.2, maxLon: 28.4, minLat: 34.6, maxLat: 41.8 },
+    viewBox: { w: 700, h: 640, pad: 24 },
+  },
 ];
 
 async function fetchCached(name, url) {

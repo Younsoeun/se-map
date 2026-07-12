@@ -91,6 +91,30 @@ const WIKI = {
   "basilica-pilar-zaragoza": "Basilica of Our Lady of the Pillar",
   "teatro-romano-merida": "Roman Theatre (Mérida)",
   "murallas-avila": "Walls of Ávila",
+  // Greece
+  "acropolis-athens": "Acropolis of Athens",
+  "ancient-agora-athens": "Ancient Agora of Athens",
+  "temple-olympian-zeus": "Temple of Olympian Zeus, Athens",
+  "plaka-athens": "Plaka",
+  "temple-poseidon-sounion": "Cape Sounion",
+  "delphi-sanctuary": "Delphi",
+  "meteora-monasteries": "Meteora",
+  "palamidi-nafplio": "Palamidi",
+  "epidaurus-theatre": "Ancient Theatre of Epidaurus",
+  "mycenae-lions-gate": "Mycenae",
+  "ancient-olympia": "Olympia, Greece",
+  "white-tower-thessaloniki": "White Tower of Thessaloniki",
+  "rotunda-thessaloniki": "Rotunda (Thessaloniki)",
+  "oia-santorini": "Oia, Greece",
+  "akrotiri-santorini": "Akrotiri (prehistoric city)",
+  "mykonos-town": "Mykonos",
+  "knossos-palace": "Knossos",
+  "heraklion-museum": "Heraklion Archaeological Museum",
+  "chania-old-town": "Chania",
+  "balos-lagoon": "Balos",
+  "rhodes-old-town": "Medieval City of Rhodes",
+  "corfu-old-town": "Corfu (city)",
+  "navagio-zakynthos": "Navagio Beach",
 };
 
 // Explicit image URLs for attractions the pageimages API can't resolve
@@ -103,6 +127,8 @@ const MANUAL_IMAGES = {
     "https://commons.wikimedia.org/wiki/Special:FilePath/Mus%C3%A9e_d%27Orsay%2C_North-West_view%2C_Paris_7e_140402.jpg?width=640",
   "praia-dona-ana":
     "https://commons.wikimedia.org/wiki/Special:FilePath/Vista_Centro_Hist%C3%B3rico_de_Lagos_%28cropped%29.jpg?width=640",
+  "rotunda-thessaloniki":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Thessaloniki_Saint_George_Rotunda_from_the_Arch_of_Galerius.jpg?width=640",
 };
 
 function loadData(rel) {
@@ -161,6 +187,7 @@ async function main() {
   Object.assign(data, loadData("js/data-portugal.js"));
   Object.assign(data, loadData("js/data-france.js"));
   Object.assign(data, loadData("js/data-spain.js"));
+  Object.assign(data, loadData("js/data-greece.js"));
 
   const attractions = [];
   for (const country of Object.values(data)) {
