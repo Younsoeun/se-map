@@ -399,7 +399,7 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   line-height: 1.2;
   padding: 4px 8px;
   white-space: nowrap;
-  border-radius: 999px;
+  border-radius: 13px;   /* .pill 과 같은 값. 완전 pill 은 원칙 1 위반 */
   background: var(--pn);
   color: var(--ink);
   border: 1px solid var(--mb);
