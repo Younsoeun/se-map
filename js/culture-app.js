@@ -58,7 +58,9 @@
         const title = el("p", { class: "culture-section-title", text: section.titleKo });
         sectionEl.appendChild(title);
         section.paragraphs.forEach((p) => {
-          sectionEl.appendChild(el("p", { class: "culture-section-body", text: p }));
+          const para = el("p", { class: "culture-section-body" });
+          para.innerHTML = p;   // authored content; carries strong-tag emphasis
+          sectionEl.appendChild(para);
         });
         sectionsWrap.appendChild(sectionEl);
       });

@@ -11,195 +11,195 @@
     Portugal: {
       key: "portugal",
       nameKo: "포르투갈",
-      labelLon: -21, labelLat: 44.5,
+      fitLon: -21, fitLat: 44.5,
       anchorLon: -9.3, anchorLat: 39.6,
     },
     France: {
       key: "france",
       nameKo: "프랑스",
-      labelLon: -1, labelLat: 56,
+      fitLon: -1, fitLat: 56,
       anchorLon: 2.5, anchorLat: 47.2,
     },
     Spain: {
       key: "spain",
       nameKo: "스페인",
-      labelLon: -3, labelLat: 32.5,
+      fitLon: -3, fitLat: 32.5,
       anchorLon: -3.7, anchorLat: 40.4,
     },
     Greece: {
       key: "greece",
       nameKo: "그리스",
-      labelLon: 33, labelLat: 43,
+      fitLon: 33, fitLat: 43,
       anchorLon: 23.7, anchorLat: 38.5,
     },
     Italy: {
       key: "italy",
       nameKo: "이탈리아",
-      labelLon: 6, labelLat: 40,
+      fitLon: 6, fitLat: 40,
       anchorLon: 12.5, anchorLat: 42.5,
     },
     Morocco: {
       key: "morocco",
       nameKo: "모로코",
-      labelLon: -24, labelLat: 33,
+      fitLon: -24, fitLat: 33,
       anchorLon: -7, anchorLat: 31.8,
     },
     Malta: {
       key: "malta",
       nameKo: "몰타",
-      labelLon: 20, labelLat: 30.5,
+      fitLon: 20, fitLat: 30.5,
       anchorLon: 14.4, anchorLat: 35.9,
     },
     Croatia: {
       key: "croatia",
       nameKo: "크로아티아",
-      labelLon: 24, labelLat: 48,
+      fitLon: 24, fitLat: 48,
       anchorLon: 16.5, anchorLat: 45.1,
     },
     Netherlands: {
       key: "netherlands",
       nameKo: "네덜란드",
-      labelLon: -6, labelLat: 57,
+      fitLon: -6, fitLat: 57,
       anchorLon: 5.3, anchorLat: 52.2,
     },
     Germany: {
       key: "germany",
       nameKo: "독일",
-      labelLon: 17, labelLat: 55,
+      fitLon: 17, fitLat: 55,
       anchorLon: 10.4, anchorLat: 51.2,
     },
     Switzerland: {
       key: "switzerland",
       nameKo: "스위스",
-      labelLon: 2, labelLat: 44,
+      fitLon: 2, fitLat: 44,
       anchorLon: 8.2, anchorLat: 46.8,
     },
     Norway: {
       key: "norway",
       nameKo: "노르웨이",
-      labelLon: -2, labelLat: 64,
+      fitLon: -2, fitLat: 64,
       anchorLon: 8.5, anchorLat: 61,
     },
     Sweden: {
       key: "sweden",
       nameKo: "스웨덴",
-      labelLon: 22, labelLat: 66,
+      fitLon: 22, fitLat: 66,
       anchorLon: 15, anchorLat: 62,
     },
     Finland: {
       key: "finland",
       nameKo: "핀란드",
-      labelLon: 33, labelLat: 65,
+      fitLon: 33, fitLat: 65,
       anchorLon: 26, anchorLat: 64,
     },
     Denmark: {
       key: "denmark",
       nameKo: "덴마크",
-      labelLon: 4, labelLat: 51,
+      fitLon: 4, fitLat: 51,
       anchorLon: 9.5, anchorLat: 56,
     },
     Iceland: {
       key: "iceland",
       nameKo: "아이슬란드",
-      labelLon: -32, labelLat: 63,
+      fitLon: -32, fitLat: 63,
       anchorLon: -19, anchorLat: 64.8,
     },
     Czechia: {
       key: "czechia",
       nameKo: "체코",
-      labelLon: 10, labelLat: 53,
+      fitLon: 10, fitLat: 53,
       anchorLon: 15.5, anchorLat: 49.8,
     },
     Austria: {
       key: "austria",
       nameKo: "오스트리아",
-      labelLon: 12, labelLat: 44.5,
+      fitLon: 12, fitLat: 44.5,
       anchorLon: 14.5, anchorLat: 47.5,
     },
     Hungary: {
       key: "hungary",
       nameKo: "헝가리",
-      labelLon: 25, labelLat: 46,
+      fitLon: 25, fitLat: 46,
       anchorLon: 19.4, anchorLat: 47.2,
     },
     Poland: {
       key: "poland",
       nameKo: "폴란드",
-      labelLon: 27, labelLat: 54,
+      fitLon: 27, fitLat: 54,
       anchorLon: 19.5, anchorLat: 52,
     },
     Slovenia: {
       key: "slovenia",
       nameKo: "슬로베니아",
-      labelLon: 9, labelLat: 42,
+      fitLon: 9, fitLat: 42,
       anchorLon: 14.8, anchorLat: 46.1,
     },
     Slovakia: {
       key: "slovakia",
       nameKo: "슬로바키아",
-      labelLon: 22, labelLat: 50.5,
+      fitLon: 22, fitLat: 50.5,
       anchorLon: 19.5, anchorLat: 48.7,
     },
     Romania: {
       key: "romania",
       nameKo: "루마니아",
-      labelLon: 31, labelLat: 47,
+      fitLon: 31, fitLat: 47,
       anchorLon: 25, anchorLat: 45.9,
     },
     Bulgaria: {
       key: "bulgaria",
       nameKo: "불가리아",
-      labelLon: 32, labelLat: 42,
+      fitLon: 32, fitLat: 42,
       anchorLon: 25.3, anchorLat: 42.7,
     },
     Estonia: {
       key: "estonia",
       nameKo: "에스토니아",
-      labelLon: 33, labelLat: 59.5,
+      fitLon: 33, fitLat: 59.5,
       anchorLon: 25.5, anchorLat: 58.7,
     },
     Latvia: {
       key: "latvia",
       nameKo: "라트비아",
-      labelLon: 33, labelLat: 57,
+      fitLon: 33, fitLat: 57,
       anchorLon: 24.6, anchorLat: 56.9,
     },
     Lithuania: {
       key: "lithuania",
       nameKo: "리투아니아",
-      labelLon: 31, labelLat: 54.5,
+      fitLon: 31, fitLat: 54.5,
       anchorLon: 23.9, anchorLat: 55.2,
     },
     Ireland: {
       key: "ireland",
       nameKo: "아일랜드",
-      labelLon: -14, labelLat: 52,
+      fitLon: -14, fitLat: 52,
       anchorLon: -8, anchorLat: 53.4,
     },
     "United Kingdom": {
       key: "uk",
       nameKo: "영국",
-      labelLon: -11, labelLat: 57,
+      fitLon: -11, fitLat: 57,
       anchorLon: -2, anchorLat: 53.5,
     },
     Belgium: {
       key: "belgium",
       nameKo: "벨기에",
-      labelLon: 0, labelLat: 49,
+      fitLon: 0, fitLat: 49,
       anchorLon: 4.6, anchorLat: 50.7,
     },
     Luxembourg: {
       key: "luxembourg",
       nameKo: "룩셈부르크",
-      labelLon: 9, labelLat: 48,
+      fitLon: 9, fitLat: 48,
       anchorLon: 6.1, anchorLat: 49.7,
     },
     // Canary Islands: no matching world-map polygon (they're clipped out of
-    // Spain), so this entry only produces a callout pill to reach the page.
+    // Spain), so its anchor dot is the only way to reach the page.
     Canary: {
       key: "canary",
       nameKo: "카나리아 제도",
-      labelLon: -34, labelLat: 22,
+      fitLon: -34, fitLat: 22,
       anchorLon: -15.6, anchorLat: 28.2,
     },
   };
@@ -234,14 +234,14 @@
   const WORLD_W = 960, WORLD_H = 500;
   let WORLD_ASPECT = WORLD_W / WORLD_H;    // set from the default (fitted) view
   let worldView = null;                    // current viewBox window {x,y,w,h}
-  let worldEntries = [];                   // [{active, pill, ax, ay, lx, ly, dot}]
-  let layoutQueued = false;
+  let worldEntries = [];                   // [{active, ax, ay, dot}]
+  let rescaleQueued = false;
   let mapDragMoved = false;
 
   function projectedBounds() {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     Object.values(ACTIVE_COUNTRIES).forEach((a) => {
-      [[a.anchorLon, a.anchorLat], [a.labelLon, a.labelLat]].forEach(([lon, lat]) => {
+      [[a.anchorLon, a.anchorLat], [a.fitLon, a.fitLat]].forEach(([lon, lat]) => {
         const [x, y] = window.SEProject.world(lon, lat);
         minX = Math.min(minX, x); maxX = Math.max(maxX, x);
         minY = Math.min(minY, y); maxY = Math.max(maxY, y);
@@ -277,20 +277,33 @@
     worldView = clampWorldView(v);
     const svg = document.getElementById("world-svg");
     svg.setAttribute("viewBox", `${worldView.x} ${worldView.y} ${worldView.w} ${worldView.h}`);
-    queueWorldLayout();
+    queueDotRescale();
   }
 
-  function queueWorldLayout() {
-    if (layoutQueued) return;
-    layoutQueued = true;
-    requestAnimationFrame(() => { layoutQueued = false; layoutWorld(); });
+  function queueDotRescale() {
+    if (rescaleQueued) return;
+    rescaleQueued = true;
+    requestAnimationFrame(() => { rescaleQueued = false; rescaleDots(); });
+  }
+
+  // How solid a country is drawn: half-transparent with no visit records, and
+  // fully opaque once every attraction in it is checked off. The fill is a
+  // record of where you have been, not just a "there is a page here" flag.
+  function fillOpacityFor(key) {
+    const data = window.SE_MAP_DATA && window.SE_MAP_DATA[key];
+    if (!data || !window.SEVisited) return 0.5;
+    const { ratio } = window.SEVisited.getGroupStats(data.attractions.map((a) => a.id));
+    return 0.5 + 0.5 * ratio;
   }
 
   function renderWorld() {
     const svg = document.getElementById("world-svg");
-    const wrap = document.getElementById("world-map-wrap");
     svg.innerHTML = "";
-    wrap.querySelectorAll(".callout-pill").forEach((n) => n.remove());
+
+    // Every polygon carries its Korean name, so pointing at a country with no
+    // page of its own still tells you what you are looking at.
+    const NAMES = window.SE_WORLD_NAME_KO || {};
+    const drawn = new Set();
 
     window.SE_MAP_GEO.world.countries.forEach((c) => {
       const active = ACTIVE_COUNTRIES[c.name];
@@ -299,29 +312,53 @@
         class: "world-country" + (active ? " active" : ""),
         "fill-rule": "evenodd",
         "vector-effect": "non-scaling-stroke",
+        "data-name-ko": (active && active.nameKo) || NAMES[c.name] || c.name,
       });
       if (active) {
+        drawn.add(c.name);
+        path.style.setProperty("--co", String(fillOpacityFor(active.key)));
+        path.setAttribute("tabindex", "0");
+        path.setAttribute("role", "button");
+        path.setAttribute("aria-label", active.nameKo);
         path.addEventListener("click", () => { if (!mapDragMoved) goToCountry(active.key); });
-        const title = svgEl("title", {});
-        title.textContent = active.nameKo;
-        path.appendChild(title);
+        path.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goToCountry(active.key); }
+        });
+        path.addEventListener("focus", () => showLabelAtElement(path, active.nameKo));
+        path.addEventListener("blur", hideHoverLabel);
+      } else {
+        // Nothing to open, and 145 country names read aloud would only be noise.
+        path.setAttribute("aria-hidden", "true");
       }
       svg.appendChild(path);
     });
 
-    worldEntries = Object.values(ACTIVE_COUNTRIES).map((active) => {
-      const [ax, ay] = window.SEProject.world(active.anchorLon, active.anchorLat);
-      const [lx, ly] = window.SEProject.world(active.labelLon, active.labelLat);
-      const dot = svgEl("circle", { cx: ax, cy: ay, r: 3, fill: "var(--tc)" });
-      svg.appendChild(dot);
-      const pill = el("button", { class: "pill callout-pill", text: active.nameKo });
-      pill.addEventListener("click", (e) => {
-        if (mapDragMoved) { e.preventDefault(); return; }
-        goToCountry(active.key);
+    // Malta and the Canary Islands have no polygon in this world map at all —
+    // Malta is too small to survive the simplification and the Canaries are
+    // clipped out of Spain. Without a marker they would be unreachable, so
+    // these two (and only these two) still get one.
+    worldEntries = Object.entries(ACTIVE_COUNTRIES)
+      .filter(([name]) => !drawn.has(name))
+      .map(([, active]) => {
+        const [ax, ay] = window.SEProject.world(active.anchorLon, active.anchorLat);
+        const pin = svgEl("circle", {
+          cx: ax, cy: ay, r: 3,
+          class: "world-pin",
+          "data-name-ko": active.nameKo,
+          tabindex: "0",
+          role: "button",
+          "aria-label": active.nameKo,
+        });
+        pin.style.setProperty("--co", String(fillOpacityFor(active.key)));
+        pin.addEventListener("click", () => { if (!mapDragMoved) goToCountry(active.key); });
+        pin.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goToCountry(active.key); }
+        });
+        pin.addEventListener("focus", () => showLabelAtElement(pin, active.nameKo));
+        pin.addEventListener("blur", hideHoverLabel);
+        svg.appendChild(pin);
+        return { active, ax, ay, dot: pin };
       });
-      wrap.appendChild(pill);
-      return { active, pill, ax, ay, lx, ly, dot };
-    });
 
     // Establish the fixed aspect from the default fit, then apply the view.
     const def = defaultWorldView();
@@ -329,70 +366,77 @@
     setWorldView(worldView || def);
   }
 
-  // Position the label pills over the map for the current view, nudge any that
-  // overlap, hide off-screen ones, and draw leader lines to their anchor dots.
-  function layoutWorld() {
+  // Keep the pins a constant on-screen size while the view zooms.
+  function rescaleDots() {
     if (!worldView) return;
-    const svg = document.getElementById("world-svg");
-    const wrap = document.getElementById("world-map-wrap");
-    const wrapRect = wrap.getBoundingClientRect();
-    const svgRect = svg.getBoundingClientRect();
-    if (!svgRect.width || !svgRect.height) return;
-
-    // Rescale anchor dots so they stay a constant on-screen size while zooming.
-    const dotR = worldView.w / 320;
-    worldEntries.forEach((e) => e.dot.setAttribute("r", dotR));
-    svg.querySelectorAll(".leader-line").forEach((n) => n.remove());
-
-    const offX = svgRect.left - wrapRect.left;
-    const offY = svgRect.top - wrapRect.top;
-    const pad = 3;
-
-    const items = [];
-    worldEntries.forEach((e) => {
-      const fx = (e.lx - worldView.x) / worldView.w;
-      const fy = (e.ly - worldView.y) / worldView.h;
-      // Hide labels whose anchor sits well outside the current window.
-      const afx = (e.ax - worldView.x) / worldView.w;
-      const afy = (e.ay - worldView.y) / worldView.h;
-      const off = afx < -0.05 || afx > 1.05 || afy < -0.05 || afy > 1.05;
-      e.pill.style.display = off ? "none" : "";
-      if (off) return;
-      const cx = offX + fx * svgRect.width;   // pill bottom-center x (in wrap px)
-      const by = offY + fy * svgRect.height;  // pill bottom-center y
-      e.pill.style.left = cx + "px";
-      e.pill.style.top = by + "px";
-      const r = e.pill.getBoundingClientRect();
-      items.push({ e, cx, by, w: r.width, h: r.height, top: by - r.height, left: cx - r.width / 2 });
-    });
-
-    items.sort((a, b) => a.top - b.top);
-    const placed = [];
-    for (const it of items) {
-      let guard = 0, overlap = true;
-      while (overlap && guard++ < 200) {
-        overlap = false;
-        for (const q of placed) {
-          const ox = it.left < q.left + q.w + pad && it.left + it.w + pad > q.left;
-          const oy = it.top < q.top + q.h + pad && it.top + it.h + pad > q.top;
-          if (ox && oy) { it.top = q.top + q.h + pad; overlap = true; }
-        }
-      }
-      it.e.pill.style.top = (it.top + it.h) + "px"; // style anchor = bottom-center
-      placed.push(it);
-    }
-
-    // Leader lines, in viewBox coords, from anchor dot to final pill.
-    for (const it of placed) {
-      const bxSvg = it.cx - offX, bySvg = (it.top + it.h) - offY;
-      const x2 = worldView.x + (bxSvg / svgRect.width) * worldView.w;
-      const y2 = worldView.y + (bySvg / svgRect.height) * worldView.h;
-      svg.appendChild(svgEl("line", {
-        x1: it.e.ax, y1: it.e.ay, x2, y2,
-        class: "leader-line", "vector-effect": "non-scaling-stroke",
-      }));
-    }
+    const r = worldView.w / 320;
+    worldEntries.forEach((e) => e.dot.setAttribute("r", r));
   }
+
+  // ---- Hover label ----
+  // One label that follows the cursor, so a name reads the same whether the
+  // country under it is Russia or Malta.
+
+  let hoverLabel = null;
+  let hoverLabelTimer = null;
+
+  function labelNode() {
+    if (hoverLabel && hoverLabel.isConnected) return hoverLabel;
+    const wrap = document.getElementById("world-map-wrap");
+    hoverLabel = wrap.querySelector(".map-hover-label")
+      || wrap.appendChild(el("div", { class: "map-hover-label" }));
+    return hoverLabel;
+  }
+
+  function showHoverLabel(nameKo, clientX, clientY) {
+    const wrap = document.getElementById("world-map-wrap");
+    const r = wrap.getBoundingClientRect();
+    const node = labelNode();
+    node.textContent = nameKo;
+    node.dataset.show = "1";
+
+    // Sit below-right of the cursor; flip to the other side near the right or
+    // bottom edge. Then clamp both ends, because a flip alone is not enough for
+    // a long name in a narrow map box.
+    const lw = node.offsetWidth, lh = node.offsetHeight;
+    let x = clientX - r.left + 14;
+    let y = clientY - r.top + 16;
+    if (x + lw > r.width - 4) x = clientX - r.left - lw - 14;
+    if (y + lh > r.height - 4) y = clientY - r.top - lh - 12;
+    node.style.left = clamp(x, 4, Math.max(4, r.width - lw - 4)) + "px";
+    node.style.top = clamp(y, 4, Math.max(4, r.height - lh - 4)) + "px";
+  }
+
+  function showLabelAtElement(node, nameKo) {
+    const r = node.getBoundingClientRect();
+    showHoverLabel(nameKo, r.left + r.width / 2, r.top + r.height / 2);
+  }
+
+  function hideHoverLabel() {
+    clearTimeout(hoverLabelTimer);
+    if (hoverLabel) hoverLabel.dataset.show = "0";
+  }
+
+  function labelFor(target) {
+    return target && target.getAttribute ? target.getAttribute("data-name-ko") : null;
+  }
+
+  function updateHoverLabel(e) {
+    const name = labelFor(e.target);
+    if (!name) { hideHoverLabel(); return; }
+    showHoverLabel(name, e.clientX, e.clientY);
+  }
+
+  // Touch has no hover, so a tap flashes the name instead. Active countries
+  // navigate on that same tap, so in practice this is what the rest get.
+  function flashHoverLabel(e) {
+    const name = labelFor(e.target);
+    if (!name) { hideHoverLabel(); return; }
+    showHoverLabel(name, e.clientX, e.clientY);
+    clearTimeout(hoverLabelTimer);
+    hoverLabelTimer = setTimeout(hideHoverLabel, 1400);
+  }
+
 
   // ---- Zoom / pan interactions ----
 
@@ -433,6 +477,7 @@
       svg.setPointerCapture(e.pointerId);
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       mapDragMoved = false;
+      if (e.pointerType === "touch") flashHoverLabel(e);
       if (pointers.size === 1) {
         panStart = { x: e.clientX, y: e.clientY, view: { ...worldView } };
         pinchStart = null;
@@ -445,6 +490,7 @@
     });
 
     svg.addEventListener("pointermove", (e) => {
+      if (pointers.size === 0) updateHoverLabel(e); else hideHoverLabel();
       if (!pointers.has(e.pointerId)) return;
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       const r = svg.getBoundingClientRect();
@@ -484,9 +530,7 @@
     };
     svg.addEventListener("pointerup", endPointer);
     svg.addEventListener("pointercancel", endPointer);
-
-    // Keep labels aligned when the container is resized.
-    window.addEventListener("resize", queueWorldLayout);
+    svg.addEventListener("pointerleave", hideHoverLabel);
   }
 
   // ---- Country screen ----
@@ -505,7 +549,7 @@
     state.countryKey = null;
     document.getElementById("country-screen").hidden = true;
     document.getElementById("world-screen").hidden = false;
-    // Re-render so callout de-collision runs with the map actually visible
+    // Re-render so the anchor dots are placed with the map actually visible
     // (a deep-linked load renders the world while it's still hidden).
     renderWorld();
     // Drop any ?country= so a refresh returns to the world map.

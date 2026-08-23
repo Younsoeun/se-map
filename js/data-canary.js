@@ -40,7 +40,7 @@ window.SE_MAP_DATA.canary = {
       nameKo: "라라구나 구시가", nameEn: "San Cristóbal de La Laguna",
       history: "16세기에 계획된 격자형 도시로, 아메리카 여러 식민 도시의 원형이 됐다. 1999년 유네스코 세계유산에 등재됐다.",
       intro: "파스텔빛 식민 건축과 목조 발코니, 안뜰이 있는 저택이 늘어선 대학 도시다. 테네리페의 옛 수도로 활기가 넘친다.",
-      tip: "산타크루스에서 트램으로 쉽게 닿는다. 골목 카페와 성당을 천천히 걷기 좋다.",
+      tip: "<strong>산타크루스</strong>에서 트램으로 쉽게 닿는다. 골목 카페와 성당을 천천히 걷기 좋다.",
     },
     {
       id: "los-gigantes-cliffs", cityId: "tenerife", category: "nature",
@@ -61,16 +61,16 @@ window.SE_MAP_DATA.canary = {
     {
       id: "roque-nublo", cityId: "gran-canaria", category: "nature",
       nameKo: "로케 누블로", nameEn: "Roque Nublo",
-      history: "그란카나리아 중앙 고지대에 솟은 높이 약 80m의 화산 바위 기둥으로, 섬 원주민(관체족)에게 신성한 장소였다.",
-      intro: "구름 위로 솟은 바위까지 완만한 트레일을 걸으면 섬 전체와 멀리 테이데 화산까지 조망된다. 그란카나리아의 상징이다.",
+      history: "그란카나리아 중앙 고지대에 솟은 높이 약 80m의 화산 바위 기둥으로, 섬 원주민(<strong>관체족</strong>)에게 신성한 장소였다.",
+      intro: "구름 위로 솟은 바위까지 완만한 트레일을 걸으면 섬 전체와 멀리 <strong>테이데 화산</strong>까지 조망된다. 그란카나리아의 상징이다.",
       tip: "정상 트레일은 왕복 1시간 남짓으로 가볍다. 구름 바다(운해) 위로 해가 지는 풍경이 유명하다.",
     },
     {
       id: "vegueta-las-palmas", cityId: "gran-canaria", category: "town",
       nameKo: "베게타 구시가 (라스팔마스)", nameEn: "Vegueta, Las Palmas",
-      history: "1478년 스페인의 카나리아 정복이 시작된 유서 깊은 구역으로, 콜럼버스가 아메리카로 가는 길에 머문 곳이다.",
-      intro: "산타아나 대성당과 콜럼버스의 집(카사 데 콜론), 자갈 골목이 있는 라스팔마스의 옛 심장이다. 도심 해변 라스칸테라스도 유명하다.",
-      tip: "목요일 저녁 '타파스의 밤'에 골목 바가 활기를 띤다. 콜럼버스의 집 박물관을 함께 보면 좋다.",
+      history: "1478년 스페인의 카나리아 정복이 시작된 유서 깊은 구역으로, <strong>콜럼버스</strong>가 아메리카로 가는 길에 머문 곳이다.",
+      intro: "<strong>산타아나 대성당</strong>과 콜럼버스의 집(카사 데 콜론), 자갈 골목이 있는 라스팔마스의 옛 심장이다. 도심 해변 <strong>라스칸테라스</strong>도 유명하다.",
+      tip: "목요일 저녁 '타파스의 밤'에 골목 바가 활기를 띤다. <strong>콜럼버스의 집 박물관</strong>을 함께 보면 좋다.",
     },
 
     // ---- Lanzarote ----
@@ -84,9 +84,9 @@ window.SE_MAP_DATA.canary = {
     {
       id: "jameos-del-agua", cityId: "lanzarote", category: "culture",
       nameKo: "하메오스 델 아과", nameEn: "Jameos del Agua",
-      history: "화산 용암 동굴을 예술가 세사르 만리케가 자연을 살려 개조한 공간이다. 만리케는 란사로테 전역의 개발을 자연과 조화시킨 인물로 유명하다.",
+      history: "화산 용암 동굴을 예술가 <strong>세사르 만리케</strong>가 자연을 살려 개조한 공간이다. 만리케는 란사로테 전역의 개발을 자연과 조화시킨 인물로 유명하다.",
       intro: "지하 용암 동굴 속 에메랄드빛 호수(눈먼 흰 게가 사는)와 하얀 야외 수영장, 콘서트홀이 어우러진다. 자연과 예술이 결합된 란사로테의 상징이다.",
-      tip: "인근 쿠에바 데 로스 베르데스(용암 터널)와 만리케 재단 등 그의 작품을 함께 묶어 보면 좋다.",
+      tip: "인근 <strong>쿠에바 데 로스 베르데스</strong>(용암 터널)와 만리케 재단 등 그의 작품을 함께 묶어 보면 좋다.",
     },
 
     // ---- Fuerteventura ----
@@ -95,7 +95,7 @@ window.SE_MAP_DATA.canary = {
       nameKo: "코랄레호 사구·해변", nameEn: "Corralejo Dunes",
       history: "푸에르테벤투라 북부의 자연공원으로, 흰 모래 사구가 청록빛 바다와 맞닿아 있다.",
       intro: "끝없이 이어지는 백사장과 얕은 바다가 카리브해를 연상시킨다. 바람이 좋아 서핑·카이트서핑의 성지다.",
-      tip: "바로 앞 로보스 섬으로 배편 당일 트립이 가능하다. 바람이 강한 날이 많으니 해변용 방풍 준비를 하자.",
+      tip: "바로 앞 <strong>로보스 섬</strong>으로 배편 당일 트립이 가능하다. 바람이 강한 날이 많으니 해변용 방풍 준비를 하자.",
     },
 
     // ---- La Palma ----
@@ -103,7 +103,7 @@ window.SE_MAP_DATA.canary = {
       id: "roque-de-los-muchachos", cityId: "la-palma", category: "culture",
       nameKo: "로케 데 로스 무차초스", nameEn: "Roque de los Muchachos",
       history: "라팔마 최고봉(2,426m) 정상으로, 세계 최고 수준의 천문대가 자리한다. 섬 전체가 '스타라이트 보호구역'으로 지정돼 있다.",
-      intro: "구름 바다 위로 솟은 정상에서 은하수와 별이 쏟아지는 밤하늘을 만난다. 낮에는 거대한 타부리엔테 칼데라를 굽어본다.",
+      intro: "구름 바다 위로 솟은 정상에서 은하수와 별이 쏟아지는 밤하늘을 만난다. 낮에는 거대한 <strong>타부리엔테 칼데라</strong>를 굽어본다.",
       tip: "빛 공해가 극도로 적어 별 관측 여행지로 손꼽힌다. 밤엔 매우 추우니 방한 준비가 필수다.",
     },
 
@@ -111,9 +111,9 @@ window.SE_MAP_DATA.canary = {
     {
       id: "garajonay-national-park", cityId: "la-gomera", category: "nature",
       nameKo: "가라호나이 국립공원", nameEn: "Garajonay National Park",
-      history: "빙하기의 잔존 식생인 월계수림(라우리실바)이 보존된 원시림으로, 1986년 유네스코 세계자연유산에 등재됐다.",
+      history: "빙하기의 잔존 식생인 월계수림(<strong>라우리실바</strong>)이 보존된 원시림으로, 1986년 유네스코 세계자연유산에 등재됐다.",
       intro: "안개가 감도는 이끼 낀 월계수 숲이 태고의 분위기를 자아낸다. 라고메라 섬은 휘파람 언어 '실보 고메로'로도 유명하다.",
-      tip: "테네리페에서 페리로 닿는 조용한 섬이다. 숲길 트레킹과 전망대(미라도르)를 함께 즐기기 좋다.",
+      tip: "<strong>테네리페</strong>에서 페리로 닿는 조용한 섬이다. 숲길 트레킹과 전망대(미라도르)를 함께 즐기기 좋다.",
     },
   ],
 };
