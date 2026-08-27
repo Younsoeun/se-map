@@ -473,8 +473,11 @@
     const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
     const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
 
+    // Capture only once a gesture actually begins — never on a plain click.
+    // Capturing on pointerdown would retarget the follow-up `click` event to the
+    // SVG (the capture element), so the country path's click listener would
+    // never fire and tapping a country wouldn't open it.
     svg.addEventListener("pointerdown", (e) => {
-      svg.setPointerCapture(e.pointerId);
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       mapDragMoved = false;
       if (e.pointerType === "touch") flashHoverLabel(e);
@@ -482,6 +485,10 @@
         panStart = { x: e.clientX, y: e.clientY, view: { ...worldView } };
         pinchStart = null;
       } else if (pointers.size === 2) {
+        // A two-finger gesture is never a click, so grab both pointers now.
+        for (const id of pointers.keys()) {
+          try { svg.setPointerCapture(id); } catch (err) { /* ignore */ }
+        }
         const p = [...pointers.values()];
         const m = mid(p[0], p[1]);
         pinchStart = { dist: dist(p[0], p[1]), mx: m.x, my: m.y, view: { ...worldView } };
@@ -508,7 +515,12 @@
         mapDragMoved = true;
       } else if (panStart) {
         const dx = e.clientX - panStart.x, dy = e.clientY - panStart.y;
-        if (Math.abs(dx) + Math.abs(dy) > 3) mapDragMoved = true;
+        // Once the drag clears the click threshold, grab the pointer so panning
+        // keeps working even if the cursor leaves the map box.
+        if (!mapDragMoved && Math.abs(dx) + Math.abs(dy) > 3) {
+          mapDragMoved = true;
+          try { svg.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+        }
         setWorldView({
           x: panStart.view.x - (dx / r.width) * panStart.view.w,
           y: panStart.view.y - (dy / r.height) * panStart.view.h,
