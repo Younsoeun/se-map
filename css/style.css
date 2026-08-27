@@ -1,8 +1,10 @@
 /* ===========================================================
    SE_map design system
-   Warm-gray / navy / terracotta palette (from the original spec),
-   with a soft radial-gradient "blob" background and full-pill UI
-   shapes borrowed from mycalmsite.com. See notes/design-references.md.
+   Warm-gray / navy / terracotta palette (from the original spec), with a
+   soft radial-gradient "blob" background borrowed from mycalmsite.com.
+   Corner radii come from a fixed scale — 15 nav shell / 13 pill / 10 card
+   / 8 badge / 50% icon button — and full pills were rejected outright.
+   See notes/design-references.md (원칙 1).
    =========================================================== */
 
 /* Light theme is the CSS default. Dark theme values (system-preference or
@@ -336,7 +338,7 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   border: 1px solid var(--mb);
   background: var(--mf);
   color: var(--ink);
-  border-radius: 9px;
+  border-radius: 10px;
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
@@ -576,7 +578,7 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   font-size: 0.68rem;
   color: #fff;
   padding: 3px 10px;
-  border-radius: 7px;
+  border-radius: 8px;
 }
 
 .ac-titlebar {
@@ -825,7 +827,7 @@ h1, h2, h3 { font-family: var(--fh); font-weight: 400; margin: 0; }
   text-transform: uppercase;
   color: var(--pn);
   background: var(--nv);
-  border-radius: 999px;
+  border-radius: 8px;
   padding: 5px 14px;
   margin: 0 0 14px;
 }
