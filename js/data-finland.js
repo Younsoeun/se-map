@@ -31,14 +31,14 @@ window.SE_MAP_DATA.finland = {
     {
       id: "helsinki-cathedral", cityId: "helsinki", category: "city",
       nameKo: "헬싱키 대성당·원로원 광장", nameEn: "Helsinki Cathedral & Senate Square",
-      history: "19세기 전반 카를 루드비그 엥엘이 설계한 신고전주의 대성당으로, 흰 벽과 초록 돔이 원로원 광장을 굽어본다.",
-      intro: "계단 위 흰 대성당과 대칭을 이룬 광장이 헬싱키의 상징적 풍경이다. 항구·시장 광장(카우파토리)과 도보로 이어진다.",
-      tip: "계단에 앉아 광장을 조망하기 좋다. 인근 붉은 우스펜스키 정교회 성당도 함께 보자.",
+      history: "19세기 전반 <strong>카를 루드비그 엥엘</strong>이 설계한 신고전주의 대성당으로, 흰 벽과 초록 돔이 원로원 광장을 굽어본다.",
+      intro: "계단 위 흰 대성당과 대칭을 이룬 광장이 헬싱키의 상징적 풍경이다. 항구·시장 광장(<strong>카우파토리</strong>)과 도보로 이어진다.",
+      tip: "계단에 앉아 광장을 조망하기 좋다. 인근 붉은 <strong>우스펜스키 정교회 성당</strong>도 함께 보자.",
     },
     {
       id: "temppeliaukio", cityId: "helsinki", category: "design",
       nameKo: "템펠리아우키오 암석교회", nameEn: "Temppeliaukio Church",
-      history: "1969년 화강암 암반을 파내 지은 교회로, '암석 교회'라 불린다. 수오말라이넨 형제가 설계했다.",
+      history: "1969년 화강암 암반을 파내 지은 교회로, '암석 교회'라 불린다. <strong>수오말라이넨 형제</strong>가 설계했다.",
       intro: "바위를 그대로 벽으로 삼고 구리 돔에서 자연광이 쏟아지는 독특한 공간이다. 음향이 뛰어나 콘서트도 열린다.",
       tip: "핀란드 특유의 자연주의 건축을 보여준다. 예배·행사 때는 관람이 제한될 수 있다.",
     },
@@ -56,16 +56,16 @@ window.SE_MAP_DATA.finland = {
       nameKo: "포르보 구시가", nameEn: "Old Porvoo",
       history: "핀란드에서 두 번째로 오래된 도시로, 강가에 늘어선 붉은 목조 창고가 상징이다.",
       intro: "자갈 골목과 파스텔빛 목조 가옥, 강변의 붉은 창고가 그림 같다. 수공예 상점과 아늑한 카페가 많다.",
-      tip: "헬싱키에서 버스로 약 1시간 거리라 당일치기가 쉽다. 언덕 위 중세 대성당까지 걸어 올라가 보자.",
+      tip: "<strong>헬싱키</strong>에서 버스로 약 1시간 거리라 당일치기가 쉽다. 언덕 위 중세 대성당까지 걸어 올라가 보자.",
     },
 
     // ---- Turku ----
     {
       id: "turku-castle", cityId: "turku", category: "city",
       nameKo: "투르쿠 성", nameEn: "Turku Castle",
-      history: "13세기에 지은 핀란드에서 가장 큰 중세 성으로, 옛 수도 투르쿠의 상징이다. 아우라 강 하구에 있다.",
-      intro: "700년 넘는 역사를 지닌 성과, 강변을 따라 이어진 박물관 배·성당이 어우러진다. 매년 성탄 평화 선포가 이곳에서 시작된다.",
-      tip: "스톡홀름행 페리가 출발하는 항구 도시라 스웨덴과 묶기 좋다. 강변 산책로가 여유롭다.",
+      history: "13세기에 지은 핀란드에서 가장 큰 중세 성으로, 옛 수도 투르쿠의 상징이다. <strong>아우라 강</strong> 하구에 있다.",
+      intro: "700년 넘는 역사를 지닌 성과, 강변을 따라 이어진 박물관 배·성당이 어우러진다. 매년 <strong>성탄 평화 선포</strong>가 이곳에서 시작된다.",
+      tip: "<strong>스톡홀름</strong>행 페리가 출발하는 항구 도시라 스웨덴과 묶기 좋다. 강변 산책로가 여유롭다.",
     },
 
     // ---- Tampere ----
@@ -73,7 +73,7 @@ window.SE_MAP_DATA.finland = {
       id: "tampere-moomin", cityId: "tampere", category: "design",
       nameKo: "탐페레·무민 박물관", nameEn: "Tampere & Moomin Museum",
       history: "두 호수 사이 급류에 세운 옛 공업 도시로, 붉은 벽돌 방직공장이 문화 공간으로 되살아났다. 무민 박물관이 있다.",
-      intro: "토베 얀손의 무민 원화와 미니어처를 소장한 무민 박물관, 공장을 개조한 상점·사우나가 어우러진다. 핀란드에서 사우나 문화가 가장 진한 도시다.",
+      intro: "<strong>토베 얀손</strong>의 무민 원화와 미니어처를 소장한 무민 박물관, 공장을 개조한 상점·사우나가 어우러진다. 핀란드에서 사우나 문화가 가장 진한 도시다.",
       tip: "핀란드식 공중 사우나를 체험하기 좋다. 무민 팬이라면 박물관은 필수 코스다.",
     },
 
@@ -82,24 +82,24 @@ window.SE_MAP_DATA.finland = {
       id: "olavinlinna", cityId: "savonlinna", category: "nature",
       nameKo: "올라빈린나 성·호수", nameEn: "Olavinlinna & Lakes",
       history: "1475년 호수 위 바위섬에 지은 중세 성으로, 북유럽에 남은 최북단 석조 성 중 하나다. 핀란드 호수 지방의 중심에 있다.",
-      intro: "물 위에 떠 있는 듯한 성과 사이마 호수의 미로 같은 물길이 어우러진다. 여름엔 성 안뜰에서 세계적인 오페라 페스티벌이 열린다.",
-      tip: "7월 사본린나 오페라 페스티벌 시기가 특별하다. 호수 크루즈로 핀란드 호수 지방의 정취를 느껴보자.",
+      intro: "물 위에 떠 있는 듯한 성과 <strong>사이마 호수</strong>의 미로 같은 물길이 어우러진다. 여름엔 성 안뜰에서 세계적인 오페라 페스티벌이 열린다.",
+      tip: "7월 <strong>사본린나 오페라 페스티벌</strong> 시기가 특별하다. 호수 크루즈로 핀란드 호수 지방의 정취를 느껴보자.",
     },
 
     // ---- Rovaniemi ----
     {
       id: "santa-claus-village", cityId: "rovaniemi", category: "arctic",
       nameKo: "산타클로스 마을", nameEn: "Santa Claus Village",
-      history: "북극권 경계선(아크틱 서클) 위에 자리한 마을로, '공식 산타클로스의 고향'으로 알려져 있다.",
+      history: "북극권 경계선(<strong>아크틱 서클</strong>) 위에 자리한 마을로, '공식 산타클로스의 고향'으로 알려져 있다.",
       intro: "일 년 내내 산타를 만나고 북극권 통과 증명서를 받을 수 있다. 겨울엔 순록·허스키 썰매와 오로라를 즐긴다.",
-      tip: "겨울(12~1월)엔 눈과 오로라가, 여름엔 백야가 있다. 로바니에미는 라플란드 여행의 관문이다.",
+      tip: "겨울(12~1월)엔 눈과 오로라가, 여름엔 백야가 있다. 로바니에미는 <strong>라플란드</strong> 여행의 관문이다.",
     },
 
     // ---- Saariselkä ----
     {
       id: "saariselka-aurora", cityId: "saariselka", category: "arctic",
       nameKo: "사리셀카 오로라·유리 이글루", nameEn: "Saariselkä Aurora",
-      history: "핀란드 라플란드 북부의 휴양지로, 오로라 관측과 유리 지붕 이글루 숙소로 유명하다.",
+      history: "핀란드 <strong>라플란드</strong> 북부의 휴양지로, 오로라 관측과 유리 지붕 이글루 숙소로 유명하다.",
       intro: "따뜻한 유리 이글루에 누워 밤하늘의 오로라를 기다린다. 스키·스노모빌·순록 사파리 등 겨울 액티비티가 풍부하다.",
       tip: "오로라는 대략 9월 말~3월 맑은 밤에 볼 수 있다. 겨울엔 낮이 매우 짧고 몹시 추우니 방한 준비가 필수다.",
     },

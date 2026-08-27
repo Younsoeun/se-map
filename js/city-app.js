@@ -52,9 +52,9 @@
 
     const body = el("div", { class: "attraction-body" });
     body.innerHTML = `
-      <p><strong>역사</strong>${a.history}</p>
-      <p><strong>소개</strong>${a.intro}</p>
-      <p><strong>방문 팁</strong>${a.tip}</p>
+      <p><span class="ab-label">역사</span>${a.history}</p>
+      <p><span class="ab-label">소개</span>${a.intro}</p>
+      <p><span class="ab-label">방문 팁</span>${a.tip}</p>
     `;
 
     // Note card: checkbox where the avatar used to be, then name + a line that

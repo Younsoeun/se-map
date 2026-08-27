@@ -33,16 +33,16 @@ window.SE_MAP_DATA.switzerland = {
     {
       id: "zurich-old-town", cityId: "zurich", category: "oldtown",
       nameKo: "취리히 구시가·호수", nameEn: "Zürich Old Town & Lake",
-      history: "리마트 강 양안에 형성된 중세 구시가(니더도르프)와 취리히 호수를 낀 스위스 최대 도시의 중심이다.",
-      intro: "좁은 골목과 길드하우스, 명품 거리 반호프슈트라세, 그리고 호숫가 산책로가 어우러진다. 알프스가 보이는 호반 도시다.",
+      history: "<strong>리마트 강</strong> 양안에 형성된 중세 구시가(<strong>니더도르프</strong>)와 취리히 호수를 낀 스위스 최대 도시의 중심이다.",
+      intro: "좁은 골목과 길드하우스, 명품 거리 <strong>반호프슈트라세</strong>, 그리고 호숫가 산책로가 어우러진다. 알프스가 보이는 호반 도시다.",
       tip: "호수 유람선이나 강변 산책으로 도시를 여유롭게 즐기자. 물가가 비싼 편이니 예산을 넉넉히 잡는 게 좋다.",
     },
     {
       id: "grossmunster", cityId: "zurich", category: "castle",
       nameKo: "그로스뮌스터", nameEn: "Grossmünster",
-      history: "12세기 로마네스크 교회로, 16세기 츠빙글리가 이곳에서 종교개혁을 이끌어 스위스 개신교의 발상지가 됐다.",
+      history: "12세기 로마네스크 교회로, 16세기 <strong>츠빙글리</strong>가 이곳에서 종교개혁을 이끌어 스위스 개신교의 발상지가 됐다.",
       intro: "쌍둥이 탑이 취리히 스카이라인을 상징한다. 탑에 오르면 구시가와 호수, 알프스가 조망된다.",
-      tip: "강 건너 프라우뮌스터의 샤갈 스테인드글라스도 함께 보면 좋다.",
+      tip: "강 건너 <strong>프라우뮌스터</strong>의 <strong>샤갈</strong> 스테인드글라스도 함께 보면 좋다.",
     },
 
     // ---- Lucerne ----
@@ -50,21 +50,21 @@ window.SE_MAP_DATA.switzerland = {
       id: "chapel-bridge", cityId: "lucerne", category: "oldtown",
       nameKo: "카펠교·물의 탑", nameEn: "Chapel Bridge",
       history: "14세기에 지은 유럽에서 가장 오래된 지붕 있는 목조 다리로, 안쪽 삼각 패널에 도시 역사를 그린 그림이 걸려 있다. 1993년 화재 후 복원됐다.",
-      intro: "꽃으로 장식된 목조 다리와 팔각형 물의 탑(바서투름)이 루체른의 상징이다. 로이스 강과 구시가가 어우러진다.",
+      intro: "꽃으로 장식된 목조 다리와 팔각형 물의 탑(<strong>바서투름</strong>)이 루체른의 상징이다. <strong>로이스 강</strong>과 구시가가 어우러진다.",
       tip: "밤 조명이 켜지면 더 아름답다. 구시가 광장의 프레스코 벽화 건물들도 함께 걸어보자.",
     },
     {
       id: "mount-pilatus", cityId: "lucerne", category: "mountain",
       nameKo: "필라투스 산", nameEn: "Mount Pilatus",
-      history: "루체른 인근의 산으로, 세계에서 가장 가파른 톱니바퀴 열차(코그휠 철도)가 정상까지 오른다.",
+      history: "루체른 인근의 산으로, 세계에서 가장 가파른 톱니바퀴 열차(<strong>코그휠 철도</strong>)가 정상까지 오른다.",
       intro: "배·톱니열차·케이블카를 잇는 '골든 라운드 트립'으로 오르내리며 알프스 파노라마와 루체른 호수를 조망한다.",
-      tip: "가파른 톱니열차는 대략 5~11월에 운행한다. 리기 산과 함께 루체른 근교 산행지로 인기다.",
+      tip: "가파른 톱니열차는 대략 5~11월에 운행한다. <strong>리기 산</strong>과 함께 루체른 근교 산행지로 인기다.",
     },
     {
       id: "lion-monument", cityId: "lucerne", category: "castle",
       nameKo: "빈사의 사자상", nameEn: "Lion Monument",
-      history: "프랑스 혁명 때 튀일리궁을 지키다 전사한 스위스 용병들을 기려 19세기 초에 절벽을 깎아 만든 조각이다.",
-      intro: "창에 찔린 채 죽어가는 사자를 새긴 상으로, 마크 트웨인이 '세상에서 가장 슬프고 감동적인 돌'이라 평했다.",
+      history: "프랑스 혁명 때 <strong>튀일리궁</strong>을 지키다 전사한 스위스 용병들을 기려 19세기 초에 절벽을 깎아 만든 조각이다.",
+      intro: "창에 찔린 채 죽어가는 사자를 새긴 상으로, <strong>마크 트웨인</strong>이 '세상에서 가장 슬프고 감동적인 돌'이라 평했다.",
       tip: "규모는 작지만 사연을 알고 보면 울림이 크다. 구시가에서 도보로 가깝다.",
     },
 
@@ -73,14 +73,14 @@ window.SE_MAP_DATA.switzerland = {
       id: "jungfraujoch", cityId: "interlaken", category: "mountain",
       nameKo: "융프라우요흐", nameEn: "Jungfraujoch",
       history: "해발 3,454m에 자리한 유럽에서 가장 높은 기차역으로, '유럽의 지붕(Top of Europe)'이라 불린다. 20세기 초에 산을 뚫어 철도를 놓았다.",
-      intro: "톱니열차를 타고 만년설의 고개에 올라 알레치 빙하(유네스코 세계유산)와 얼음궁전, 설원을 만난다.",
+      intro: "톱니열차를 타고 만년설의 고개에 올라 <strong>알레치 빙하</strong>(유네스코 세계유산)와 <strong>얼음궁전</strong>, 설원을 만난다.",
       tip: "정상은 한여름에도 영하이니 방한 준비가 필수다. 날씨가 관건이라 맑은 날을 골라 오르고, 온라인 예매로 비용을 아끼자.",
     },
     {
       id: "harder-kulm", cityId: "interlaken", category: "mountain",
       nameKo: "하르더 쿨름 전망대", nameEn: "Harder Kulm",
-      history: "인터라켄을 굽어보는 전망대로, 푸니쿨라(케이블 철도)로 정상까지 오른다.",
-      intro: "허공으로 뻗은 전망 데크에서 두 호수(툰·브리엔츠) 사이의 인터라켄과 아이거·묀히·융프라우 삼봉이 한눈에 들어온다.",
+      history: "<strong>인터라켄</strong>을 굽어보는 전망대로, 푸니쿨라(케이블 철도)로 정상까지 오른다.",
+      intro: "허공으로 뻗은 전망 데크에서 두 호수(툰·브리엔츠) 사이의 인터라켄과 <strong>아이거</strong>·묀히·융프라우 삼봉이 한눈에 들어온다.",
       tip: "융프라우 지역 여행의 방향을 잡기 좋은 전망 포인트다. 해질녘 두 호수의 색이 아름답다.",
     },
 
@@ -88,34 +88,34 @@ window.SE_MAP_DATA.switzerland = {
     {
       id: "lauterbrunnen-valley", cityId: "lauterbrunnen", category: "lake",
       nameKo: "라우터브루넨 계곡", nameEn: "Lauterbrunnen Valley",
-      history: "빙하가 깎은 U자형 계곡으로, 72개의 폭포가 절벽에서 쏟아진다. 슈타우바흐 폭포가 대표적이다.",
-      intro: "수직 절벽 사이 초원에 자리한 마을과 흩날리는 폭포가 톨킨의 '깊은골(리븐델)' 영감지로 알려져 있다. 벵겐·뮈렌 등 절벽 위 마을로 이어진다.",
-      tip: "융프라우 지역의 관문이라 인터라켄·벵겐과 묶기 좋다. 절벽 위 마을 뮈렌·쉴트호른 전망도 인기다.",
+      history: "빙하가 깎은 U자형 계곡으로, 72개의 폭포가 절벽에서 쏟아진다. <strong>슈타우바흐 폭포</strong>가 대표적이다.",
+      intro: "수직 절벽 사이 초원에 자리한 마을과 흩날리는 폭포가 <strong>톨킨</strong>의 '깊은골(리븐델)' 영감지로 알려져 있다. 벵겐·뮈렌 등 절벽 위 마을로 이어진다.",
+      tip: "융프라우 지역의 관문이라 인터라켄·벵겐과 묶기 좋다. 절벽 위 마을 뮈렌·<strong>쉴트호른</strong> 전망도 인기다.",
     },
 
     // ---- Zermatt ----
     {
       id: "matterhorn", cityId: "zermatt", category: "mountain",
       nameKo: "마터호른", nameEn: "Matterhorn",
-      history: "해발 4,478m의 피라미드형 봉우리로, 스위스를 상징하는 산이다(토블론 초콜릿의 그 산). 체르마트는 휘발유 차가 없는 청정 산악 마을이다.",
-      intro: "고르너그라트·수네가 전망대에서 뾰족한 마터호른을 정면으로 마주한다. 호수에 비친 '거울 마터호른'이 유명하다.",
-      tip: "체르마트는 전기차·마차만 다닌다. 아침 맑을 때 봉우리가 잘 보이니 이른 시각을 노리자.",
+      history: "해발 4,478m의 피라미드형 봉우리로, 스위스를 상징하는 산이다(<strong>토블론</strong> 초콜릿의 그 산). 체르마트는 휘발유 차가 없는 청정 산악 마을이다.",
+      intro: "고르너그라트·<strong>수네가</strong> 전망대에서 뾰족한 마터호른을 정면으로 마주한다. 호수에 비친 '거울 마터호른'이 유명하다.",
+      tip: "<strong>체르마트</strong>는 전기차·마차만 다닌다. 아침 맑을 때 봉우리가 잘 보이니 이른 시각을 노리자.",
     },
     {
       id: "gornergrat", cityId: "zermatt", category: "mountain",
       nameKo: "고르너그라트", nameEn: "Gornergrat",
       history: "1898년 개통한 톱니바퀴 산악철도로, 해발 3,089m의 전망 능선까지 오른다.",
-      intro: "정상에서 마터호른을 비롯한 4,000m급 봉우리 29개와 고르너 빙하가 360도로 펼쳐진다. 알프스 최고의 파노라마로 꼽힌다.",
-      tip: "리펠제 호수에 비친 마터호른을 담으려면 중간역에서 내려 잠시 걸으면 된다. 맑은 오전이 좋다.",
+      intro: "정상에서 <strong>마터호른</strong>을 비롯한 4,000m급 봉우리 29개와 <strong>고르너 빙하</strong>가 360도로 펼쳐진다. 알프스 최고의 파노라마로 꼽힌다.",
+      tip: "<strong>리펠제</strong> 호수에 비친 마터호른을 담으려면 중간역에서 내려 잠시 걸으면 된다. 맑은 오전이 좋다.",
     },
 
     // ---- Bern ----
     {
       id: "bern-old-town", cityId: "bern", category: "oldtown",
       nameKo: "베른 구시가", nameEn: "Bern Old Town",
-      history: "아레 강이 감싸 흐르는 중세 도시로, 6km에 이르는 아케이드와 천문 시계탑(치트글로게)이 남아 있다. 1983년 유네스코 세계유산에 등재됐다.",
-      intro: "붉은 지붕과 아케이드 상가, 분수, 그리고 아인슈타인이 상대성이론을 구상한 집이 있는 스위스의 수도다.",
-      tip: "치트글로게 시계는 매시 정각 직전에 인형이 움직인다. 강 건너 장미 정원에서 구시가 전경을 볼 수 있다.",
+      history: "<strong>아레 강</strong>이 감싸 흐르는 중세 도시로, 6km에 이르는 아케이드와 천문 시계탑(<strong>치트글로게</strong>)이 남아 있다. 1983년 유네스코 세계유산에 등재됐다.",
+      intro: "붉은 지붕과 아케이드 상가, 분수, 그리고 <strong>아인슈타인</strong>이 상대성이론을 구상한 집이 있는 스위스의 수도다.",
+      tip: "<strong>치트글로게</strong> 시계는 매시 정각 직전에 인형이 움직인다. 강 건너 장미 정원에서 구시가 전경을 볼 수 있다.",
     },
 
     // ---- Geneva ----
@@ -123,26 +123,26 @@ window.SE_MAP_DATA.switzerland = {
       id: "jet-deau-geneva", cityId: "geneva", category: "lake",
       nameKo: "제트 분수·레만 호수", nameEn: "Jet d'Eau & Lake Geneva",
       history: "레만 호수(제네바 호수)로 물을 약 140m까지 쏘아 올리는 분수로, 제네바의 상징이다. 원래 수압 조절용이었다가 명물이 됐다.",
-      intro: "호숫가 산책로에서 거대한 물기둥과 몽블랑을 배경으로 한 풍경을 즐긴다. 제네바는 유엔 유럽본부·적십자가 있는 국제도시다.",
-      tip: "바람에 따라 물보라가 흩날리니 가까이 갈 땐 주의하자. 꽃시계와 구시가(생피에르 대성당)도 함께 걷기 좋다.",
+      intro: "호숫가 산책로에서 거대한 물기둥과 <strong>몽블랑</strong>을 배경으로 한 풍경을 즐긴다. 제네바는 유엔 유럽본부·적십자가 있는 국제도시다.",
+      tip: "바람에 따라 물보라가 흩날리니 가까이 갈 땐 주의하자. 꽃시계와 구시가(<strong>생피에르 대성당</strong>)도 함께 걷기 좋다.",
     },
 
     // ---- Montreux ----
     {
       id: "chillon-castle", cityId: "montreux", category: "castle",
       nameKo: "시옹 성", nameEn: "Chillon Castle",
-      history: "레만 호숫가 바위섬 위에 세운 중세 성으로, 사보이아 백작가의 거점이었다. 바이런의 시 '시옹의 죄수'로 유명해졌다.",
+      history: "레만 호숫가 바위섬 위에 세운 중세 성으로, <strong>사보이아 백작가</strong>의 거점이었다. <strong>바이런</strong>의 시 '시옹의 죄수'로 유명해졌다.",
       intro: "호수에 비친 성의 모습이 그림 같고, 지하 감옥과 대연회장, 성루를 둘러볼 수 있다. 스위스에서 가장 많이 찾는 사적지다.",
-      tip: "몽트뢰에서 호숫가 산책로를 따라 걸어갈 수 있다. 7월 몽트뢰 재즈 페스티벌 시기와 겹치면 색다르다.",
+      tip: "몽트뢰에서 호숫가 산책로를 따라 걸어갈 수 있다. 7월 <strong>몽트뢰 재즈 페스티벌</strong> 시기와 겹치면 색다르다.",
     },
 
     // ---- Lugano ----
     {
       id: "lake-lugano", cityId: "lugano", category: "lake",
       nameKo: "루가노 호수", nameEn: "Lake Lugano",
-      history: "스위스 남부 이탈리아어권(티치노)에 있는 호수 도시로, 알프스 남쪽의 지중해성 분위기를 지녔다.",
-      intro: "야자수가 늘어선 호반 산책로와 파스텔빛 건물, 주변 산(몬테 브레·산 살바토레)의 전망이 이탈리아를 연상시킨다.",
-      tip: "이탈리아 국경과 가까워 코모 호수와 묶기 좋다. 케이블카로 오르는 산 전망대에서 호수 전경을 담아보자.",
+      history: "스위스 남부 이탈리아어권(<strong>티치노</strong>)에 있는 호수 도시로, 알프스 남쪽의 지중해성 분위기를 지녔다.",
+      intro: "야자수가 늘어선 호반 산책로와 파스텔빛 건물, 주변 산(<strong>몬테 브레</strong>·산 살바토레)의 전망이 이탈리아를 연상시킨다.",
+      tip: "이탈리아 국경과 가까워 <strong>코모 호수</strong>와 묶기 좋다. 케이블카로 오르는 산 전망대에서 호수 전경을 담아보자.",
     },
   ],
 };
