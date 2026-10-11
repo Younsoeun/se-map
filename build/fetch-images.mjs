@@ -61,6 +61,9 @@ const WIKI = {
   "arles-arena": "Arles Amphitheatre",
   "promenade-anglais": "Promenade des Anglais",
   "vieux-nice": "Nice",
+  "vieux-port-marseille": "Old Port of Marseille",
+  "mucem": "Museum of European and Mediterranean Civilisations",
+  "le-panier": "Vieille Charité",
   "cite-carcassonne": "Cité de Carcassonne",
   "place-bourse": "Place de la Bourse",
   // Spain

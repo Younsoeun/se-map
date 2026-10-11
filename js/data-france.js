@@ -35,6 +35,7 @@ window.SE_MAP_DATA.france = {
     { id: "pont-du-gard", nameKo: "퐁뒤가르", nameEn: "Pont du Gard", lon: 4.5350, lat: 43.9476 },
     { id: "arles", nameKo: "아를", nameEn: "Arles", lon: 4.6277, lat: 43.6767 },
     { id: "nice", nameKo: "니스", nameEn: "Nice", lon: 7.2620, lat: 43.7102 },
+    { id: "marseille", nameKo: "마르세유", nameEn: "Marseille", lon: 5.3698, lat: 43.2965 },
     { id: "carcassonne", nameKo: "카르카손", nameEn: "Carcassonne", lon: 2.3634, lat: 43.2130 },
     { id: "bordeaux", nameKo: "보르도", nameEn: "Bordeaux", lon: -0.5792, lat: 44.8378 },
   ],
@@ -266,6 +267,50 @@ window.SE_MAP_DATA.france = {
       history: "니스 구시가로, <strong>사르데냐 왕국</strong> 시절의 흔적이 남은 좁은 골목과 바로크 성당, 프로방스·이탈리아가 섞인 색채의 건물들이 밀집해 있다.",
       intro: "노천 꽃·식재료 시장(<strong>쿠르 살레야</strong>)과 니스식 별미(소카, 팡바냐)를 즐길 수 있는 활기찬 옛 동네다.",
       tip: "아침엔 살레야 시장, 오후엔 성 언덕(<strong>콜린 뒤 샤토</strong>) 전망대에 올라 니스 해안과 붉은 지붕을 내려다보자.",
+    },
+
+    // ---- Marseille ----
+    {
+      id: "notre-dame-garde", cityId: "marseille", category: "cathedral",
+      nameKo: "노트르담 드 라 가르드 대성당", nameEn: "Notre-Dame de la Garde",
+      history: "해발 약 150m 석회암 언덕 꼭대기에 선 신비잔틴 양식 바실리카로, 건축가 <strong>앙리자크 에스페랑디외</strong>의 설계로 1853년 착공해 1864년 봉헌됐다. 종탑 위에는 높이 11.2m의 금박 성모자상이 서 있다.",
+      intro: "마르세유 사람들은 '<strong>라 본 메르</strong>(좋은 어머니)'라 부르며 도시의 수호자로 여긴다. 난파에서 살아남은 선원들이 바친 배 모형과 봉헌화가 내부를 가득 채운다.",
+      tip: "시내와 구항구, 이프 섬까지 한눈에 들어오는 마르세유 최고의 전망대다. 언덕이 가파르니 구항구에서 버스나 관광 열차(<strong>프티 트랭</strong>)로 오르는 것이 편하다.",
+    },
+    {
+      id: "vieux-port-marseille", cityId: "marseille", category: "culture",
+      nameKo: "구항구 (비외 포르)", nameEn: "Vieux-Port of Marseille",
+      history: "기원전 600년경 소아시아 <strong>포카이아</strong> 출신 그리스인들이 이 만에 상륙해 식민도시 마살리아를 세웠다. 마르세유라는 도시가 시작된 자리다.",
+      intro: "2013년 유럽 문화수도를 맞아 보행자 광장으로 정비됐다. <strong>노먼 포스터</strong>가 설계한 46×22m 거울 지붕 '옹브리에르' 아래에 서면 거꾸로 비친 사람들과 항구가 보인다.",
+      tip: "아침에는 벨주 부두에서 어부들이 갓 잡은 생선을 파는 <strong>어시장</strong>이 열린다. 마르세유 명물 부야베스는 항구 주변 식당에서 맛보자.",
+    },
+    {
+      id: "mucem", cityId: "marseille", category: "art",
+      nameKo: "뮤셈 (유럽·지중해 문명 박물관)", nameEn: "MuCEM",
+      history: "마르세유가 유럽 문화수도였던 2013년 6월 문을 연 국립박물관으로, 건축가 <strong>뤼디 리치오티</strong>가 설계했다. 17세기 <strong>생장 요새</strong>와 길이 130m의 보행교로 이어진다.",
+      intro: "섬유 보강 콘크리트로 짠 레이스 같은 격자 외피가 지중해 햇빛을 걸러 내부에 무늬 그림자를 드리운다. 유럽과 지중해 문명을 주제로 한 전시가 열린다.",
+      tip: "전시를 보지 않더라도 보행교를 건너 <strong>생장 요새</strong>의 성벽 산책로를 걸으며 구항구 입구와 바다를 바라보기 좋다. 해 질 녘 산책 코스로 추천한다.",
+    },
+    {
+      id: "calanques", cityId: "marseille", category: "nature",
+      nameKo: "칼랑크 국립공원", nameEn: "Calanques National Park",
+      history: "2012년 지정된 국립공원으로, 마르세유 남쪽부터 <strong>카시스</strong>·라시오타까지 이어지는 석회암 절벽 해안을 보호한다. 면적 약 520㎢ 가운데 대부분이 바다 구역이다.",
+      intro: "하얀 석회암 절벽 사이로 깊숙이 파고든 좁은 만(칼랑크)과 에메랄드빛 바다가 장관이다. 스르미우·모르지우·수지통·<strong>앙보</strong> 등이 대표적이다.",
+      tip: "6~9월에는 산불 위험에 따라 산지 출입이 통제될 수 있으니 전날 저녁 공식 앱(<strong>Mes Calanques</strong>)으로 확인하자. 여름 성수기 수지통 해안은 무료 사전 예약제이고, 카시스에서 출발하는 보트 투어도 대안이다.",
+    },
+    {
+      id: "chateau-dif", cityId: "marseille", category: "landmark",
+      nameKo: "이프 성", nameEn: "Château d'If",
+      history: "16세기 초 <strong>프랑수아 1세</strong>의 명으로 마르세유 앞바다 약 1.5km의 작은 섬에 세운 요새다. 이후 19세기 말까지 정치범과 위그노 신자들을 가둔 감옥으로 쓰였다.",
+      intro: "<strong>알렉상드르 뒤마</strong>의 소설 『몬테크리스토 백작』에서 주인공 에드몽 당테스가 갇힌 곳으로 유명하며, 그의 이름을 붙인 감방도 있다.",
+      tip: "구항구에서 배를 타고 간다. 미스트랄(강한 북서풍)이 부는 날은 배편이 결항될 수 있으니 출발 전에 운항 여부를 확인하자.",
+    },
+    {
+      id: "le-panier", cityId: "marseille", category: "culture",
+      nameKo: "르 파니에", nameEn: "Le Panier",
+      history: "그리스 식민도시 마살리아가 처음 자리 잡은 구항구 북쪽 언덕으로, 마르세유에서 가장 오래된 동네다. 1943년 독일군이 인근 구시가를 대규모로 폭파했을 때 살아남은 <strong>옛 중심부</strong>다.",
+      intro: "좁은 계단 골목과 파스텔빛 집들 사이로 공방과 갤러리가 이어진다. 중심에는 <strong>피에르 퓌제</strong>가 설계한 17~18세기 구빈원 '<strong>비에유 샤리테</strong>'가 박물관으로 쓰인다.",
+      tip: "구항구에서 걸어 올라가 골목을 둘러본 뒤 비에유 샤리테 안뜰에서 쉬어 가자. 언덕길이 가파르고 미로처럼 얽혀 있어 편한 신발이 좋다.",
     },
 
     // ---- Carcassonne ----
